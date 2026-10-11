@@ -160,12 +160,14 @@
 <h2 id="instalación">Instalación</h2>
 <ol>
 <li>Instale Python 3.11 o superior.</li>
-<li>Descargue este repositorio.</li>
-<li>En la carpeta del repositorio, ejecute <code>pip install .</code></li>
+<li>Ejecute estos comandos:</li>
 </ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">git</span> clone https://github.com/LuisReinoso/ojo-al-gasto.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="bu">cd</span> ojo-al-gasto</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">pip</span> install .</span></code></pre></div>
 <h2 id="uso">Uso</h2>
 <h3 id="auditar-un-municipio">Auditar un municipio</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">veeduria</span> auditar entidades/quito.toml --anios 2025 2026</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">veeduria</span> auditar entidades/quito.toml --anios 2025 2026</span></code></pre></div>
 <p>La primera vez descarga 22 archivos del SERCOP. Esto toma unos minutos. Abra <code>informes/quito/publico.html</code>.</p>
 <h3 id="auditar-otro-cantón">Auditar otro cantón</h3>
 <ol>
@@ -177,11 +179,11 @@
 <li>Ejecute <code>veeduria auditar entidades/su-canton.toml</code>.</li>
 </ol>
 <h3 id="investigar-un-proceso-o-un-proveedor">Investigar un proceso o un proveedor</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">veeduria</span> proceso COTS-EPMGDT-2025-002</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="ex">veeduria</span> proveedor <span class="st">&quot;nombre o RUC&quot;</span> --csv proveedor.csv</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="ex">veeduria</span> proceso COTS-EPMGDT-2025-002</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="ex">veeduria</span> proveedor <span class="st">&quot;nombre o RUC&quot;</span> --csv proveedor.csv</span></code></pre></div>
 <h3 id="pedir-información">Pedir información</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="ex">veeduria</span> solicitud entidades/quito.toml --nombre <span class="st">&quot;Ana Pérez&quot;</span> --cedula 1700000000 <span class="kw">\</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>  <span class="ex">--correo</span> ana@example.com --pedido <span class="st">&quot;Contrato y actas del proceso LICO-EPMMOP-2026-001&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="ex">veeduria</span> solicitud entidades/quito.toml --nombre <span class="st">&quot;Ana Pérez&quot;</span> --cedula 1700000000 <span class="kw">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>  <span class="ex">--correo</span> ana@example.com --pedido <span class="st">&quot;Contrato y actas del proceso LICO-EPMMOP-2026-001&quot;</span></span></code></pre></div>
 <p>La entidad tiene 10 días para responder, prorrogables 5 (LOTAIP, art. 34). El comando calcula la fecha en días calendario y en días hábiles.</p>
 <h2 id="archivos-del-informe">Archivos del informe</h2>
 <table>
@@ -234,9 +236,9 @@
 <li>Revisiones de experiencia de uso: <a href="recorrido-cognitivo.html">recorrido cognitivo</a> y <a href="revision-diseno.html">diseño y marca</a>.</li>
 </ul>
 <h2 id="contribuir">Contribuir</h2>
-<p>Las reglas están en <code>src/veeduria/reglas.py</code>. Los umbrales y los textos legales están en <code>src/veeduria/datos/normas.toml</code>. Si cambia una norma, corrija ese archivo.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="ex">pip</span> install -e <span class="st">&quot;.[dev]&quot;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="ex">pytest</span></span></code></pre></div>
+<p>Reporte errores o proponga mejoras en <a href="https://github.com/LuisReinoso/ojo-al-gasto/issues">Issues</a>. Las reglas están en <code>src/veeduria/reglas.py</code>. Los umbrales y los textos legales están en <code>src/veeduria/datos/normas.toml</code>. Si cambia una norma, corrija ese archivo.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="ex">pip</span> install -e <span class="st">&quot;.[dev]&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="ex">pytest</span></span></code></pre></div>
 <h2 id="licencia">Licencia</h2>
 <p>Código: MIT. Datos del SERCOP: CC BY 3.0 Ecuador. Información del Portal de Transparencia: pública según la LOTAIP.</p>
 <footer class="pie">Ojo al Gasto · herramienta libre (licencia MIT)</footer>

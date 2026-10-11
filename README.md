@@ -24,8 +24,13 @@ Ejemplos publicados: [Quito](informes/quito/publico.html) e [Ibarra](informes/ib
 ## Instalación
 
 1. Instale Python 3.11 o superior.
-2. Descargue este repositorio.
-3. En la carpeta del repositorio, ejecute `pip install .`
+2. Ejecute estos comandos:
+
+```bash
+git clone https://github.com/LuisReinoso/ojo-al-gasto.git
+cd ojo-al-gasto
+pip install .
+```
 
 ## Uso
 
@@ -98,7 +103,7 @@ Ojo al Gasto se centra en lo local: un cantón, preguntas a sus entidades y los 
 
 ## Contribuir
 
-Las reglas están en `src/veeduria/reglas.py`. Los umbrales y los textos legales están en `src/veeduria/datos/normas.toml`. Si cambia una norma, corrija ese archivo.
+Reporte errores o proponga mejoras en [Issues](https://github.com/LuisReinoso/ojo-al-gasto/issues). Las reglas están en `src/veeduria/reglas.py`. Los umbrales y los textos legales están en `src/veeduria/datos/normas.toml`. Si cambia una norma, corrija ese archivo.
 
 ```bash
 pip install -e ".[dev]"
