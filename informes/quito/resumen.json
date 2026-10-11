@@ -1,0 +1,34 @@
+{
+  "entidad": "Municipio del Distrito Metropolitano de Quito",
+  "canton": "Quito",
+  "anios": [
+    2025,
+    2026
+  ],
+  "generado": "11/10/2026 10:03",
+  "procesos": 8226,
+  "monto_usd": 907438065.35,
+  "monto_sin_concurso_usd": 122685587.86,
+  "alertas_por_regla": {
+    "Adjudicado al precio máximo": 83,
+    "Contratación sin concurso": 117,
+    "Mismo proveedor, suma sobre un límite": 6,
+    "Plazo de ofertas muy corto": 4,
+    "Posible fraccionamiento": 6,
+    "Presupuesto al borde del límite": 8,
+    "Proveedor único para servicios u obras": 9,
+    "Un solo oferente": 181
+  },
+  "hallazgos": [
+    "<b>3 grupos de procesos con posible fraccionamiento</b>: mismo proveedor, objetos parecidos y suma sobre un límite legal (6 procesos, USD 896.095). Son la primera prioridad para preguntar.",
+    "En competencia está <b>mejor que el promedio del país</b>: tuvo menos procesos con un solo oferente en Subasta Inversa Electrónica (9,0 % frente a 17,0 %); Licitación (10,0 % frente a 21,6 %); Cotización (8,6 % frente a 22,9 %); Menor Cuantía (9,6 % frente a 34,7 %); Concurso público (10,6 % frente a 26,5 %).",
+    "El <b>13,5 %</b> del monto (USD 122,7 M) se contrató por régimen especial o contratación directa, sin concurso de ofertas.",
+    "El proveedor que más recibe es <b>CONSORCIO CAF METRO DE QUITO</b>: USD 35,6 M en 1 proceso (5,7 % de lo adjudicado sin catálogo).",
+    "En 2025 la entidad dejó <b>sin responder 102 de 317 solicitudes de acceso a la información</b> (32,2 %).",
+    "En la transparencia LOTAIP, de 20 meses evaluados hubo <b>3 meses incompletos</b> (incompleto: falta algún numeral que la entidad sí publica otros meses).",
+    "Publica la información de transparencia de cada mes, en promedio, <b>18 días después del cierre del mes</b> (entre 15 y 37).",
+    "<b>790 RUC de contratistas</b> publicados en sus archivos LOTAIP son ilegibles (notación científica de Excel): no se puede saber a quién se contrató.",
+    "A agosto de 2026 había ejecutado (devengado) el <b>51,7 %</b> de su presupuesto codificado (un ritmo parejo daría cerca del 66,7 %).",
+    "En <b>obras públicas</b> (grupo 75) había ejecutado solo el <b>13,9 %</b>: USD 11,8 M de USD 84,9 M presupuestados."
+  ]
+}

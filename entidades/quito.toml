@@ -1,0 +1,86 @@
+# Municipio del Distrito Metropolitano de Quito y sus entidades.
+# Para auditar otro GAD copie este archivo y cambie los datos.
+# Los RUC se pueden buscar con:  veeduria entidades "nombre del cantón"
+
+nombre = "Municipio del Distrito Metropolitano de Quito"
+canton = "Quito"
+provincia = "Pichincha"
+
+# Id de la entidad principal en el Portal Nacional de Transparencia (Defensoría del Pueblo).
+# Se obtiene con:  veeduria entidades "quito"
+id_transparencia = 972
+
+# Feriados locales que suspenden plazos en este cantón (fundación de Quito, trasladado).
+feriados_locales = ["2025-12-05"]
+
+[[rucs]]
+ruc = "1760003410001"
+nombre = "GAD del Distrito Metropolitano de Quito (administración central, secretarías y administraciones zonales)"
+
+[[rucs]]
+ruc = "1768154690001"
+nombre = "EPMMOP - Movilidad y Obras Públicas"
+
+[[rucs]]
+ruc = "1768154260001"
+nombre = "EPMAPS - Agua Potable y Saneamiento"
+
+[[rucs]]
+ruc = "1768097950001"
+nombre = "Cuerpo de Bomberos del DMQ"
+
+[[rucs]]
+ruc = "1768155310001"
+nombre = "EMASEO - Aseo"
+
+[[rucs]]
+ruc = "1768158410001"
+nombre = "EMGIRS - Gestión Integral de Residuos Sólidos"
+
+[[rucs]]
+ruc = "1768156390001"
+nombre = "EP de Logística para la Seguridad y la Convivencia Ciudadana"
+
+[[rucs]]
+ruc = "1768153960001"
+nombre = "EPMSA - Servicios Aeroportuarios y Zonas Francas"
+
+[[rucs]]
+ruc = "1768164650001"
+nombre = "EP Metro de Quito"
+
+[[rucs]]
+ruc = "1768156710001"
+nombre = "EPMTPQ - Transporte de Pasajeros"
+
+[[rucs]]
+ruc = "1768157280001"
+nombre = "EP Rastro Quito"
+
+[[rucs]]
+ruc = "1768155740001"
+nombre = "EPMHV - Hábitat y Vivienda"
+
+[[rucs]]
+ruc = "1768172830001"
+nombre = "EP Mercado Mayorista de Quito"
+
+[[rucs]]
+ruc = "1768154420001"
+nombre = "Quito Turismo - Gestión de Destino Turístico"
+
+[[rucs]]
+ruc = "1768125320001"
+nombre = "Consejo de Protección de Derechos del DMQ"
+
+[[rucs]]
+ruc = "1768121760001"
+nombre = "Comisión Metropolitana de Lucha contra la Corrupción (Quito Honesto)"
+
+[[rucs]]
+ruc = "1791905911001"
+nombre = "ConQuito - Corporación de Promoción Económica"
+
+[[rucs]]
+ruc = "1768129900001"
+nombre = "Fondo Ambiental del DMQ"

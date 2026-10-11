@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Ojo al Gasto</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z' fill='white' stroke='%231c5cab' stroke-width='2.2'/%3E%3Ccircle cx='12' cy='12' r='4.3' fill='%23eb6834'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#1c5cab">
+  <style>
+  :root{color-scheme:light dark;--marca:#1c5cab;--linea:#e3e1dc;--text-muted:#6f6e69}
+  body{font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;max-width:760px;margin:0 auto;padding:1rem 1.1rem 4rem;color:#0b0b0b;background:#fff}
+  @media (prefers-color-scheme:dark){:root{--marca:#6da7ec;--linea:#383835;--text-muted:#9e9d95}body{color:#fff;background:#121211}a{color:#86b6ef}th{background:#242422!important}td,th{border-color:#383835!important}pre,code{background:#242422!important}blockquote{background:#1a1a19!important}}
+
+    .marca { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap;
+             padding: .7rem 0 .9rem; border-bottom: 1px solid var(--linea, #e3e1dc); margin-bottom: 1.4rem; }
+    .marca-enlace { display: inline-flex; align-items: center; gap: .45rem; text-decoration: none; color: inherit; white-space: nowrap; }
+    .marca-logo { width: 34px; height: 34px; flex: none; }
+    .marca-nombre { font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
+    .marca-lema { color: var(--text-muted, #6f6e69); font-size: .82rem; }
+
+  @media (max-width:520px){.marca-lema{display:none}}
+  a{color:#1c5cab} h1{line-height:1.15} h2{margin-top:2.4rem}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow-x:auto} th,td{border-bottom:1px solid #e3e1dc;padding:.4rem .5rem;text-align:left;vertical-align:top} th{background:#f3f2ef}
+  pre{background:#f3f2ef;padding:.8rem 1rem;border-radius:8px;overflow-x:auto} code{background:#f3f2ef;padding:.1rem .3rem;border-radius:4px;font-size:.88em}
+  blockquote{margin:1rem 0;padding:.7rem 1rem;background:#f6f7f9;border-radius:8px}
+  header#title-block-header{display:none}
+  footer.pie{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--linea);color:var(--text-muted);font-size:.85rem}
+  </style>
+</head>
+<body>
+<header class="marca">
+  <a class="marca-enlace" href="../index.html" aria-label="Ojo al Gasto: inicio">
+    <svg class="marca-logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z" fill="none" stroke="var(--marca, #1c5cab)" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="4.3" fill="#eb6834"/>
+      <circle cx="12" cy="12" r="2" fill="none" stroke="#fff" stroke-width="1.2"/>
+    </svg>
+    <span class="marca-nombre">Ojo al Gasto</span>
+  </a>
+  <span class="marca-lema">Control ciudadano de las compras municipales</span>
+</header>
+<main>
+<header id="title-block-header">
+<h1 class="title">Ojo al Gasto</h1>
+</header>
+<h1 id="guía-para-periodistas-de-una-alerta-a-una-nota">Guía para periodistas: de una alerta a una nota</h1>
+<p>Esta guía explica cómo convertir una alerta de veeduria-ec en una nota verificada.</p>
+<blockquote>
+<p>Una alerta no es una nota. Una alerta es el punto de partida de la reportería.</p>
+</blockquote>
+<h2 id="1-elija-una-alerta">1. Elija una alerta</h2>
+<ol>
+<li>Abra <code>informe.html</code> de su cantón.</li>
+<li>Empiece por las alertas de nivel <strong>alta</strong>.</li>
+<li>Elija una alerta con un monto importante para la comunidad.</li>
+<li>Copie el código del proceso.</li>
+</ol>
+<h2 id="2-verifique-los-datos">2. Verifique los datos</h2>
+<ol>
+<li>Ejecute <code>veeduria proceso &lt;código&gt;</code>.</li>
+<li>Abra la "Ficha oficial" del resultado.</li>
+<li>Compare el monto, la fecha y el proveedor con la ficha oficial.</li>
+<li>Descargue los pliegos, el contrato y las actas desde el portal del SERCOP.</li>
+<li>Ejecute <code>veeduria proveedor &lt;RUC&gt;</code> para ver todo lo que ganó ese proveedor en el país.</li>
+</ol>
+<p><strong>AVISO:</strong> si un dato de la herramienta no coincide con la ficha oficial, use la ficha oficial. Reporte la diferencia en el repositorio.</p>
+<h2 id="3-busque-el-contexto">3. Busque el contexto</h2>
+<ol>
+<li>Lea la explicación y la base legal de la alerta en el informe.</li>
+<li>Busque si la Contraloría ya examinó el tema: el informe técnico lista sus informes.</li>
+<li>Compare con el resto del país: el informe da la tasa nacional de cada patrón.</li>
+<li>Visite la obra si el proceso es una obra.</li>
+</ol>
+<h2 id="4-pida-la-versión-de-la-entidad">4. Pida la versión de la entidad</h2>
+<ol>
+<li>Ejecute <code>veeduria solicitud</code> con preguntas concretas.</li>
+<li>Presente la solicitud y guarde la fe de recepción.</li>
+<li>Espere el plazo legal: 10 días, prorrogables 5.</li>
+<li>Publique la respuesta de la entidad o informe que no respondió.</li>
+</ol>
+<p>Preguntas útiles:</p>
+<ul>
+<li>¿Por qué se contrató por separado?</li>
+<li>¿Por qué se usó un procedimiento sin concurso?</li>
+<li>¿Por qué se presentó un solo oferente?</li>
+<li>¿Qué recomendaciones de la Contraloría se cumplieron?</li>
+</ul>
+<h2 id="5-escriba-la-nota">5. Escriba la nota</h2>
+<p>Escriba hechos verificables con su fuente:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Escriba</th>
+<th>No escriba</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"El SERCOP registra dos procesos de USD 350.000 y USD 300.000, con objetos parecidos y el mismo proveedor, en un mes."</td>
+<td>"Fraccionaron el contrato."</td>
+</tr>
+<tr class="even">
+<td>"La entidad no respondió la solicitud en el plazo legal."</td>
+<td>"La entidad oculta información."</td>
+</tr>
+<tr class="odd">
+<td>"El proceso tuvo un solo oferente. En el país esto ocurre en el 17 % de los casos."</td>
+<td>"El proceso estaba amarrado."</td>
+</tr>
+<tr class="even">
+<td>"La Contraloría determinó que el personal técnico no correspondió al ofertado."</td>
+<td>"El contratista estafó."</td>
+</tr>
+</tbody>
+</table>
+<p><strong>AVISO:</strong> no atribuya delitos a personas. La calumnia tiene pena de cárcel (COIP, art. 182). Si tiene pruebas de un delito, preséntelas a la Fiscalía o a la Contraloría.</p>
+<p><strong>AVISO:</strong> no publique la cédula ni datos privados de personas naturales. Los archivos de la herramienta ya enmascaran el RUC. En las alertas, un proveedor persona natural aparece como "Persona natural"; su nombre está en la ficha oficial del SERCOP.</p>
+<h2 id="6-antes-de-publicar">6. Antes de publicar</h2>
+<p>Revise esta lista:</p>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+Cada cifra tiene su fuente y su fecha.</li>
+<li><input type="checkbox" disabled="" />
+Cada cifra coincide con la ficha oficial del SERCOP.</li>
+<li><input type="checkbox" disabled="" />
+La nota incluye la versión de la entidad o su silencio.</li>
+<li><input type="checkbox" disabled="" />
+La nota explica qué es normal: la tasa nacional o la ley.</li>
+<li><input type="checkbox" disabled="" />
+La nota no atribuye delitos a personas.</li>
+<li><input type="checkbox" disabled="" />
+La nota no expone datos privados.</li>
+<li><input type="checkbox" disabled="" />
+Un abogado revisó la nota si nombra a personas.</li>
+</ul>
+<h2 id="atajos">Atajos</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Necesita</th>
+<th>Comando</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ficha de un proceso</td>
+<td><code>veeduria proceso &lt;código&gt;</code></td>
+</tr>
+<tr class="even">
+<td>Historial de un proveedor</td>
+<td><code>veeduria proveedor &lt;nombre o RUC&gt; --csv salida.csv</code></td>
+</tr>
+<tr class="odd">
+<td>Fecha límite de una solicitud</td>
+<td><code>veeduria plazo AAAA-MM-DD</code></td>
+</tr>
+<tr class="even">
+<td>Solicitud LOTAIP</td>
+<td><code>veeduria solicitud &lt;entidad.toml&gt; --pedido "..."</code></td>
+</tr>
+<tr class="odd">
+<td>Datos para su propio análisis</td>
+<td><code>informes/&lt;cantón&gt;/procesos.csv</code> y <code>alertas.csv</code></td>
+</tr>
+</tbody>
+</table>
+<footer class="pie">Ojo al Gasto · herramienta libre (licencia MIT)</footer>
+</main>
+</body>
+</html>

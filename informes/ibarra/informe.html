@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Informe técnico: Ibarra · Ojo al Gasto</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 24 24&#39;%3E%3Cpath d=&#39;M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z&#39; fill=&#39;white&#39; stroke=&#39;%231c5cab&#39; stroke-width=&#39;2.2&#39;/%3E%3Ccircle cx=&#39;12&#39; cy=&#39;12&#39; r=&#39;4.3&#39; fill=&#39;%23eb6834&#39;/%3E%3C/svg%3E">
+<meta name="theme-color" content="#1c5cab">
+<style>
+  :root { --tinta:#1b1f24; --suave:#5b6470; --linea:#d9dee4; --fondo:#f6f7f9; --alta:#b42318; --media:#b54708; --baja:#475467; --ok:#067647; --marca:#1c5cab; --serie:#2a78d6; }
+  * { box-sizing: border-box; }
+  body { font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--tinta); margin: 0; background: #fff; }
+  main { max-width: 1100px; margin: 0 auto; padding: 1rem 1rem 4rem; }
+  
+  .marca { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap;
+           padding: .7rem 0 .9rem; border-bottom: 1px solid var(--linea, #e3e1dc); margin-bottom: 1.4rem; }
+  .marca-enlace { display: inline-flex; align-items: center; gap: .45rem; text-decoration: none; color: inherit; white-space: nowrap; }
+  .marca-logo { width: 34px; height: 34px; flex: none; }
+  .marca-nombre { font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
+  .marca-lema { color: var(--text-muted, #6f6e69); font-size: .82rem; }
+
+  @media (max-width: 520px) { .marca-lema { display: none; } }
+  h1 { font-size: 1.7rem; margin: .2rem 0; } h2 { margin-top: 2.6rem; border-bottom: 2px solid var(--tinta); padding-bottom: .3rem; scroll-margin-top: 3.5rem; }
+  h3 { margin-top: 1.6rem; }
+  .sub { color: var(--suave); }
+  .cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: .8rem; margin: 1.2rem 0; }
+  .cifras article { background: var(--fondo); border-radius: 10px; padding: .9rem 1rem; }
+  .cifras b { display: block; font-size: 1.55rem; } .cifras span { color: var(--suave); font-size: .9rem; }
+  main > article { background: var(--fondo); border-radius: 10px; padding: .9rem 1.1rem; margin: 1rem 0; }
+  .nota { color: var(--suave); font-size: .9rem; }
+  table { border-collapse: collapse; width: 100%; font-size: .9rem; margin: .6rem 0 1rem; }
+  th, td { border-bottom: 1px solid var(--linea); padding: .4rem .5rem; text-align: left; vertical-align: top; }
+  th { background: var(--fondo); position: sticky; top: 0; }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tabla { overflow-x: auto; max-height: 34rem; overflow-y: auto; border: 1px solid var(--linea); border-radius: 8px; }
+  .tabla table { margin: 0; }
+  .nivel { font-weight: 600; font-size: .8rem; text-transform: uppercase; }
+  .alta { color: var(--alta); } .media { color: var(--media); } .baja { color: var(--baja); } .ok { color: var(--ok); }
+  .barra-mini { background: var(--linea); border-radius: 4px; height: .7rem; min-width: 80px; }
+  .barra-mini i { display: block; height: 100%; border-radius: 4px; background: var(--serie); }
+  details { margin: .6rem 0; } summary { cursor: pointer; font-weight: 600; }
+  a { color: #1849a9; }
+  ol li, ul li { margin: .3rem 0; }
+  .secciones { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--linea); margin: 0 0 1rem; }
+  .secciones ul { display: flex; gap: .4rem; overflow-x: auto; list-style: none; padding: .5rem 0; margin: 0; scrollbar-width: none; }
+  .secciones li { margin: 0; flex: none; }
+  .secciones a { display: inline-block; text-decoration: none; font-size: .88rem; padding: .35rem .75rem; border: 1px solid var(--linea); border-radius: 999px; color: var(--tinta); background: var(--fondo); }
+  footer.pie { margin-top: 3rem; color: var(--suave); font-size: .85rem; border-top: 1px solid var(--linea); padding-top: 1rem; }
+  @media print { .tabla { max-height: none; overflow: visible; } .secciones { display: none; } }
+</style>
+</head>
+<body>
+
+<header class="marca">
+  <a class="marca-enlace" href="../index.html" aria-label="Ojo al Gasto: inicio">
+    <svg class="marca-logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z" fill="none" stroke="var(--marca, #1c5cab)" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="4.3" fill="#eb6834"/>
+      <circle cx="12" cy="12" r="2" fill="none" stroke="#fff" stroke-width="1.2"/>
+    </svg>
+    <span class="marca-nombre">Ojo al Gasto</span>
+  </a>
+  <span class="marca-lema">Control ciudadano de las compras municipales</span>
+</header>
+<main>
+<p class="sub">Informe técnico · generado el 11/10/2026 10:03 · <a href="publico.html">ver el resumen para el público</a></p>
+<h1>Municipio de San Miguel de Ibarra</h1>
+<p class="sub">Compras públicas 2025 y 2026 · 6 entidades (municipio y empresas metropolitanas) · datos oficiales del SERCOP y de la Defensoría del Pueblo</p>
+
+<nav class="secciones" aria-label="Secciones"><ul>
+<li><a href="#importante">Lo importante</a></li><li><a href="#alertas">Alertas</a></li><li><a href="#gasto">Gasto</a></li><li><a href="#competencia">Competencia</a></li><li><a href="#transparencia">Transparencia</a></li><li><a href="#presupuesto">Presupuesto</a></li><li><a href="#contraloria">Contraloría</a></li><li><a href="#acciones">Qué hacer</a></li>
+</ul></nav>
+<article><b>Cómo leer este informe.</b> Una alerta no es una acusación. Indica un patrón que la ley o la buena práctica piden revisar, y en muchos casos tiene una explicación legítima. Antes de publicar o denunciar, abra el proceso en el portal del SERCOP, lea sus documentos y pida información a la entidad. Este informe sirve para eso: le dice <i>dónde mirar</i>.</article>
+
+<div class="cifras">
+  <article><b>1.132</b><span>procesos de compra publicados</span></article>
+  <article><b>USD 70,1 M</b><span>en presupuesto de esos procesos</span></article>
+  <article><b>2,0 %</b><span>del monto se contrató sin concurso de ofertas</span></article>
+  <article><b>0</b><span>procesos con posible fraccionamiento</span></article>
+  
+  <article><b>3 de 3</b><span>solicitudes de información sin responder en 2025</span></article>
+  
+  <article><b>30,8 %</b><span>del presupuesto ejecutado a agosto 2026</span></article>
+</div>
+
+<h2 id="importante">1. Lo más importante</h2>
+<ol>
+<li>En <b>Cotización</b>, el 58,3 % de los procesos tuvo un solo oferente, frente al 22,9 % del país (14 procesos; se esperarían unos 6). Que ocurra por azar es improbable (probabilidad menor a 1 en 1.000).</li><li>En <b>Lista corta</b>, el 87,5 % de los procesos tuvo un solo oferente, frente al 34,3 % del país (7 procesos; se esperarían unos 3). Que ocurra por azar es improbable (probabilidad 0,003).</li><li>El <b>2,0 %</b> del monto (USD 1,4 M) se contrató por régimen especial o contratación directa, sin concurso de ofertas.</li><li>El proveedor que más recibe es <b>BUENO Y CASTRO INGENIEROS ASOCIADOS CIA.LTDA.</b>: USD 4,4 M en 1 proceso (8,1 % de lo adjudicado sin catálogo).</li><li>En la transparencia LOTAIP, de 20 meses evaluados hubo <b>1 mes incompleto</b> (incompleto: falta algún numeral que la entidad sí publica otros meses).</li><li>Publica la información de transparencia de cada mes, en promedio, <b>14 días después del cierre del mes</b> (entre 12 y 17).</li><li>A agosto de 2026 había ejecutado (devengado) el <b>30,8 %</b> de su presupuesto codificado (un ritmo parejo daría cerca del 66,7 %).</li>
+</ol>
+
+<h2 id="gasto">2. ¿En qué gasta?</h2>
+<p>Los 10 procesos más grandes publicados en 2025 y 2026:</p>
+<div class="tabla"><table>
+<tr><th>Fecha</th><th>Entidad</th><th>Objeto</th><th>Procedimiento</th><th class="n">Monto (USD)</th><th>Proveedor</th></tr>
+
+<tr><td>17/07/2025</td><td>GAD Municipal de San Miguel de Ibarra</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2025-001-2783">CONSTRUCCIÓN DEL CENTRO DE SALUD TIPO C UBICADO EN LA CIUDAD DE IBARRA, PROVINCIA DE IMBABURA</a></td><td>Licitación</td><td class="n">4.417.244</td><td>BUENO Y CASTRO INGENIEROS ASOCIADOS CIA.LTDA.</td></tr>
+
+<tr><td>05/06/2026</td><td>GAD Municipal de San Miguel de Ibarra</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-014-2783">MEJORAMIENTO DE LA INFRAESTRUCTURA DE LA LIGA DEPORTIVA BARRIAL SAN MIGUEL LIGA ALPACHACA, INTERVENCIÓN EN LA UNIDAD EDUCATIVA MUNICIPAL AM…</a></td><td>Licitación</td><td class="n">3.636.863</td><td>nan</td></tr>
+
+<tr><td>20/04/2026</td><td>GAD Municipal de San Miguel de Ibarra</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-011-2783">REGENERACIÓN DE ACERAS Y BORDILLOS DE LA AV MARIANO ACOSTA, CONSTRUCCIÓN DEL CERRAMIENTO PARA EL RELLENO SANITARIO SAN ALFONSO, DEL PARQUE…</a></td><td>Licitación</td><td class="n">1.976.131</td><td>CONSTRUCCIONES REYES&amp;AGUILAR C.L.</td></tr>
+
+<tr><td>24/10/2025</td><td>GAD Municipal de San Miguel de Ibarra</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-066-2783">ADQUISICIÓN DE MAQUINARIA PESADA CON FINANCIAMIENTO DEL BDE PARA FORTALECER EL EQUIPO CAMINERO MUNICIPAL EN OBRAS, CONVENIOS Y EMERGENCIAS…</a></td><td>Subasta Inversa Electrónica</td><td class="n">1.946.739</td><td>IASA S.A.</td></tr>
+
+<tr><td>05/02/2026</td><td>GAD Municipal de San Miguel de Ibarra</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2026-001-2783">ADQUISICIÓN DE VEHÍCULOS PESADOS CON FINANCIAMIENTO DEL BDE PARA FORTALECER EL EQUIPO CAMINERO MUNICIPAL EN OBRAS, CONVENIOS Y EMERGENCIAS…</a></td><td>Subasta Inversa Electrónica</td><td class="n">1.899.600</td><td>MAQUINARIAS Y VEHICULOS S.A. MAVESA</td></tr>
+
+<tr><td>17/10/2025</td><td>GAD Municipal de San Miguel de Ibarra</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2025-003-2783">MEJORAMIENTO DE LOS SISTEMAS DE AGUA POTABLE DE LAS COMUNIDADES DEL RAMAL AMBUQUI, PARROQUIA AMBUQUI</a></td><td>Licitación</td><td class="n">1.732.650</td><td>Persona natural</td></tr>
+
+<tr><td>28/07/2026</td><td>GAD Municipal de San Miguel de Ibarra</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-024-2783">CONSTRUCCIÓN DEL CENTRO RECREATIVO Y CULTURAL PILANQUI PRIMERA ETAPA Y PROYECTOS VIALES CON PRESUPUESTO PARTICIPATIVO EN LAS PARROQUIAS LA…</a></td><td>Licitación</td><td class="n">1.565.256</td><td>PROCONSTRUCIONES SOCIEDAD CIVIL Y COMERCIAL</td></tr>
+
+<tr><td>06/07/2026</td><td>GAD Municipal de San Miguel de Ibarra</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-021-2783">CONSTRUCCIÓN DE LOS CENTROS CULTURALES Y DEPORTIVOS MI ESPACIO SEGURO LOMAS DE AZAYA, SAN CRISTOBAL ALTO Y LA FLORESTA, DE OBRAS DE MEJORA…</a></td><td>Licitación</td><td class="n">1.325.017</td><td>nan</td></tr>
+
+<tr><td>03/07/2026</td><td>GAD Municipal de San Miguel de Ibarra</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-020-2783">IMPLEMENTACIÓN DEL SISTEMA DE ILUMINACIÓN ARQUITECTÓNICA, ORNAMENTAL Y ARTÍSTICA DE IGLESIAS PATRIMONIALES, MONUMENTOS, ESPACIOS PAISAJÍSTI…</a></td><td>Licitación</td><td class="n">1.225.123</td><td>nan</td></tr>
+
+<tr><td>18/06/2026</td><td>GAD Municipal de San Miguel de Ibarra</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-015-2783">CONSTRUCCION DEL MIRADOR SAN MIGUEL ARCANGEL SEGUNDA ETAPA</a></td><td>Licitación</td><td class="n">1.150.000</td><td>Persona natural</td></tr>
+
+</table></div>
+
+<h3>Por entidad</h3>
+<div class="tabla"><table>
+<tr><th>Entidad</th><th class="n">Procesos</th><th class="n">Monto (USD)</th><th></th></tr>
+
+
+<tr><td>GAD Municipal de San Miguel de Ibarra</td><td class="n">623</td><td class="n">64.173.110</td><td><div class="barra-mini"><i style="width:100.0%"></i></div></td></tr>
+
+<tr><td>EMAPA-I - Agua Potable y Alcantarillado de Ibarra</td><td class="n">204</td><td class="n">4.014.025</td><td><div class="barra-mini"><i style="width:6.3%"></i></div></td></tr>
+
+<tr><td>Cuerpo de Bomberos de Ibarra</td><td class="n">71</td><td class="n">1.400.131</td><td><div class="barra-mini"><i style="width:2.2%"></i></div></td></tr>
+
+<tr><td>Registro de la Propiedad del Cantón Ibarra</td><td class="n">88</td><td class="n">349.107</td><td><div class="barra-mini"><i style="width:0.5%"></i></div></td></tr>
+
+<tr><td>Comercibarra - Mercado Mayorista de Ibarra</td><td class="n">81</td><td class="n">194.806</td><td><div class="barra-mini"><i style="width:0.3%"></i></div></td></tr>
+
+<tr><td>EP Municipal de Faenamiento del Cantón Ibarra</td><td class="n">65</td><td class="n">5.718</td><td><div class="barra-mini"><i style="width:0.0%"></i></div></td></tr>
+
+</table></div>
+
+<h3>Por tipo de procedimiento</h3>
+<div class="tabla"><table>
+<tr><th>Procedimiento</th><th class="n">Procesos</th><th class="n">Monto (USD)</th><th class="n">% del monto</th></tr>
+
+<tr><td>Licitación</td><td class="n">52</td><td class="n">27.219.050</td><td class="n">38,8 %</td></tr>
+
+<tr><td>Cotización</td><td class="n">24</td><td class="n">17.296.425</td><td class="n">24,7 %</td></tr>
+
+<tr><td>Subasta Inversa Electrónica</td><td class="n">197</td><td class="n">14.510.885</td><td class="n">20,7 %</td></tr>
+
+<tr><td>Catálogo electrónico - Compra directa</td><td class="n">187</td><td class="n">2.827.508</td><td class="n">4,0 %</td></tr>
+
+<tr><td>Licitación de Seguros</td><td class="n">7</td><td class="n">1.661.371</td><td class="n">2,4 %</td></tr>
+
+<tr><td>Catálogo electrónico - Gran compra mejor oferta</td><td class="n">6</td><td class="n">1.362.187</td><td class="n">1,9 %</td></tr>
+
+<tr><td>Lista corta</td><td class="n">8</td><td class="n">1.245.772</td><td class="n">1,8 %</td></tr>
+
+<tr><td>Catálogo electrónico - Mejor oferta</td><td class="n">481</td><td class="n">921.194</td><td class="n">1,3 %</td></tr>
+
+<tr><td>Catálogo electrónico - Gran compra puja</td><td class="n">2</td><td class="n">769.362</td><td class="n">1,1 %</td></tr>
+
+<tr><td>Concurso publico</td><td class="n">6</td><td class="n">530.414</td><td class="n">0,8 %</td></tr>
+
+<tr><td>Menor Cuantía</td><td class="n">12</td><td class="n">406.446</td><td class="n">0,6 %</td></tr>
+
+<tr><td>Bienes y Servicios únicos</td><td class="n">15</td><td class="n">385.310</td><td class="n">0,5 %</td></tr>
+
+<tr><td>Comunicación Social – Contratación Directa</td><td class="n">42</td><td class="n">324.750</td><td class="n">0,5 %</td></tr>
+
+<tr><td>Contratos entre Entidades Públicas o sus subsidiarias</td><td class="n">6</td><td class="n">279.694</td><td class="n">0,4 %</td></tr>
+
+<tr><td>Contratacion directa</td><td class="n">14</td><td class="n">204.766</td><td class="n">0,3 %</td></tr>
+
+<tr><td>Obra artística, científica o literaria</td><td class="n">1</td><td class="n">98.000</td><td class="n">0,1 %</td></tr>
+
+<tr><td>Asesoría y Patrocinio Jurídico</td><td class="n">3</td><td class="n">75.500</td><td class="n">0,1 %</td></tr>
+
+<tr><td>Repuestos o Accesorios</td><td class="n">2</td><td class="n">18.263</td><td class="n">0,0 %</td></tr>
+
+<tr><td>sin dato</td><td class="n">67</td><td class="n">0</td><td class="n">0,0 %</td></tr>
+
+</table></div>
+
+<h2 id="competencia">3. ¿Hubo competencia?</h2>
+<p>En los procedimientos competitivos la ley espera que varios proveedores compitan. La tabla compara la proporción de procesos con <b>un solo oferente</b> en Ibarra con la de todo el país en el mismo periodo. "Prob. por azar" es la probabilidad de ver tantos casos o más si la entidad se comportara como el promedio nacional; se marca en rojo si es menor a 0,007 (0,05 dividido entre el número de procedimientos comparados, para no ver patrones donde solo hay azar).</p>
+<div class="tabla"><table>
+<tr><th>Procedimiento</th><th class="n">Procesos</th><th class="n">Con un solo oferente</th><th class="n">Ibarra</th><th class="n">País</th><th class="n">Esperados si fuera como el país</th><th class="n">Prob. por azar</th></tr>
+
+<tr><td>Subasta Inversa Electrónica</td><td class="n">195</td><td class="n">34</td><td class="n ">17,4 %</td><td class="n">17,0 %</td><td class="n">33</td><td class="n">0,464</td></tr>
+
+<tr><td>Licitación</td><td class="n">52</td><td class="n">16</td><td class="n ">30,8 %</td><td class="n">21,6 %</td><td class="n">11</td><td class="n">0,080</td></tr>
+
+<tr><td>Cotización</td><td class="n">24</td><td class="n">14</td><td class="n alta">58,3 %</td><td class="n">22,9 %</td><td class="n">6</td><td class="n">menor a 1 en 1.000</td></tr>
+
+<tr><td>Menor Cuantía</td><td class="n">12</td><td class="n">8</td><td class="n ">66,7 %</td><td class="n">34,7 %</td><td class="n">4</td><td class="n">0,024</td></tr>
+
+<tr><td>Lista corta</td><td class="n">8</td><td class="n">7</td><td class="n alta">87,5 %</td><td class="n">34,3 %</td><td class="n">3</td><td class="n">0,003</td></tr>
+
+<tr><td>Licitación de Seguros</td><td class="n">7</td><td class="n">3</td><td class="n ">42,9 %</td><td class="n">34,9 %</td><td class="n">2</td><td class="n">0,465</td></tr>
+
+<tr><td>Concurso publico</td><td class="n">6</td><td class="n">1</td><td class="n ">16,7 %</td><td class="n">26,5 %</td><td class="n">2</td><td class="n">—</td></tr>
+
+</table></div>
+
+<h3>Proveedores que más dinero reciben</h3>
+<p class="nota">Sin compras por catálogo electrónico. "Directos" = contratos sin concurso; "1 oferente" = ganó siendo el único participante.</p>
+<div class="tabla"><table>
+<tr><th>Proveedor</th><th>RUC</th><th class="n">Procesos</th><th class="n">Monto (USD)</th><th class="n">% del total</th><th class="n">Directos</th><th class="n">1 oferente</th></tr>
+
+<tr><td>BUENO Y CASTRO INGENIEROS ASOCIADOS CIA.LTDA.</td><td>1790820556001</td><td class="n">1</td><td class="n">4.371.286</td><td class="n">8,1 %</td><td class="n">0</td><td class="n">0</td></tr>
+
+<tr><td>MAQUINARIAS Y VEHICULOS S.A. MAVESA</td><td>0990022011001</td><td class="n">5</td><td class="n">2.960.800</td><td class="n">5,5 %</td><td class="n">3</td><td class="n">3</td></tr>
+
+<tr><td>Persona natural</td><td>17********001</td><td class="n">2</td><td class="n">2.575.020</td><td class="n">4,8 %</td><td class="n">0</td><td class="n">1</td></tr>
+
+<tr><td>IASA S.A.</td><td>0990011109001</td><td class="n">4</td><td class="n">2.416.060</td><td class="n">4,5 %</td><td class="n">0</td><td class="n">2</td></tr>
+
+<tr><td>Persona natural</td><td>17********001</td><td class="n">2</td><td class="n">2.148.123</td><td class="n">4,0 %</td><td class="n">0</td><td class="n">2</td></tr>
+
+<tr><td>CONSTRUCCIONES REYES&amp;AGUILAR C.L.</td><td>1091750631001</td><td class="n">1</td><td class="n">1.976.009</td><td class="n">3,7 %</td><td class="n">0</td><td class="n">1</td></tr>
+
+<tr><td>Persona natural</td><td>10********001</td><td class="n">2</td><td class="n">1.887.157</td><td class="n">3,5 %</td><td class="n">0</td><td class="n">0</td></tr>
+
+<tr><td>PROCONSTRUCIONES SOCIEDAD CIVIL Y COMERCIAL</td><td>1091797377001</td><td class="n">1</td><td class="n">1.565.128</td><td class="n">2,9 %</td><td class="n">0</td><td class="n">1</td></tr>
+
+<tr><td>Persona natural</td><td>10********001</td><td class="n">2</td><td class="n">1.067.542</td><td class="n">2,0 %</td><td class="n">0</td><td class="n">1</td></tr>
+
+<tr><td>Persona natural</td><td>10********001</td><td class="n">1</td><td class="n">1.063.128</td><td class="n">2,0 %</td><td class="n">0</td><td class="n">1</td></tr>
+
+<tr><td>Persona natural</td><td>17********001</td><td class="n">1</td><td class="n">985.448</td><td class="n">1,8 %</td><td class="n">0</td><td class="n">1</td></tr>
+
+<tr><td>Persona natural</td><td>10********001</td><td class="n">1</td><td class="n">931.471</td><td class="n">1,7 %</td><td class="n">0</td><td class="n">0</td></tr>
+
+<tr><td>COREIMEXA CONSTRUCCION REPRESENTACION IMPORTACION Y EXPORTACION CIA. LTDA.</td><td>1791298039001</td><td class="n">1</td><td class="n">904.004</td><td class="n">1,7 %</td><td class="n">0</td><td class="n">0</td></tr>
+
+<tr><td>Persona natural</td><td>18********001</td><td class="n">1</td><td class="n">891.286</td><td class="n">1,7 %</td><td class="n">0</td><td class="n">0</td></tr>
+
+<tr><td>Persona natural</td><td>06********001</td><td class="n">2</td><td class="n">871.756</td><td class="n">1,6 %</td><td class="n">0</td><td class="n">0</td></tr>
+
+</table></div>
+
+<h2 id="alertas">4. Alertas de contratación</h2>
+<p>149 alertas en 115 procesos. El detalle completo está en <code>alertas.csv</code>.</p>
+
+<details open>
+<summary><span class="nivel media">media</span> · Proveedor único para servicios u obras (5 procesos, USD 69.400)</summary>
+<p>Contratos por el régimen de bienes y servicios únicos clasificados como servicio u obra. Si esa categoría corresponde al art. 139 del Reglamento de la LOSNCP (vigente desde el 28-oct-2025), ese artículo solo permite el proveedor único para repuestos, mejora de tecnologías existentes y patentes. Puede ser un error de clasificación: pida el informe técnico motivado.</p>
+<p class="nota">Base legal: RGLOSNCP (DE 193, 2025) art. 139: proveedor único solo para repuestos, mejora de tecnologías existentes o patentes; no aplica a servicios, obras o consultorías.</p>
+<div class="tabla"><table>
+<tr><th>Fecha</th><th>Código</th><th>Entidad</th><th>Objeto</th><th>Proveedor</th><th class="n">Monto (USD)</th><th>Por qué</th></tr>
+
+<tr><td>06/11/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-PU-CBI-2025-001-23759">RE-PU-CBI-2025-001</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>ACTUALIZACIÓN Y MANTENIMIENTO DEL SISTEMA DE GESTIÓN EMPRESARIAL ERP OLYMPO V 16.0 PARA EL CUERPO DE BOMBEROS IBARRA</td><td>PROTELCOTELSA S.A.</td><td class="n">28.000</td><td>Contratado por el régimen de bienes y servicios únicos, clasificado por el SERCOP como servicio. Si esta categoría del SERCOP corresponde al art. 139 del Reglamento, ese artículo no permite el proveedor único para servicios, obras ni consultorías. Pida el informe técnico motivado: puede ser un repuesto o la mejora de una tecnología mal clasificados.</td></tr>
+
+<tr><td>30/10/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-PU-EMAPA-I-2025-011-316213">RE-PU-EMAPA-I-2025-011</a></td><td>Empresa Publica Municipal de Agua…</td><td>CONTRATACION DEL SERVICIO DE MANTENIMIENTO MECANICO DEL VEHICULO HIDROSUCCIONADOR MARCA UD TRUCKS DE LA EMAPA-I</td><td>MOROAQUA S.A.</td><td class="n">15.300</td><td>Contratado por el régimen de bienes y servicios únicos, clasificado por el SERCOP como servicio. Si esta categoría del SERCOP corresponde al art. 139 del Reglamento, ese artículo no permite el proveedor único para servicios, obras ni consultorías. Pida el informe técnico motivado: puede ser un repuesto o la mejora de una tecnología mal clasificados.</td></tr>
+
+<tr><td>28/10/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-PU-EMAPA-I-2025-010-316213">RE-PU-EMAPA-I-2025-010</a></td><td>Empresa Publica Municipal de Agua…</td><td>CONTRATACION DEL SERVICIO DE MANTENIMIENTO MECANICO DE LAS CAMIONETAS MARCA GREAT WALL DE LA EMAPA-I</td><td>AMBACAR CIA. LTDA.</td><td class="n">15.000</td><td>Contratado por el régimen de bienes y servicios únicos, clasificado por el SERCOP como servicio. Si esta categoría del SERCOP corresponde al art. 139 del Reglamento, ese artículo no permite el proveedor único para servicios, obras ni consultorías. Pida el informe técnico motivado: puede ser un repuesto o la mejora de una tecnología mal clasificados.</td></tr>
+
+<tr><td>18/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-PU-EMAPA-I-2025-014-316213">RE-PU-EMAPA-I-2025-014</a></td><td>Empresa Publica Municipal de Agua…</td><td>CONTRATACION DEL SERVICIO DE MANTENIMIENTO DEL SISTEMA INFORMATICO FINANCIERO ADMINISTRATIVO EMAPA-I YUPAK</td><td>YUPAK ASOCIADOS CIA.LTDA.</td><td class="n">9.000</td><td>Contratado por el régimen de bienes y servicios únicos, clasificado por el SERCOP como servicio. Si esta categoría del SERCOP corresponde al art. 139 del Reglamento, ese artículo no permite el proveedor único para servicios, obras ni consultorías. Pida el informe técnico motivado: puede ser un repuesto o la mejora de una tecnología mal clasificados.</td></tr>
+
+<tr><td>11/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-PU-EMAPA-I-2025-013-316213">RE-PU-EMAPA-I-2025-013</a></td><td>Empresa Publica Municipal de Agua…</td><td>CONTRATACION DEL SERVICIO DE MANTENIMIENTO MECANICO PREVENTIVO PARA CAMION GRUA MARCA DON FENG DE LA EMAPAI</td><td>MAQUINARIAS Y VEHICULOS S.A. MAVESA</td><td class="n">2.100</td><td>Contratado por el régimen de bienes y servicios únicos, clasificado por el SERCOP como servicio. Si esta categoría del SERCOP corresponde al art. 139 del Reglamento, ese artículo no permite el proveedor único para servicios, obras ni consultorías. Pida el informe técnico motivado: puede ser un repuesto o la mejora de una tecnología mal clasificados.</td></tr>
+
+</table></div>
+
+</details>
+
+<details >
+<summary><span class="nivel media">media</span> · Un solo oferente (83 procesos, USD 27.008.884)</summary>
+<p>Procedimientos pensados para que compitan varios proveedores, pero en los que se presentó uno solo. Puede deberse a un mercado pequeño, o a requisitos o plazos que alejaron a otros oferentes.</p>
+<p class="nota">Base legal: No es ilegal, pero reduce la garantía de mejor precio. LOSNCP art. 47 (subasta con un solo oferente pasa a negociación); RGLOSNCP art. 426.1 (criterios de riesgo del SERCOP).</p>
+<div class="tabla"><table>
+<tr><th>Fecha</th><th>Código</th><th>Entidad</th><th>Objeto</th><th>Proveedor</th><th class="n">Monto (USD)</th><th>Por qué</th></tr>
+
+<tr><td>20/04/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-011-2783">LICO-GADM-IBARRA-2026-011</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>REGENERACIÓN DE ACERAS Y BORDILLOS DE LA AV MARIANO ACOSTA, CONSTRUCCIÓN DEL CERRAMIENTO PARA EL RELLENO SANITARIO SAN…</td><td>CONSTRUCCIONES REYES&amp;AGUILAR C.L.</td><td class="n">1.976.131</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>24/10/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-066-2783">SIE-GADM-IBARRA-2025-066</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ADQUISICIÓN DE MAQUINARIA PESADA CON FINANCIAMIENTO DEL BDE PARA FORTALECER EL EQUIPO CAMINERO MUNICIPAL EN OBRAS, CONV…</td><td>IASA S.A.</td><td class="n">1.946.739</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>28/07/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-024-2783">LICO-GADM-IBARRA-2026-024</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN DEL CENTRO RECREATIVO Y CULTURAL PILANQUI PRIMERA ETAPA Y PROYECTOS VIALES CON PRESUPUESTO PARTICIPATIVO E…</td><td>PROCONSTRUCIONES SOCIEDAD CIVIL Y COMERCIAL</td><td class="n">1.565.256</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>06/07/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-021-2783">LICO-GADM-IBARRA-2026-021</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN DE LOS CENTROS CULTURALES Y DEPORTIVOS MI ESPACIO SEGURO LOMAS DE AZAYA, SAN CRISTOBAL ALTO Y LA FLORESTA,…</td><td>nan</td><td class="n">1.325.017</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>18/06/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-015-2783">LICO-GADM-IBARRA-2026-015</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCION DEL MIRADOR SAN MIGUEL ARCANGEL SEGUNDA ETAPA</td><td>Persona natural</td><td class="n">1.150.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>01/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-010-2783">COTO-GADM-IBARRA-2025-010</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CULMINACIÓN DE LA CANCHA DEPORTIVA DEL ESTADIO DE LA PARROQUIA SALINAS, CONSTRUCCIÓN DEL ESTADIO DE LITA, CONSTRUCCIÓN…</td><td>Persona natural</td><td class="n">1.063.203</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>03/07/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-018-2783">LICO-GADM-IBARRA-2026-018</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN DE LOS CENTROS CULTURALES Y DEPORTIVOS MI ESPACIO SEGURO HUERTOS FAMILIARES NORTE Y ROMERILLO ALTO, DEL PA…</td><td>nan</td><td class="n">1.052.489</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>02/07/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-017-2783">LICO-GADM-IBARRA-2026-017</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>“CONSTRUCCION DE PARQUES TEMATICOS EN YAHUARCOCHA“</td><td>nan</td><td class="n">1.000.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>17/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-007-2783">COTO-GADM-IBARRA-2025-007</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCION DEL MIRADOR SAN MIGUEL ARCÁNGEL PRIMERA ETAPA</td><td>Persona natural</td><td class="n">998.904</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>26/05/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-009-2783">COTO-GADM-IBARRA-2025-009</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>READOQUINADO DE PIEDRA DE CALLES DEL CENTRO HISTORICO DE LA CIUDAD, CALLE BOLIVAR ENTRE VELASCO Y PEREZ GUERRERO, CALLE…</td><td>Persona natural</td><td class="n">991.222</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>30/05/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-011-2783">COTO-GADM-IBARRA-2025-011</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CENTRO RECREATIVO Y CULTURAL MI ESPACIO SEGURO LA CAMPIÑA, CONSTRUCCIÓN DEL POLIDEPORTIVO BARRIO BAJADA DE LOS MOLINOS,…</td><td>Persona natural</td><td class="n">982.682</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>26/03/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-003-2783">COTO-GADM-IBARRA-2025-003</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CENTRO RECREATIVO Y CULTURAL MI ESPACIO SEGURO - 15 DE DICIEMBRE, ADECUACIONES DEL LABORATORIO CLINICO DEL GADM-I, CONS…</td><td>nan</td><td class="n">891.327</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>25/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-016-2783">COTO-GADM-IBARRA-2025-016</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN CENTRO CULTURAL Y DEPORTIVO MI ESPACIO SEGURO LA MAGDALENA</td><td>Persona natural</td><td class="n">870.328</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>28/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-017-2783">COTO-GADM-IBARRA-2025-017</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN CENTRO CULTURAL Y DEPORTIVO MI ESPACIO SEGURO PABLO JURADO, CENTRO CULTURAL Y DEPORTIVO MARIANO ACOSTA Y A…</td><td>Persona natural</td><td class="n">844.136</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>04/03/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-009-2783">LICO-GADM-IBARRA-2026-009</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>“INTERVENCIÓN ESCUELA EDUCATIVA BÁSICA FUERZA AÉREA ECUATORIANA GUALLUPE PARROQUIA LA CAROLINA, IMPLEMENTACIÓN DE LOCAL…</td><td>Persona natural</td><td class="n">831.454</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>01/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-004-2783">COTO-GADM-IBARRA-2025-004</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN DEL CENTRO RECREATIVO Y CULTURAL MI ESPACIO SEGURO - AZAYA NORTE, CENTRO RECREATIVO CULTURAL MI ESPACIO SE…</td><td>CONSTRUGRISHA S A</td><td class="n">812.728</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>25/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-019-2783">COTO-GADM-IBARRA-2025-019</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN CENTRO RECREATIVO EL MILAGRO Y CANANVALLE Y CENTRO RECREATIVO MI ESPACIO SEGURO BALCÓN IBARREÑO</td><td>Persona natural</td><td class="n">805.008</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>22/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-020-2783">COTO-GADM-IBARRA-2025-020</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN CENTRO CULTURAL Y DEPORTIVO MI ESPACIO SEGURO SAN FRANCISCO DE CHORLAVI, CENTRO DE SEGURIDAD SAN ANTONIO Y…</td><td>Persona natural</td><td class="n">770.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>24/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-018-2783">COTO-GADM-IBARRA-2025-018</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN CENTRO CULTURAL Y DEPORTIVO MI ESPACIO SEGURO TURUPAMBA, CONSTRUCCIÓN CENTROCULTURAL Y DEPORTIVO MI ESPACI…</td><td>Persona natural</td><td class="n">758.734</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>29/05/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-005-2783">COTO-GADM-IBARRA-2025-005</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>MEJORAMIENTO DE LA INFRAESTRUCTURA DE LA LIGA DEPORTIVA BARRIAL DE ALPACHACA, CENTRO RECREATIVO Y CULTURAL MI ESPACIO S…</td><td>Persona natural</td><td class="n">686.761</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>23/02/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-007-2783">LICO-GADM-IBARRA-2026-007</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN DEL COLISEO COMUNIDAD RUMIPAMBA PARROQUIA LA ESPERANZA, DEL CENTRO CULTURAL Y DEPORTIVO MI ESPACIO SEGURO…</td><td>Persona natural</td><td class="n">616.580</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>15/05/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-0025-2783">SIE-GADM-IBARRA-2025-0025</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ADQUISICION DE MOTONIVELADORA PARA RASANTEO Y CONFORMACION DE VIAS</td><td>IASA S.A.</td><td class="n">341.891</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>16/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-007-2783">LCC-GADM-IBARRA-2025-007</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ESTUDIOS DE PREFACTIBILIDAD, FACTIBILIDAD Y DISEÑO DEFINITIVO PARA LA SOLUCIÓN VIAL PASO ELEVADO Y PEATONAL EN LA AV. C…</td><td>Persona natural</td><td class="n">289.806</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 34% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>11/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICSG-GADM-IBARRA-2025-001-2783">LICSG-GADM-IBARRA-2025-001</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACIÓN PÓLIZAS DE PROGRAMA DE SEGUROS PARA LOS BIENES INSTITUCIONALES</td><td>SEGUROS ALIANZA S A</td><td class="n">269.012</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 35% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>05/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-GADM-IBARRA-2025-003-2783">LICS-GADM-IBARRA-2025-003</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>REPARACION Y MANTENIMIENTO DE SISTEMAS DE RIEGO PILETAS CUARTOS DE MAQUINA</td><td>Persona natural</td><td class="n">252.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>15/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-043-2783">SIE-GADM-IBARRA-2025-043</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ADQUISICIÓN DE BARREDORA MECANICA PARA LIMPIEZA DE ESPACIOS PÚBLICOS DEL CANTÓN IBARRA</td><td>ECUA LIMPIO CIA.LTDA.</td><td class="n">237.450</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>02/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-008-2783">LCC-GADM-IBARRA-2025-008</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ACTUALIZACIÓN DEL VALOR DE LA PROPIEDAD URBANA Y RURAL BIENIO 2026 - 2027</td><td>TECH2GO S.A.</td><td class="n">235.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 34% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>15/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICSG-EMAPA-I-2025-001-316213">LICSG-EMAPA-I-2025-001</a></td><td>Empresa Publica Municipal de Agua…</td><td>CONTRATACION DE POLIZAS DE SEGUROS GENERALES PARA LA EMAPA-I</td><td>SEGUROS ALIANZA S A</td><td class="n">217.998</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 35% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>11/09/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-CPC-RPI-IBARRA-2025-001-378506">CPC-RPI-IBARRA-2025-001</a></td><td>REGISTRO DE LA PROPIEAD DEL CANTON…</td><td>CONSULTORIA PARA LA IMPLEMENTACION DEL SISTEMA DE GESTION REGISTRAL INTEGRADO BASADO EN GESTION POR PROCESOS PARA EL RE…</td><td>TECH2GO S.A.</td><td class="n">200.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 27% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>09/09/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICSG-CBI-2025-002-23759">LICSG-CBI-2025-002</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>CONTRATACION DEL PROGRAMA DE SEGUROS GENERALES DEL CUERPO DE BOMBEROS DE IBARRA, COMPRENDE RAMO DE: INCENDIO, ROBO Y AS…</td><td>ASEGURADORA DEL SUR C. A.</td><td class="n">185.282</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 35% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>30/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-003-2783">LCC-GADM-IBARRA-2025-003</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ESTUDIOS DE PREFACTIBILIDAD, FACTIBILIDAD Y DISEÑO DEFINITIVO PARA LA CONSTRUCCION DE UN PUENTE DE UN CARRIL POR SENTID…</td><td>Persona natural</td><td class="n">172.900</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 34% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>26/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-040-2783">SIE-GADM-IBARRA-2025-040</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DEL SERVICIO DE INSTRUCTORES DE BAILOTERAPIA Y MONITORES DEPORTIVOS EN EL MARCO DEL PROYECTO DEPORTE PARA…</td><td>ASOCIACION DE SERVICIOS DE CAPACITACION DEPORTIVA UNIDOS POR IBARRA ASOSERCADEPOR</td><td class="n">143.855</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>25/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-020-2783">SIE-GADM-IBARRA-2025-020</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ADQUISICIÓN DE MOTOCICLETAS PARA LA VIGILANCIA Y CONTROL PÚBLICO CON BALIZAS Y SIRENAS INCORPORADAS PARA LA DIRECCIÓN D…</td><td>INDUSTRIAS MOTORIZADAS INDUMOT SA</td><td class="n">138.937</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>31/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-012-2783">LCC-GADM-IBARRA-2025-012</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSULTORIA PARA LA CREACION DE LA ESCUELA DE FORMACION CIUDADANA QUE FORTALECERA EL DESARROLLO DE LAS CAPACIDADES DE L…</td><td>Persona natural</td><td class="n">130.405</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 34% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>28/02/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-001-2783">LCC-GADM-IBARRA-2025-001</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSULTORIA ESTUDIO SOBRE EL DESARROLLO ECONOMICO LOCAL Y LA COMPETITIVIDAD DEL CANTON IBARRA</td><td>CONSULTORA DE EMPRENDIMIENTO E INNOVACION ECEDILATAM S.A.</td><td class="n">130.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 34% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>24/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-010-2783">LCC-GADM-IBARRA-2025-010</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>GENERACIÓN DE LA ORTOFOTO RURAL DEL CANTÓN SAN MIGUEL DE IBARRA MEDIANTE EL USO DE IMÁGENES SATELITALES DE ALTA RESOLUC…</td><td>PROINFORMATICA PROTECCION INFORMATICA S.A.</td><td class="n">120.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 34% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>05/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-031-2783">SIE-GADM-IBARRA-2025-031</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DEL SERVICIO DE CONTROL VEHICULAR DENTRO DE LA ZONA REGULADA DEL SISMERT</td><td>ASOCIACION DE SERVICIOS DE PARQUEO TARIFADO AMIGOS EMPRENDEDORES ASOSERPARTAE</td><td class="n">114.018</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>08/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTS-EMAPA-I-2025-001-316213">COTS-EMAPA-I-2025-001</a></td><td>Empresa Publica Municipal de Agua…</td><td>CONTRATACION DEL SERVICIO DE ABASTECIMIENTO DE COMBUSTIBLE PARA LA EMAPA-I</td><td>Persona natural</td><td class="n">97.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>23/06/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-CBI-2026-002-23759">LICS-CBI-2026-002</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>CONTRATACIÓN DEL SERVICIO DE MANTENIMIENTO PREVENTIVO Y CORRECTIVO INCLUIDO LA ADQUISICIÓN DE REPUESTOS EQUIPOS Y ACCES…</td><td>Persona natural</td><td class="n">95.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>10/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2025-006-2783">LICO-GADM-IBARRA-2025-006</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN DE DUCTO CAJÓN ACEQUIA EL QUINCE Y READECUACIÓN BATERIAS SANITARIAS BORDE LACUSTRE SECTOR YAHUARCOCHA, IMP…</td><td>Persona natural</td><td class="n">94.861</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>30/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTS-CBI-2025-001-23759">COTS-CBI-2025-001</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>CONTRATACIÓN DEL SERVICIO DE MANTENIMIENTO PREVENTIVO Y CORRECTIVO INCLUIDO LA ADQUISICIÓN DE REPUESTOS EQUIPOS Y ACCES…</td><td>Persona natural</td><td class="n">90.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 23% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>15/04/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-GADM-IBARRA-2026-004-2783">LICS-GADM-IBARRA-2026-004</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DE LOS SERVICIOS DE INHUMACION EXHUMACION Y MANTENIMIENTO DE CEMENTERIOS DEL CANTON IBARRA</td><td>ASOCIACION DE SERVICIOS DE MANTENIMIENTO DE CEMENTERIOS LOS RECUERDOS ASOSERMANCEREC</td><td class="n">84.793</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>11/03/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-007-2783">SIE-GADM-IBARRA-2025-007</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DE LOS SERVICIOS DE INHUMACION EXHUMACION Y MANTENIMIENTO DE CEMENTERIOS DEL CANTON IBARRA</td><td>ASOCIACION DE SERVICIOS DE MANTENIMIENTO DE CEMENTERIOS LOS RECUERDOS ASOSERMANCEREC</td><td class="n">79.705</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>27/05/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-005-2783">LCC-GADM-IBARRA-2025-005</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSULTORIA PARA LA INTERVENCION DE ESPACIOS PUBLICOS DEL CANTON IBARRA</td><td>Persona natural</td><td class="n">77.662</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 34% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>29/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-GADM-IBARRA-2025-007-2783">LICS-GADM-IBARRA-2025-007</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CREACIÓN DE LA RED DE MURALES DEL CANTÓN IBARRA</td><td>Persona natural</td><td class="n">75.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>30/07/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-EMAPA-I-2026-024-316213">SIE-EMAPA-I-2026-024</a></td><td>Empresa Publica Municipal de Agua…</td><td>SERVICIO DE MANTENIMIENTO MECANICO DE SISTEMAS, POZOS Y PLANTAS DE LA EMAPA-I.</td><td>Persona natural</td><td class="n">74.834</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>26/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-EMAPA-I-2025-004-316213">LICO-EMAPA-I-2025-004</a></td><td>Empresa Publica Municipal de Agua…</td><td>CONSTRUCCIÓN DE INSTALACIONES SANITARIAS Y MANTENIMIENTO DE CUBIERTAS DE LA EMAPA-I</td><td>Persona natural</td><td class="n">62.885</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>30/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCS-GADM-IBARRA-2025-007-2783">MCS-GADM-IBARRA-2025-007</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DEL SERVICIO DE MANTENIMIENTO CORRECTIVO DEVEHICULOS LIVIANOS DEL GAD-I</td><td>Persona natural</td><td class="n">60.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 35% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>08/04/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-EMAPA-I-2026-002-316213">LICO-EMAPA-I-2026-002</a></td><td>Empresa Publica Municipal de Agua…</td><td>INSTALACIÓN DE CONEXIONES DOMICILIARIAS DE ALCANTARILLADO PARA LOS CLIENTES DE LA EMAPA-I DEL CANTÓN IBARRA.</td><td>Persona natural</td><td class="n">59.951</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>02/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-EMAPA-I-2025-045-316213">SIE-EMAPA-I-2025-045</a></td><td>Empresa Publica Municipal de Agua…</td><td>ADQUISICIÓN DE TAPAS Y REJILLAS EN POLIETILENO DE ALTA RESISTENCIA PARA CONSTRUCCIÓN Y MANTENIMIENTO DE POZOS DE SISTEM…</td><td>HYDRO-PLASTIC S.A.S.</td><td class="n">54.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>09/04/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-EMAPA-I-2026-011-316213">SIE-EMAPA-I-2026-011</a></td><td>Empresa Publica Municipal de Agua…</td><td>ADQUISICIÓN DE HIPOCLORITO DE CALCIO GRANULAR E HIPOCLORITO DE CALCIO EN BRIQUETAS PARA PLANTAS DE TRATAMIENTO URBANAS…</td><td>Persona natural</td><td class="n">50.430</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>29/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCS-GADM-IBARRA-2025-006-2783">MCS-GADM-IBARRA-2025-006</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DEL SERVICIO DE REPARACION DE GATOS  HIDRAULICOS DEL PARQUE AUTOMOTOR DEL GAD-I</td><td>IBARRATRUCKS S.A.S.</td><td class="n">50.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 35% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>10/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCS-GADM-IBARRA-2025-003-2783">MCS-GADM-IBARRA-2025-003</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>SERVICIO DE MANTENIMIENTO Y REPARACION DE BOMBAS DE INYECCION DIESEL DE LAS UNIDADES DEL GAD I</td><td>Persona natural</td><td class="n">50.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 35% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>16/07/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2026-022-2783">SIE-GADM-IBARRA-2026-022</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>SERVICIO DE CONECTIVIDAD INCLUIDO ACCESO USO DE RED Y EQUIPOS DE COMUNICACION PARA LA SEGURIDAD PREVENCION Y PROTECCION…</td><td>Persona natural</td><td class="n">47.223</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>26/02/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-EMAPA-I-2026-003-316213">SIE-EMAPA-I-2026-003</a></td><td>Empresa Publica Municipal de Agua…</td><td>ADQUISICIÓN DE CLORO GAS DE 907KG Y CLORO GAS DE 68KG PARA PLANTAS DE TRATAMEINTO URBANAS Y RURALES DE LA EMAPA-I</td><td>Persona natural</td><td class="n">47.166</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>24/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-019-2783">SIE-GADM-IBARRA-2025-019</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>SERVICIO DE CONECTIVIDAD, INCLUIDO ACCESO, USO DE RED Y EQUIPOS DE COMUNICACIÓN PARA LA SEGURIDAD, PREVENCIÓN Y PROTECC…</td><td>Persona natural</td><td class="n">47.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>27/11/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-071-2783">SIE-GADM-IBARRA-2025-071</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>SERVICIO DE CONECTIVIDAD, INCLUIDO ACCESO, USO DE RED Y EQUIPOS DE COMUNICACIÓNPARA LA SEGURIDAD, PREVENCIÓN Y PROTECCI…</td><td>Persona natural</td><td class="n">46.993</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>01/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-009-2783">SIE-GADM-IBARRA-2025-009</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>RENOVACION DE GARANTIA EXTENDIDA CARE PACK Y SOPORTE PARA INFRAESTRUCTURA DE HIPERCONVERGENCIA POR 3 AÑOS</td><td>TECNOLOGIA APLICADA DEL ECUADOR S.A.TECNASA</td><td class="n">46.192</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>29/05/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-EMAPA-I-2025-022-316213">SIE-EMAPA-I-2025-022</a></td><td>Empresa Publica Municipal de Agua…</td><td>ADQUISICIÓN DE HIPOCLORITO DE CALCIO GRANULAR E HIPOCLORITO DE CALCIO EN BRIQUETAS PARA PLANTAS DE TRATAMIENTO URBANAS…</td><td>Persona natural</td><td class="n">42.633</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>14/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-EMAPA-I-2025-016-316213">SIE-EMAPA-I-2025-016</a></td><td>Empresa Publica Municipal de Agua…</td><td>ADQUISICIÓN DE CLORO GAS DE 907KG Y CLORO GAS DE 68KG PARA PLANTAS DE TRATAMIENTO URBANAS Y RURALES DE LA EMAPA-I</td><td>Persona natural</td><td class="n">40.167</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>27/04/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-GADM-IBARRA-2026-005-2783">LICS-GADM-IBARRA-2026-005</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DE SERVICIOS PARA EJECUCION DE LA AGENDA DE PROMOCION DE SERVICIOS DEL CONSEJO CANTONAL DE SALUD</td><td>nan</td><td class="n">40.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 22% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>25/11/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-CBI-2025-018-23759">SIE-CBI-2025-018</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>ADQUISICION DE EQUIPOS, MATERIALES Y ACCESORIOS PARA RESCATE EN ALTURAS Y MONTAÑA PARA EL CUERPO DE BOMBEROS DE IBARRA</td><td>DOTALTURAS EQUIPOS E IMPLEMENTOS CIA. LTDA.</td><td class="n">35.009</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>16/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-017-2783">SIE-GADM-IBARRA-2025-017</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>Adquisición e instalación de Firewall Perimetral licencias y soporte técnico</td><td>INSTALRED CIA.LTDA.</td><td class="n">32.119</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>14/04/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-EMAPA-I-2026-013-316213">SIE-EMAPA-I-2026-013</a></td><td>Empresa Publica Municipal de Agua…</td><td>ADQUISICIÓN DE QUIMICO SECUESTRANTE DE ARSENICO PARA PLANTAS DE TRATAMIENTO DE LA EMAPA-I</td><td>LESSQUIM S.A.S. B.I.C.</td><td class="n">30.230</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>22/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCS-GADM-IBARRA-2025-002-2783">MCS-GADM-IBARRA-2025-002</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DEL SERVICIO DE MANTENIMIENTO DE LA MAQUINARIA LIVIANA DE LA UNIDAD DE PARQUES Y JARDINES</td><td>Persona natural</td><td class="n">29.250</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 35% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>13/03/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-EMAPA-I-2025-006-316213">SIE-EMAPA-I-2025-006</a></td><td>Empresa Publica Municipal de Agua…</td><td>ADQUISICIÓN DE QUIMICO SECUESTRANTE DE ARSENICO PARA PLANTAS DE TRATAMIENTO DE LA EMAPA-I</td><td>LESSQUIM S.A.S. B.I.C.</td><td class="n">28.425</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>06/08/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-EMAPA-I-2026-025-316213">SIE-EMAPA-I-2026-025</a></td><td>Empresa Publica Municipal de Agua…</td><td>CONTRATACION DEL SERVICIO DE CONECTIVIDAD DIGITAL INCLUIDO ACCESO, USO DE RED Y PROVISION DE EQUIPOS DE COMUNICACIÓN PA…</td><td>Persona natural</td><td class="n">27.434</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>24/10/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-EMAPA-I-2025-040-316213">SIE-EMAPA-I-2025-040</a></td><td>Empresa Publica Municipal de Agua…</td><td>ADQUISICIÓN DE QUIMICO SECUESTRANTE DE ARSENICO PARA PLANTAS DE TRATAMIENTO DE LA EMAPA-I</td><td>LESSQUIM S.A.S. B.I.C.</td><td class="n">25.718</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>01/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCS-GADM-IBARRA-2025-005-2783">MCS-GADM-IBARRA-2025-005</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>SERVICIO DE EMPACADA DE ZAPATAS DE FRENO DEL PARQUE AUTOMOTOR</td><td>Persona natural</td><td class="n">19.840</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 35% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>12/11/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-067-2783">SIE-GADM-IBARRA-2025-067</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DEL SERVICIO DE INTERNET CORPORATIVO Y TUNEL DE DATOS ENTRE BANCOS PARA EL GADI</td><td>TELCONET S.A.</td><td class="n">18.959</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>22/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-CBI-2025-012-23759">SIE-CBI-2025-012</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>ADQUISICION DE COMPRESOR PORTATIL, SISTEMA DE COMUNICACIÓN Y EQUIPOS DE BUCEO PARA EL CUERPO DE BOMBEROS DE IBARRA</td><td>HYDROLASA S.A.S.</td><td class="n">18.795</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>29/04/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2026-012-2783">SIE-GADM-IBARRA-2026-012</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ADQUISICIÓN DE HORMIGÓN PREMEZCLADO PARA TRABAJOS POR ADMINISTRACIÓN DIRECTA</td><td>Persona natural</td><td class="n">18.617</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>13/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-035-2783">SIE-GADM-IBARRA-2025-035</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ELABORACIÓN E INSTALACIÓN DE TELONES CON SISTEMAS AUTOMATIZADOS PARA EL TEATRO GRAN COLOMBIA</td><td>RIVAS PINTO PABLO ANDRES</td><td class="n">18.401</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>04/06/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2026-016-2783">SIE-GADM-IBARRA-2026-016</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ADQUISICIÓN DE CONTENEDORES DE RESIDUOS SÓLIDOS DE 50 LITROS DE CAPACIDAD TIPO PAPELERAS PARA ESPACIOS PÚBLICOS DEL CAN…</td><td>Persona natural</td><td class="n">16.441</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>12/03/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCS-GADM-IBARRA-2025-001-2783">MCS-GADM-IBARRA-2025-001</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DEL SERVICIO DE FABRICACION DE MANGUERAS A PRESION PARA EL PARQUE AUTOMOTOR DEL GADI</td><td>Persona natural</td><td class="n">15.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 35% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>31/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCS-GADM-IBARRA-2025-008-2783">MCS-GADM-IBARRA-2025-008</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACIÓN DEL SERVICIO DE MANTENIMIENTO PREVENTIVO Y CORRECTIVO DE MOTOCICLETAS DEL GAD I</td><td>Persona natural</td><td class="n">15.000</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 35% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>10/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCB-EMAPA-I-2025-001-316213">MCB-EMAPA-I-2025-001</a></td><td>Empresa Publica Municipal de Agua…</td><td>ADQUISICIÓN DE CEMENTO PORTLAND PARA TRABAJOS DE OPERACIÓN Y MANTENIMIENTO DE ALCANTARILLADO Y AGUA POTABLE DE LA EMAPA…</td><td>Persona natural</td><td class="n">12.344</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 35% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>03/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-028-2783">SIE-GADM-IBARRA-2025-028</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>RENOVACIÓN DE LICENCIAS DE LA BASE CENTRAL APU Y ACTUALIZACIÓN Y ADQUISICIÓN DE LLAVES PARA INTERPRO POR 2 AÑOS</td><td>ISSOLUCIONES CIA. LTDA.</td><td class="n">9.254</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>31/03/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-011-2783">SIE-GADM-IBARRA-2025-011</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>“ADQUISICION DE EQUIPOS Y REACTIVOS QUIMICOS PARA MONITOREO AMBIENTAL“</td><td>ELICROM CIA. LTDA. </td><td class="n">7.301</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>05/05/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-CBI-2025-006-23759">SIE-CBI-2025-006</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>ADQUISICION DE COMPRESOR PORTATIL, SISTEMA DE COMUNICACIÓN Y EQUIPOS DE BUCEO PARA EL CUERPO DE BOMBEROS DE IBARRA</td><td>nan</td><td class="n">—</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>26/05/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-CBI-2025-008-23759">SIE-CBI-2025-008</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>ADQUISICION DE COMPRESOR PORTATIL, SISTEMA DE COMUNICACIÓN Y EQUIPOS DE BUCEO PARA EL CUERPO DE BOMBEROS DE IBARRA</td><td>nan</td><td class="n">—</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>31/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-CBI-2025-024-23759">SIE-CBI-2025-024</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>ADQUISICION EQUIPOS TACTICOS MEDICOS PARA EL PERSONAL DE PARAMÉDICOS DEL CUERPO DE BOMBEROS DE IBARRA</td><td>nan</td><td class="n">—</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+<tr><td>06/03/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2026-006-2783">SIE-GADM-IBARRA-2026-006</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ADQUISICION DE ASFALTO PARA BACHEO DE LAS PRINCIPALES AVENIDAS DE LA CIUDAD DE IBARRA</td><td>nan</td><td class="n">—</td><td>Procedimiento competitivo con un único oferente: no hubo competencia de precios. A nivel nacional el 17% de los procesos de este tipo tuvo un solo oferente.</td></tr>
+
+</table></div>
+
+</details>
+
+<details >
+<summary><span class="nivel media">media</span> · Contratación sin concurso (7 procesos, USD 620.591)</summary>
+<p>Contratos de USD 50.000 o más adjudicados por régimen especial o contratación directa, sin concurso de ofertas. Son legales cuando se cumple la causal; pida la resolución motivada.</p>
+<p class="nota">Base legal: LOSNCP art. 38 (régimen especial, lista taxativa) y Reglamento; la entidad debe motivar la causal.</p>
+<div class="tabla"><table>
+<tr><th>Fecha</th><th>Código</th><th>Entidad</th><th>Objeto</th><th>Proveedor</th><th class="n">Monto (USD)</th><th>Por qué</th></tr>
+
+<tr><td>11/03/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-CEP-CBI-2025-002-23759">RE-CEP-CBI-2025-002</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>ADQUISICION DE VESTUARIO, LENCERÍA Y PRENDAS DE PROTECCIÓN PARA EL PERSONAL OPERATIVO DEL CUERPO DE BOMBEROS DE IBARRA</td><td>FAME S.A.</td><td class="n">189.732</td><td>Proceso por &#39;Contratos entre Entidades Públicas o sus subsidiarias&#39; por USD 189.732: no hubo concurso de ofertas. Revise la resolución que justifica el régimen especial o la contratación directa.</td></tr>
+
+<tr><td>29/08/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-PU-GADM-IBARRA-2025-020-2783">RE-PU-GADM-IBARRA-2025-020</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>?ARRENDAMIENTO DE LICENCIA SOFTWARE DEL SISTEMA DE INFORMACIÓN GEOGRAFICA ARCGIS?</td><td>ESRI ECUADOR S.A.</td><td class="n">117.859</td><td>Proceso por &#39;Bienes y Servicios únicos&#39; por USD 117.859: no hubo concurso de ofertas. Revise la resolución que justifica el régimen especial o la contratación directa.</td></tr>
+
+<tr><td>31/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-OACL-GADM-IBARRA-2025-016-2783">RE-OACL-GADM-IBARRA-2025-016</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>?CONTRATACIÓN DEL SERVICIO DE ELABORACIÓN DE 10 DE OBRAS ARTÍSTICAS QUE REPRESENTEN LA CULTURA IBARREÑA Y QUE SE EXPONG…</td><td>Persona natural</td><td class="n">98.000</td><td>Proceso por &#39;Obra artística, científica o literaria&#39; por USD 98.000: no hubo concurso de ofertas. Revise la resolución que justifica el régimen especial o la contratación directa.</td></tr>
+
+<tr><td>10/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-APJ-GADM-IBARRA-2025-012-2783">RE-APJ-GADM-IBARRA-2025-012</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>PATROCINIO JURIDICO EN PROCEDIMIENTOS ADMINISTRATIVOS, TRIBUTARIOS Y CONSTITUCIONALES PARA EL GOBIERNO AUTÓNOMO DESCENT…</td><td>Persona natural</td><td class="n">60.000</td><td>Proceso por &#39;Asesoría y Patrocinio Jurídico&#39; por USD 60.000: no hubo concurso de ofertas. Revise la resolución que justifica el régimen especial o la contratación directa.</td></tr>
+
+<tr><td>17/07/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-CSCD-GADM-IBARRA-2026-009-2783">RE-CSCD-GADM-IBARRA-2026-009</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>?SERVICIO COMUNICACIONAL DE DIFUSIÓN DE INFORMACIÓN EN DIARIO EL NORTE?</td><td>nan</td><td class="n">55.000</td><td>Proceso por &#39;Comunicación Social – Contratación Directa&#39; por USD 55.000: no hubo concurso de ofertas. Revise la resolución que justifica el régimen especial o la contratación directa.</td></tr>
+
+<tr><td>07/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-PU-GADM-IBARRA-2025-002-2783">RE-PU-GADM-IBARRA-2025-002</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>PARTICIPACIÓN DEL CANTÓN IBARRA EN EL CIRCUITO OFICIAL SWS SKYRUNNER WORLD SERIES IBARRA SKY RACE</td><td>Persona natural</td><td class="n">50.000</td><td>Proceso por &#39;Bienes y Servicios únicos&#39; por USD 50.000: no hubo concurso de ofertas. Revise la resolución que justifica el régimen especial o la contratación directa.</td></tr>
+
+<tr><td>07/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-CSCD-GADM-IBARRA-2025-004-2783">RE-CSCD-GADM-IBARRA-2025-004</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>SERVICIO COMUNICACIONAL DE DIFUSIÓN DE INFORMACIÓN EN DIARIO EL NORTE</td><td>GCNORTE S.A.S.</td><td class="n">50.000</td><td>Proceso por &#39;Comunicación Social – Contratación Directa&#39; por USD 50.000: no hubo concurso de ofertas. Revise la resolución que justifica el régimen especial o la contratación directa.</td></tr>
+
+</table></div>
+
+</details>
+
+<details >
+<summary><span class="nivel baja">baja</span> · Plazo de ofertas muy corto (1 procesos, USD 90.000)</summary>
+<p>Procesos en los que se dio menos tiempo para presentar ofertas que en el 95% de procesos del mismo tipo en el país.</p>
+<p class="nota">Base legal: Comparación estadística, no un plazo legal. RGLOSNCP art. 426.1 (patrones de riesgo).</p>
+<div class="tabla"><table>
+<tr><th>Fecha</th><th>Código</th><th>Entidad</th><th>Objeto</th><th>Proveedor</th><th class="n">Monto (USD)</th><th>Por qué</th></tr>
+
+<tr><td>30/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTS-CBI-2025-001-23759">COTS-CBI-2025-001</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>CONTRATACIÓN DEL SERVICIO DE MANTENIMIENTO PREVENTIVO Y CORRECTIVO INCLUIDO LA ADQUISICIÓN DE REPUESTOS EQUIPOS Y ACCES…</td><td>Persona natural</td><td class="n">90.000</td><td>Hubo 10.0 días para presentar ofertas; el 95% de los procesos de este tipo en el país dio más tiempo. Plazos cortos limitan la participación.</td></tr>
+
+</table></div>
+
+</details>
+
+<details >
+<summary><span class="nivel baja">baja</span> · Adjudicado al precio máximo (53 procesos, USD 22.495.692)</summary>
+<p>Procesos adjudicados por el 99,5% o más del presupuesto referencial: la competencia no logró bajar el precio. No incluye la menor cuantía de obras, donde el precio era fijo por ley.</p>
+<p class="nota">Base legal: LOSNCP art. 21 y RGLOSNCP art. 426.1 (precios inusuales como criterio de alerta).</p>
+<div class="tabla"><table>
+<tr><th>Fecha</th><th>Código</th><th>Entidad</th><th>Objeto</th><th>Proveedor</th><th class="n">Monto (USD)</th><th>Por qué</th></tr>
+
+<tr><td>20/04/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-011-2783">LICO-GADM-IBARRA-2026-011</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>REGENERACIÓN DE ACERAS Y BORDILLOS DE LA AV MARIANO ACOSTA, CONSTRUCCIÓN DEL CERRAMIENTO PARA EL RELLENO SANITARIO SAN…</td><td>CONSTRUCCIONES REYES&amp;AGUILAR C.L.</td><td class="n">1.976.131</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>28/07/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-024-2783">LICO-GADM-IBARRA-2026-024</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN DEL CENTRO RECREATIVO Y CULTURAL PILANQUI PRIMERA ETAPA Y PROYECTOS VIALES CON PRESUPUESTO PARTICIPATIVO E…</td><td>PROCONSTRUCIONES SOCIEDAD CIVIL Y COMERCIAL</td><td class="n">1.565.256</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>18/06/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-015-2783">LICO-GADM-IBARRA-2026-015</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCION DEL MIRADOR SAN MIGUEL ARCANGEL SEGUNDA ETAPA</td><td>Persona natural</td><td class="n">1.150.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>01/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-010-2783">COTO-GADM-IBARRA-2025-010</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CULMINACIÓN DE LA CANCHA DEPORTIVA DEL ESTADIO DE LA PARROQUIA SALINAS, CONSTRUCCIÓN DEL ESTADIO DE LITA, CONSTRUCCIÓN…</td><td>Persona natural</td><td class="n">1.063.203</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>05/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-008-2783">COTO-GADM-IBARRA-2025-008</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN PARQUE INFANTIL PRIMAVERA, CONSTRUCCIÓN DEL PARQUE RECREATIVO NUEVO HOGAR- PARROQUIA EL SAGRARIO, CONSTRUC…</td><td>Persona natural</td><td class="n">1.021.061</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>17/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-007-2783">COTO-GADM-IBARRA-2025-007</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCION DEL MIRADOR SAN MIGUEL ARCÁNGEL PRIMERA ETAPA</td><td>Persona natural</td><td class="n">998.904</td><td>Se adjudicó por el 99.9% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>30/05/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-011-2783">COTO-GADM-IBARRA-2025-011</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CENTRO RECREATIVO Y CULTURAL MI ESPACIO SEGURO LA CAMPIÑA, CONSTRUCCIÓN DEL POLIDEPORTIVO BARRIO BAJADA DE LOS MOLINOS,…</td><td>Persona natural</td><td class="n">982.682</td><td>Se adjudicó por el 99.7% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>18/02/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-004-2783">LICO-GADM-IBARRA-2026-004</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN DEL CENTRO RECREATIVO SAN BENITO DE PALERMO, DEL CENTRO DE DESARROLLO CULTURAL Y ECONÓMICO SANTO DOMINGO,…</td><td>Persona natural</td><td class="n">933.892</td><td>Se adjudicó por el 99.7% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>23/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-014-2783">COTO-GADM-IBARRA-2025-014</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>REMODELACION DE LA PLAZA CARANQUI, CONSTRUCCION DE LA CASA COMUNAL DE LA CIUDADELA MUNICIPAL YUYUCOCHA Y CONSTRUCCION D…</td><td>COREIMEXA CONSTRUCCION REPRESENTACION IMPORTACION Y EXPORTACION CIA. LTDA.</td><td class="n">904.996</td><td>Se adjudicó por el 99.9% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>20/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-015-2783">COTO-GADM-IBARRA-2025-015</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CENTRO RECREATIVO Y CULTURAL MI ESPACIO SEGURO - 15 DE DICIEMBRE, ADECUACIONES DEL LABORATORIO CLINICO DEL GADM-I, CONS…</td><td>Persona natural</td><td class="n">891.327</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>13/02/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-003-2783">LICO-GADM-IBARRA-2026-003</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>INTERVENCIÓN EN LAS UNIDADES EDUCATIVAS AGUSTÍN CUEVA DÁVILA, YAHUARCOCHA, 28 DE ABRIL Y CARANQUI PARROQUIAS SAN FRANCI…</td><td>Persona natural</td><td class="n">866.691</td><td>Se adjudicó por el 99.9% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>10/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-013-2783">COTO-GADM-IBARRA-2025-013</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN CENTRO RECREATIVO CULTURAL MI ESPACIO SEGURO AJAVÍ CHIQUITO Y CENTRO RECREATIVO Y TURISTICO BARRIO EL OBRE…</td><td>Persona natural</td><td class="n">853.336</td><td>Se adjudicó por el 99.9% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>28/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-017-2783">COTO-GADM-IBARRA-2025-017</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN CENTRO CULTURAL Y DEPORTIVO MI ESPACIO SEGURO PABLO JURADO, CENTRO CULTURAL Y DEPORTIVO MARIANO ACOSTA Y A…</td><td>Persona natural</td><td class="n">844.136</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>04/03/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-009-2783">LICO-GADM-IBARRA-2026-009</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>“INTERVENCIÓN ESCUELA EDUCATIVA BÁSICA FUERZA AÉREA ECUATORIANA GUALLUPE PARROQUIA LA CAROLINA, IMPLEMENTACIÓN DE LOCAL…</td><td>Persona natural</td><td class="n">831.454</td><td>Se adjudicó por el 99.7% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>22/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-020-2783">COTO-GADM-IBARRA-2025-020</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN CENTRO CULTURAL Y DEPORTIVO MI ESPACIO SEGURO SAN FRANCISCO DE CHORLAVI, CENTRO DE SEGURIDAD SAN ANTONIO Y…</td><td>Persona natural</td><td class="n">770.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>24/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-018-2783">COTO-GADM-IBARRA-2025-018</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN CENTRO CULTURAL Y DEPORTIVO MI ESPACIO SEGURO TURUPAMBA, CONSTRUCCIÓN CENTROCULTURAL Y DEPORTIVO MI ESPACI…</td><td>Persona natural</td><td class="n">758.734</td><td>Se adjudicó por el 99.8% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>29/05/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-005-2783">COTO-GADM-IBARRA-2025-005</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>MEJORAMIENTO DE LA INFRAESTRUCTURA DE LA LIGA DEPORTIVA BARRIAL DE ALPACHACA, CENTRO RECREATIVO Y CULTURAL MI ESPACIO S…</td><td>Persona natural</td><td class="n">686.761</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>23/02/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-007-2783">LICO-GADM-IBARRA-2026-007</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN DEL COLISEO COMUNIDAD RUMIPAMBA PARROQUIA LA ESPERANZA, DEL CENTRO CULTURAL Y DEPORTIVO MI ESPACIO SEGURO…</td><td>Persona natural</td><td class="n">616.580</td><td>Se adjudicó por el 99.9% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>18/11/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-GADM-IBARRA-2025-001-2783">LICS-GADM-IBARRA-2025-001</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACIÓN DEL SERVICIO DE ACTIVIDADES ARTÍSTICAS Y CULTURALES EN EL MARCO DE LA NAVIDAD 2025</td><td>Persona natural</td><td class="n">492.356</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>07/02/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-001-2783">COTO-GADM-IBARRA-2025-001</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>IMPLEMENTACION DE EQUIPAMIENTO EN LOS PARQUES LA JUVENTUD Y PASEO PILANQUI DEL CANTON IBARRA</td><td>HIDALGO-CONSTRUCTORA S.C.C.</td><td class="n">399.008</td><td>Se adjudicó por el 99.9% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>13/01/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-GADM-IBARRA-2026-001-2783">LICS-GADM-IBARRA-2026-001</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DEL SERVICIO DE ACTIVIDADES ARTISTICAS Y CULTURALES EN EL MARCO DEL PROYECTO LA RUTA DE LOS CARNAVALES DEL…</td><td>Persona natural</td><td class="n">380.000</td><td>Se adjudicó por el 99.9% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>16/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-007-2783">LCC-GADM-IBARRA-2025-007</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ESTUDIOS DE PREFACTIBILIDAD, FACTIBILIDAD Y DISEÑO DEFINITIVO PARA LA SOLUCIÓN VIAL PASO ELEVADO Y PEATONAL EN LA AV. C…</td><td>Persona natural</td><td class="n">289.806</td><td>Se adjudicó por el 99.8% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 42% de este tipo de procesos.</td></tr>
+
+<tr><td>30/05/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-012-2783">COTO-GADM-IBARRA-2025-012</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCION DE TRES DUCTOS CAJON EN LA  QUEBRADA EL LAUREL Y UN DUCTO CAJON EN LA QUEBRADA SIN NOMBRE DE LA PARROQUIA…</td><td>CIVILCONSTRUQ CONSULTORES CONSTRUCTORES S.A.S.</td><td class="n">287.678</td><td>Se adjudicó por el 99.8% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>30/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-022-2783">COTO-GADM-IBARRA-2025-022</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>INTERVENCIÓN DE LA UNIDAD EDUCATIVA VALLE DEL CHOTA PRIMERA ETAPA</td><td>Persona natural</td><td class="n">280.000</td><td>Se adjudicó por el 99.8% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>05/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-GADM-IBARRA-2025-003-2783">LICS-GADM-IBARRA-2025-003</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>REPARACION Y MANTENIMIENTO DE SISTEMAS DE RIEGO PILETAS CUARTOS DE MAQUINA</td><td>Persona natural</td><td class="n">252.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>02/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-008-2783">LCC-GADM-IBARRA-2025-008</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ACTUALIZACIÓN DEL VALOR DE LA PROPIEDAD URBANA Y RURAL BIENIO 2026 - 2027</td><td>TECH2GO S.A.</td><td class="n">235.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 42% de este tipo de procesos.</td></tr>
+
+<tr><td>15/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICSG-EMAPA-I-2025-001-316213">LICSG-EMAPA-I-2025-001</a></td><td>Empresa Publica Municipal de Agua…</td><td>CONTRATACION DE POLIZAS DE SEGUROS GENERALES PARA LA EMAPA-I</td><td>SEGUROS ALIANZA S A</td><td class="n">217.998</td><td>Se adjudicó por el 99.8% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 5% de este tipo de procesos.</td></tr>
+
+<tr><td>09/09/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICSG-CBI-2025-002-23759">LICSG-CBI-2025-002</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>CONTRATACION DEL PROGRAMA DE SEGUROS GENERALES DEL CUERPO DE BOMBEROS DE IBARRA, COMPRENDE RAMO DE: INCENDIO, ROBO Y AS…</td><td>ASEGURADORA DEL SUR C. A.</td><td class="n">185.282</td><td>Se adjudicó por el 99.7% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 5% de este tipo de procesos.</td></tr>
+
+<tr><td>30/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-003-2783">LCC-GADM-IBARRA-2025-003</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ESTUDIOS DE PREFACTIBILIDAD, FACTIBILIDAD Y DISEÑO DEFINITIVO PARA LA CONSTRUCCION DE UN PUENTE DE UN CARRIL POR SENTID…</td><td>Persona natural</td><td class="n">172.900</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 42% de este tipo de procesos.</td></tr>
+
+<tr><td>22/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-CPC-GADM-IBARRA-2025-004-2783">CPC-GADM-IBARRA-2025-004</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>Estudios de Soterramiento Eléctrico y Telecomunicaciones en el Centro de la Ciudad de Ibarra</td><td>Persona natural</td><td class="n">167.500</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 20% de este tipo de procesos.</td></tr>
+
+<tr><td>31/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-012-2783">LCC-GADM-IBARRA-2025-012</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSULTORIA PARA LA CREACION DE LA ESCUELA DE FORMACION CIUDADANA QUE FORTALECERA EL DESARROLLO DE LAS CAPACIDADES DE L…</td><td>Persona natural</td><td class="n">130.405</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 42% de este tipo de procesos.</td></tr>
+
+<tr><td>28/02/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-001-2783">LCC-GADM-IBARRA-2025-001</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSULTORIA ESTUDIO SOBRE EL DESARROLLO ECONOMICO LOCAL Y LA COMPETITIVIDAD DEL CANTON IBARRA</td><td>CONSULTORA DE EMPRENDIMIENTO E INNOVACION ECEDILATAM S.A.</td><td class="n">130.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 42% de este tipo de procesos.</td></tr>
+
+<tr><td>24/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-010-2783">LCC-GADM-IBARRA-2025-010</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>GENERACIÓN DE LA ORTOFOTO RURAL DEL CANTÓN SAN MIGUEL DE IBARRA MEDIANTE EL USO DE IMÁGENES SATELITALES DE ALTA RESOLUC…</td><td>PROINFORMATICA PROTECCION INFORMATICA S.A.</td><td class="n">120.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 42% de este tipo de procesos.</td></tr>
+
+<tr><td>31/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-GADM-IBARRA-2025-008-2783">LICS-GADM-IBARRA-2025-008</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>MANTENIMIENTO CORRECTIVO DE MAQUINARIA PESADA DEL GAD IBARRA</td><td>Persona natural</td><td class="n">100.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>08/04/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTS-EMAPA-I-2025-001-316213">COTS-EMAPA-I-2025-001</a></td><td>Empresa Publica Municipal de Agua…</td><td>CONTRATACION DEL SERVICIO DE ABASTECIMIENTO DE COMBUSTIBLE PARA LA EMAPA-I</td><td>Persona natural</td><td class="n">97.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>10/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2025-006-2783">LICO-GADM-IBARRA-2025-006</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSTRUCCIÓN DE DUCTO CAJÓN ACEQUIA EL QUINCE Y READECUACIÓN BATERIAS SANITARIAS BORDE LACUSTRE SECTOR YAHUARCOCHA, IMP…</td><td>Persona natural</td><td class="n">94.861</td><td>Se adjudicó por el 99.6% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>30/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTS-CBI-2025-001-23759">COTS-CBI-2025-001</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>CONTRATACIÓN DEL SERVICIO DE MANTENIMIENTO PREVENTIVO Y CORRECTIVO INCLUIDO LA ADQUISICIÓN DE REPUESTOS EQUIPOS Y ACCES…</td><td>Persona natural</td><td class="n">90.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 29% de este tipo de procesos.</td></tr>
+
+<tr><td>26/11/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-GADM-IBARRA-2025-002-2783">LICS-GADM-IBARRA-2025-002</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>ORGANIZACIÓN DE FERIAS DE EMPRENDIMIENTOS EXPO NAVIDAD Y FIN DE AÑO IBARRA 2025</td><td>FERNANDEZ DAVALOS CIA. LTDA.</td><td class="n">83.798</td><td>Se adjudicó por el 99.8% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>27/05/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LCC-GADM-IBARRA-2025-005-2783">LCC-GADM-IBARRA-2025-005</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSULTORIA PARA LA INTERVENCION DE ESPACIOS PUBLICOS DEL CANTON IBARRA</td><td>Persona natural</td><td class="n">77.662</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 42% de este tipo de procesos.</td></tr>
+
+<tr><td>29/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-GADM-IBARRA-2025-007-2783">LICS-GADM-IBARRA-2025-007</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CREACIÓN DE LA RED DE MURALES DEL CANTÓN IBARRA</td><td>Persona natural</td><td class="n">75.000</td><td>Se adjudicó por el 99.9% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>18/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-GADM-IBARRA-2025-004-2783">LICS-GADM-IBARRA-2025-004</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DEL SERVICIO DE TORNO Y SUELDAS ESPECIALES PARA EL PARQUE AUTOMOTOR DEL GAD-I</td><td>Persona natural</td><td class="n">70.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>30/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCS-GADM-IBARRA-2025-007-2783">MCS-GADM-IBARRA-2025-007</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DEL SERVICIO DE MANTENIMIENTO CORRECTIVO DEVEHICULOS LIVIANOS DEL GAD-I</td><td>Persona natural</td><td class="n">60.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 36% de este tipo de procesos.</td></tr>
+
+<tr><td>30/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2025-009-2783">LICO-GADM-IBARRA-2025-009</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>READECUACIÓN DE LAS OFICINAS E IMPLANTACIÓN DEL ASCENSOR EN EL EDIFICIO DEL CONSEJO CANTONAL DE PROTECCIÓN DE DERECHOS…</td><td>Persona natural</td><td class="n">59.624</td><td>Se adjudicó por el 99.9% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>29/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCS-GADM-IBARRA-2025-006-2783">MCS-GADM-IBARRA-2025-006</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DEL SERVICIO DE REPARACION DE GATOS  HIDRAULICOS DEL PARQUE AUTOMOTOR DEL GAD-I</td><td>IBARRATRUCKS S.A.S.</td><td class="n">50.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 36% de este tipo de procesos.</td></tr>
+
+<tr><td>10/06/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCS-GADM-IBARRA-2025-003-2783">MCS-GADM-IBARRA-2025-003</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>SERVICIO DE MANTENIMIENTO Y REPARACION DE BOMBAS DE INYECCION DIESEL DE LAS UNIDADES DEL GAD I</td><td>Persona natural</td><td class="n">50.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 36% de este tipo de procesos.</td></tr>
+
+<tr><td>22/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-GADM-IBARRA-2025-005-2783">LICS-GADM-IBARRA-2025-005</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DEL SERVICIO ELECTRICO PARA EL PARQUE AUTOMOTOR DEL GAD-I</td><td>Persona natural</td><td class="n">29.990</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>01/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCS-GADM-IBARRA-2025-005-2783">MCS-GADM-IBARRA-2025-005</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>SERVICIO DE EMPACADA DE ZAPATAS DE FRENO DEL PARQUE AUTOMOTOR</td><td>Persona natural</td><td class="n">19.840</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 36% de este tipo de procesos.</td></tr>
+
+<tr><td>31/08/2026</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-CPC-GADM-IBARRA-2026-003-2783">CPC-GADM-IBARRA-2026-003</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONSULTORÍA PARA LA INVESTIGACIÓN, DISEÑO Y DESARROLLO DE RECURSOS DIDÁCTICOS PARA EL PROGRAMA BIBLIOTECA A CIELO ABIER…</td><td>Persona natural</td><td class="n">16.500</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 20% de este tipo de procesos.</td></tr>
+
+<tr><td>12/03/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCS-GADM-IBARRA-2025-001-2783">MCS-GADM-IBARRA-2025-001</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACION DEL SERVICIO DE FABRICACION DE MANGUERAS A PRESION PARA EL PARQUE AUTOMOTOR DEL GADI</td><td>Persona natural</td><td class="n">15.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 36% de este tipo de procesos.</td></tr>
+
+<tr><td>31/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCS-GADM-IBARRA-2025-008-2783">MCS-GADM-IBARRA-2025-008</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>CONTRATACIÓN DEL SERVICIO DE MANTENIMIENTO PREVENTIVO Y CORRECTIVO DE MOTOCICLETAS DEL GAD I</td><td>Persona natural</td><td class="n">15.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 36% de este tipo de procesos.</td></tr>
+
+<tr><td>10/07/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-MCB-EMAPA-I-2025-001-316213">MCB-EMAPA-I-2025-001</a></td><td>Empresa Publica Municipal de Agua…</td><td>ADQUISICIÓN DE CEMENTO PORTLAND PARA TRABAJOS DE OPERACIÓN Y MANTENIMIENTO DE ALCANTARILLADO Y AGUA POTABLE DE LA EMAPA…</td><td>Persona natural</td><td class="n">12.344</td><td>Se adjudicó por el 99.7% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 36% de este tipo de procesos.</td></tr>
+
+<tr><td>26/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-GADM-IBARRA-2025-006-2783">LICS-GADM-IBARRA-2025-006</a></td><td>GOBIERNO AUTONOMO DESCENTRALIZADO…</td><td>SERVICIO DE VULCANIZADORA PARA EL PARQUE AUTOMOTOR DEL GAD IBARRA</td><td>Persona natural</td><td class="n">12.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+<tr><td>01/12/2025</td><td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-CBI-2025-003-23759">LICS-CBI-2025-003</a></td><td>Cuerpo de Bomberos de Ibarra</td><td>CONTRATACIÓN DE SERVICIO DE EMISIÓN DE PASAJES AÉREOS NACIONALES E INTERNACIONALES A TRAVES DE AGENCIAS DE VIAJES PARA…</td><td>EUROVIAJES &amp; TUR S.A.</td><td class="n">12.000</td><td>Se adjudicó por el 100.0% del presupuesto referencial: la competencia no bajó el precio. Nacionalmente ocurre en el 18% de este tipo de procesos.</td></tr>
+
+</table></div>
+
+</details>
+
+
+<h2 id="transparencia">5. Transparencia (LOTAIP)</h2>
+
+<p>La LOTAIP (art. 19) obliga a publicar cada mes, en datos abiertos, la información de transparencia activa en el Portal Nacional de Transparencia.
+No se encontró en la norma una fecha límite mensual verificada, por eso se muestra cuántos días después del cierre de cada mes se publicó, sin calificarlo como atraso.</p>
+<div class="tabla"><table>
+<tr><th>Mes</th><th class="n">Numerales publicados</th><th>Publicado el</th><th class="n">Días tras el cierre</th><th>Estado</th><th>Faltan</th></tr>
+
+<tr><td>enero 2025</td><td class="n">26</td><td>17/02/2025</td><td class="n">17</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>febrero 2025</td><td class="n">26</td><td>13/03/2025</td><td class="n">13</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>marzo 2025</td><td class="n">26</td><td>15/04/2025</td><td class="n">15</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>abril 2025</td><td class="n">26</td><td>15/05/2025</td><td class="n">15</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>mayo 2025</td><td class="n">26</td><td>13/06/2025</td><td class="n">13</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>junio 2025</td><td class="n">25</td><td>14/07/2025</td><td class="n">14</td>
+
+<td class="alta">incompleto</td><td>Numeral 10</td></tr>
+
+<tr><td>julio 2025</td><td class="n">26</td><td>15/08/2025</td><td class="n">15</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>agosto 2025</td><td class="n">26</td><td>15/09/2025</td><td class="n">15</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>septiembre 2025</td><td class="n">26</td><td>15/10/2025</td><td class="n">15</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>octubre 2025</td><td class="n">26</td><td>13/11/2025</td><td class="n">13</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>noviembre 2025</td><td class="n">26</td><td>15/12/2025</td><td class="n">15</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>diciembre 2025</td><td class="n">26</td><td>14/01/2026</td><td class="n">14</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>enero 2026</td><td class="n">26</td><td>16/02/2026</td><td class="n">16</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>febrero 2026</td><td class="n">26</td><td>13/03/2026</td><td class="n">13</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>marzo 2026</td><td class="n">26</td><td>15/04/2026</td><td class="n">15</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>abril 2026</td><td class="n">26</td><td>14/05/2026</td><td class="n">14</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>mayo 2026</td><td class="n">26</td><td>12/06/2026</td><td class="n">12</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>junio 2026</td><td class="n">26</td><td>14/07/2026</td><td class="n">14</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>julio 2026</td><td class="n">26</td><td>15/08/2026</td><td class="n">15</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>agosto 2026</td><td class="n">26</td><td>15/09/2026</td><td class="n">15</td>
+
+<td class="ok">publicado</td><td></td></tr>
+
+<tr><td>septiembre 2026</td><td class="n">0</td><td></td><td class="n"></td>
+
+<td class="baja">pendiente</td><td>Art. 24 Gobiernos Autónomos Descentralizados, Numeral 1.1, Numeral 1.2, Numeral 1.3, Numeral 10, Numeral 11, Numeral 12, Numeral 13, Numeral 14, Numeral 15, Numeral 16, Numeral 17, Numeral 18, Numeral 19, Numeral 2, Numeral 20, Numeral 21, Numeral 23, Numeral 24, Numeral 3, Numeral 4, Numeral 5-22, Numeral 6, Numeral 7, Numeral 8, Numeral 9</td></tr>
+
+</table></div>
+
+
+
+<h3>Solicitudes de acceso a la información</h3>
+<div class="tabla"><table>
+<tr><th>Año</th><th class="n">Recibidas</th><th class="n">Respondidas</th><th class="n">Sin responder</th><th class="n">% sin responder</th></tr>
+
+<tr><td>2025</td><td class="n">3</td><td class="n">0</td><td class="n">3</td><td class="n">100,0 %</td></tr>
+
+<tr><td>2026</td><td class="n">3</td><td class="n">0</td><td class="n">2</td><td class="n">66,7 %</td></tr>
+
+</table></div>
+<p class="nota">Fuente: Portal Nacional de Transparencia. La cifra del año en curso es parcial y algunas solicitudes pueden estar aún dentro de plazo.</p>
+
+
+
+<h3>Calidad de los datos publicados</h3>
+<ul>
+
+<li><b>Numeral 8</b> (agosto 2026, 7 filas):
+<span class="ok">identificadores legibles</span>.
+<a href="https://transparencia.dpe.gob.ec/backend/v1/transparency/media/transparencia/1060000260001/Numeral%208/2026/8/Conjunto%20de%20datos.csv">archivo</a></li>
+
+<li><b>Numeral 9</b> (agosto 2026, 3 filas):
+<span class="ok">identificadores legibles</span>.
+<a href="https://transparencia.dpe.gob.ec/backend/v1/transparency/media/transparencia/1060000260001/Numeral%209/2026/8/Conjunto%20de%20datos.csv">archivo</a></li>
+
+<li><b>Cruce con SERCOP:</b> la entidad reporta en LOTAIP 7 códigos de proceso. 0 aparecen en los datos abiertos del SERCOP y 7 son de tipos que el SERCOP no publica en esa descarga (catálogo electrónico, ínfimas cuantías, arrendamientos). </li>
+</ul>
+
+
+
+<h2 id="presupuesto">6. Presupuesto: ¿cuánto se ha ejecutado?</h2>
+<p>Ejecución presupuestaria publicada por la entidad (LOTAIP, numeral 6) a agosto de 2026: se devengó el <b>30,8 %</b> de USD 272,8 M codificados. A esa fecha, una ejecución pareja estaría cerca del 66,7 %.</p>
+<div class="tabla"><table>
+<tr><th>Grupo de gasto</th><th class="n">Codificado</th><th class="n">Devengado</th><th class="n">Ejecución</th><th></th></tr>
+
+<tr><td></td><td class="n">136.376.284</td><td class="n">41.945.700</td><td class="n alta">30,8 %</td><td><div class="barra-mini"><i style="width:30.8%"></i></div></td></tr>
+
+<tr><td>OBRAS PUBLICAS</td><td class="n">53.367.837</td><td class="n">8.757.628</td><td class="n alta">16,4 %</td><td><div class="barra-mini"><i style="width:16.4%"></i></div></td></tr>
+
+<tr><td>BIENES Y SERVICIOS PARA INVERSION</td><td class="n">28.661.397</td><td class="n">6.059.549</td><td class="n alta">21,1 %</td><td><div class="barra-mini"><i style="width:21.1%"></i></div></td></tr>
+
+<tr><td>EGRESOS EN PERSONAL PARA INVERSION</td><td class="n">14.824.695</td><td class="n">8.048.605</td><td class="n ">54,3 %</td><td><div class="barra-mini"><i style="width:54.3%"></i></div></td></tr>
+
+<tr><td>EGRESOS EN PERSONAL</td><td class="n">11.364.482</td><td class="n">6.211.231</td><td class="n ">54,7 %</td><td><div class="barra-mini"><i style="width:54.7%"></i></div></td></tr>
+
+<tr><td>BIENES DE LARGA DURACION (PROPIEDADES PLANTA Y EQUIPO)</td><td class="n">9.467.525</td><td class="n">4.513.222</td><td class="n ">47,7 %</td><td><div class="barra-mini"><i style="width:47.7%"></i></div></td></tr>
+
+<tr><td>EGRESOS FINANCIEROS</td><td class="n">6.107.001</td><td class="n">3.396.151</td><td class="n ">55,6 %</td><td><div class="barra-mini"><i style="width:55.6%"></i></div></td></tr>
+
+<tr><td>AMORTIZACION DE LA DEUDA PUBLICA</td><td class="n">4.025.196</td><td class="n">2.161.042</td><td class="n ">53,7 %</td><td><div class="barra-mini"><i style="width:53.7%"></i></div></td></tr>
+
+<tr><td>BIENES Y SERVICIOS DE CONSUMO</td><td class="n">3.022.587</td><td class="n">969.701</td><td class="n alta">32,1 %</td><td><div class="barra-mini"><i style="width:32.1%"></i></div></td></tr>
+
+<tr><td>TRANSFERENCIAS O DONACIONES PARA INVERSION</td><td class="n">2.414.948</td><td class="n">184.864</td><td class="n alta">7,7 %</td><td><div class="barra-mini"><i style="width:7.7%"></i></div></td></tr>
+
+<tr><td>TRANSFERENCIAS O DONACIONES CORRIENTES</td><td class="n">1.544.739</td><td class="n">492.063</td><td class="n alta">31,9 %</td><td><div class="barra-mini"><i style="width:31.9%"></i></div></td></tr>
+
+<tr><td>PASIVO CIRCULANTE</td><td class="n">886.277</td><td class="n">636.273</td><td class="n ">71,8 %</td><td><div class="barra-mini"><i style="width:71.8%"></i></div></td></tr>
+
+<tr><td>OTROS EGRESOS CORRIENTES</td><td class="n">684.599</td><td class="n">514.142</td><td class="n ">75,1 %</td><td><div class="barra-mini"><i style="width:75.1%"></i></div></td></tr>
+
+<tr><td>OTROS EGRESOS DE INVERSION</td><td class="n">5.000</td><td class="n">1.230</td><td class="n alta">24,6 %</td><td><div class="barra-mini"><i style="width:24.6%"></i></div></td></tr>
+
+</table></div>
+
+<p class="nota">Fuente: <a href="https://transparencia.dpe.gob.ec/backend/v1/transparency/media/transparencia/1060000260001/Numeral%206/2026/8/Conjunto%20de%20datos.csv">archivo publicado por la entidad</a>.</p>
+
+
+
+<h2 id="contraloria">7. Informes de la Contraloría</h2>
+<p>La entidad reporta 3 informes de auditoría o exámenes especiales. Son públicos y suelen detallar responsabilidades.</p>
+<div class="tabla"><table>
+<tr><th>Informe</th><th>Tipo</th><th>Qué se examinó</th><th>Periodo</th><th>Área</th></tr>
+
+<tr><td><a href="https://www.contraloria.gob.ec/WFDescarga.aspx?id=59642&amp;tipo=inf"></a></td><td>Examen Especial</td><td>Examen Especial a los procesos de contratación relacionados con el Proyecto de Rehabilitación de los Edificios Públicos Patrimoniales, Ex Cuartel y antiguo Municipio, por el periodo comprendido entre el 1 de enero de 20…</td><td>Desde: 01/05/2014
+Hasta: 31/08/2018</td><td>DIRECCIÓN DE EDUCACIÓN, CULTURA Y DEPORTES
+
+Construcción de Polideportivos sin…</td></tr>
+
+<tr><td><a href="https://www.contraloria.gob.ec/WFDescarga.aspx?id=76403&amp;tipo=inf"></a></td><td>Examen Especial</td><td>Examen Especial a la planificación y ejecución del 10% del presupuesto institucional para los grupos de atención prioritaria, por el período comprendido entre el 2 de enero de 2019 y el 31 de diciembre de 2023</td><td>Desde: 02/01/2019
+Hasta: 31/12/2023
+Aprobación: 22/04/2024</td><td>DIRECTORES DEPARTAMENTALES
+
+3. Elaborarán los planes operativos anuales conside…</td></tr>
+
+<tr><td><a href="https://www.contraloria.gob.ec/WFDescarga.aspx?id=74983&amp;tipo=inf"></a></td><td>Examen Especial</td><td>Examen Especial a la suscripción, ejecución y liquidación de convenios institucionales, suscritos con entidades del sector público y privado, por el período comprendido entre el 2 de enero de 2018 y el 31 de julio de 20…</td><td>Desde: 02/01/2018
+Hasta: 31/07/2023
+Aprobación: 19/12/2023</td><td>1. Dispondrá y supervisará a los Directores Departamentales para que, previo a…</td></tr>
+
+</table></div>
+
+
+<h2 id="acciones">8. ¿Qué puede hacer usted?</h2>
+<ol>
+<li><b>Pida información.</b> Genere una solicitud LOTAIP con <code>veeduria solicitud</code>. La entidad tiene un plazo legal para responder; si no lo hace, puede acudir a la Defensoría del Pueblo o presentar una acción de acceso a la información pública.</li>
+<li><b>Revise el proceso.</b> Cada código de este informe enlaza al proceso en los datos abiertos del SERCOP. En el portal de compras públicas están los pliegos, las ofertas y las actas.</li>
+<li><b>Forme una veeduría.</b> El Consejo de Participación Ciudadana y Control Social (CPCCS) registra y acompaña veedurías ciudadanas sobre obras y contratos concretos.</li>
+<li><b>Denuncie con pruebas.</b> La Contraloría General del Estado recibe denuncias ciudadanas sobre el uso de recursos públicos.</li>
+</ol>
+<p class="nota">Base legal detallada en <code>docs/marco-legal.md</code> del proyecto.</p>
+
+<h2 id="metodologia">Metodología y límites</h2>
+<ul class="nota">
+<li>Contratación: descarga masiva OCDS del SERCOP (licencia <a href="https://creativecommons.org/licenses/by/3.0/ec/">CC BY 3.0 Ecuador</a>); datos procesados y resumidos. Un proceso cuenta en el año en que se publicó. El monto es el presupuesto referencial; si falta (catálogo electrónico y subasta inversa), se usa lo adjudicado.</li>
+<li>La descarga OCDS <b>no incluye ínfimas cuantías ni contrataciones de emergencia</b>. Esos gastos no están en este informe.</li>
+<li>La línea base nacional usa todas las entidades del país en el mismo periodo: 298.368 procesos.</li>
+<li>Límites de procedimiento según la fecha de publicación de cada proceso:
+<ul><li>01/01/2024 a 31/12/2024, LOSNCP anterior, PIE 2024 (USD 33.296.819.775,31): bienes y servicios menor cuantía de bienes y servicios USD 66.594; cotización de bienes y servicios USD 499.452; obras menor cuantía de obras USD 233.078; cotización de obras USD 998.905.</li><li>01/01/2025 a 25/06/2025, LOSNCP anterior, PIE 2025 (USD 36.063.017.083,08): bienes y servicios menor cuantía de bienes y servicios USD 72.126; cotización de bienes y servicios USD 540.945; obras menor cuantía de obras USD 252.441; cotización de obras USD 1.081.891.</li><li>28/10/2025 a hoy, LOSNCP reformada (RO 4.º S. 140, 7-oct-2025) y RGLOSNCP (DE 193, RO 9.º S. 153, 28-oct-2025): bienes y servicios comisión técnica obligatoria (RGLOSNCP art. 88) USD 100.000; obras comisión técnica obligatoria (RGLOSNCP art. 88) USD 100.000.</li>
+<li>Entre el 26/06/2025 y el 27/10/2025 (transición de la reforma de la LOSNCP) no hay un límite verificado y no se aplican las reglas de límite.</li></ul></li>
+<li>Transparencia: servicios públicos del Portal Nacional de Transparencia de la Defensoría del Pueblo.</li>
+</ul>
+
+<footer class="pie">Generado con <b>Ojo al Gasto</b> (veeduria-ec), herramienta libre (licencia MIT). Los datos son de las fuentes oficiales citadas; los errores de origen se reportan tal cual. Entidades incluidas: GAD Municipal de San Miguel de Ibarra (1060000260001); EMAPA-I - Agua Potable y Alcantarillado de Ibarra (1060031300001); Cuerpo de Bomberos de Ibarra (1060021420001); EP Municipal de Faenamiento del Cantón Ibarra (1060031140001); Comercibarra - Mercado Mayorista de Ibarra (1091704338001); Registro de la Propiedad del Cantón Ibarra (1060034160001).</footer>
+</main></body></html>

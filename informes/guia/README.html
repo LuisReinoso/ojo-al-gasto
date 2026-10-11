@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Ojo al Gasto</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z' fill='white' stroke='%231c5cab' stroke-width='2.2'/%3E%3Ccircle cx='12' cy='12' r='4.3' fill='%23eb6834'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#1c5cab">
+  <style>
+  :root{color-scheme:light dark;--marca:#1c5cab;--linea:#e3e1dc;--text-muted:#6f6e69}
+  body{font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;max-width:760px;margin:0 auto;padding:1rem 1.1rem 4rem;color:#0b0b0b;background:#fff}
+  @media (prefers-color-scheme:dark){:root{--marca:#6da7ec;--linea:#383835;--text-muted:#9e9d95}body{color:#fff;background:#121211}a{color:#86b6ef}th{background:#242422!important}td,th{border-color:#383835!important}pre,code{background:#242422!important}blockquote{background:#1a1a19!important}}
+
+    .marca { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap;
+             padding: .7rem 0 .9rem; border-bottom: 1px solid var(--linea, #e3e1dc); margin-bottom: 1.4rem; }
+    .marca-enlace { display: inline-flex; align-items: center; gap: .45rem; text-decoration: none; color: inherit; white-space: nowrap; }
+    .marca-logo { width: 34px; height: 34px; flex: none; }
+    .marca-nombre { font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
+    .marca-lema { color: var(--text-muted, #6f6e69); font-size: .82rem; }
+
+  @media (max-width:520px){.marca-lema{display:none}}
+  a{color:#1c5cab} h1{line-height:1.15} h2{margin-top:2.4rem}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow-x:auto} th,td{border-bottom:1px solid #e3e1dc;padding:.4rem .5rem;text-align:left;vertical-align:top} th{background:#f3f2ef}
+  pre{background:#f3f2ef;padding:.8rem 1rem;border-radius:8px;overflow-x:auto} code{background:#f3f2ef;padding:.1rem .3rem;border-radius:4px;font-size:.88em}
+  blockquote{margin:1rem 0;padding:.7rem 1rem;background:#f6f7f9;border-radius:8px}
+  header#title-block-header{display:none}
+  footer.pie{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--linea);color:var(--text-muted);font-size:.85rem}
+  </style>
+</head>
+<body>
+<header class="marca">
+  <a class="marca-enlace" href="../index.html" aria-label="Ojo al Gasto: inicio">
+    <svg class="marca-logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z" fill="none" stroke="var(--marca, #1c5cab)" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="4.3" fill="#eb6834"/>
+      <circle cx="12" cy="12" r="2" fill="none" stroke="#fff" stroke-width="1.2"/>
+    </svg>
+    <span class="marca-nombre">Ojo al Gasto</span>
+  </a>
+  <span class="marca-lema">Control ciudadano de las compras municipales</span>
+</header>
+<main>
+<header id="title-block-header">
+<h1 class="title">Ojo al Gasto</h1>
+</header>
+<h1 id="ojo-al-gasto-veeduria-ec">Ojo al Gasto (veeduria-ec)</h1>
+<p>Herramienta libre para auditar las compras públicas de los municipios del Ecuador. Está hecha para periodistas, veedurías y ciudadanos.</p>
+<p>Usa solo datos oficiales y abiertos: el SERCOP y el Portal Nacional de Transparencia de la Defensoría del Pueblo.</p>
+<blockquote>
+<p>Una alerta no es una acusación. Una alerta le dice dónde mirar.</p>
+</blockquote>
+<p>Ojo al Gasto es una herramienta de control social (Constitución, art. 95). No es una veeduría registrada en el CPCCS: sirve a quienes forman una.</p>
+<h2 id="qué-obtiene">Qué obtiene</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Comando</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>veeduria auditar</code></td>
+<td>Una página pública ("¿En qué gasta su cantón?") con preguntas para la entidad y los pasos para presentarlas, un informe técnico con alertas y su base legal, y tablas CSV</td>
+</tr>
+<tr class="even">
+<td><code>veeduria proceso</code></td>
+<td>La ficha de un proceso: entidad, monto, proveedor, oferentes y enlace oficial</td>
+</tr>
+<tr class="odd">
+<td><code>veeduria proveedor</code></td>
+<td>Todo lo que un proveedor ganó en el país, por entidad y por monto</td>
+</tr>
+<tr class="even">
+<td><code>veeduria solicitud</code></td>
+<td>Una solicitud LOTAIP lista para firmar, con la fecha límite de respuesta</td>
+</tr>
+<tr class="odd">
+<td><code>veeduria plazo</code></td>
+<td>La fecha límite de respuesta de una solicitud</td>
+</tr>
+<tr class="even">
+<td><code>veeduria entidades</code></td>
+<td>Los RUC de las entidades de un cantón, para preparar su archivo</td>
+</tr>
+</tbody>
+</table>
+<p>Ejemplos publicados: <a href="informes/quito/publico.html">Quito</a> e <a href="informes/ibarra/publico.html">Ibarra</a>.</p>
+<h2 id="instalación">Instalación</h2>
+<ol>
+<li>Instale Python 3.11 o superior.</li>
+<li>Descargue este repositorio.</li>
+<li>En la carpeta del repositorio, ejecute <code>pip install .</code></li>
+</ol>
+<h2 id="uso">Uso</h2>
+<h3 id="auditar-un-municipio">Auditar un municipio</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">veeduria</span> auditar entidades/quito.toml --anios 2025 2026</span></code></pre></div>
+<p>La primera vez descarga 22 archivos del SERCOP. Esto toma unos minutos. Abra <code>informes/quito/publico.html</code>.</p>
+<h3 id="auditar-otro-cantón">Auditar otro cantón</h3>
+<ol>
+<li>Ejecute <code>veeduria descargar --anios 2025 2026</code>.</li>
+<li>Ejecute <code>veeduria entidades "nombre del cantón"</code>.</li>
+<li>Copie <code>entidades/quito.toml</code> a un archivo nuevo.</li>
+<li>Pegue el <code>id_transparencia</code> y los RUC del municipio y de sus empresas públicas.</li>
+<li>No incluya hospitales ni direcciones distritales: son del Gobierno central.</li>
+<li>Ejecute <code>veeduria auditar entidades/su-canton.toml</code>.</li>
+</ol>
+<h3 id="investigar-un-proceso-o-un-proveedor">Investigar un proceso o un proveedor</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">veeduria</span> proceso COTS-EPMGDT-2025-002</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="ex">veeduria</span> proveedor <span class="st">&quot;nombre o RUC&quot;</span> --csv proveedor.csv</span></code></pre></div>
+<h3 id="pedir-información">Pedir información</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="ex">veeduria</span> solicitud entidades/quito.toml --nombre <span class="st">&quot;Ana Pérez&quot;</span> --cedula 1700000000 <span class="kw">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>  <span class="ex">--correo</span> ana@example.com --pedido <span class="st">&quot;Contrato y actas del proceso LICO-EPMMOP-2026-001&quot;</span></span></code></pre></div>
+<p>La entidad tiene 10 días para responder, prorrogables 5 (LOTAIP, art. 34). El comando calcula la fecha en días calendario y en días hábiles.</p>
+<h2 id="archivos-del-informe">Archivos del informe</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Archivo</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>publico.html</code></td>
+<td>Resumen para el público. No nombra a personas naturales</td>
+</tr>
+<tr class="even">
+<td><code>informe.html</code></td>
+<td>Informe técnico con todas las alertas y su base legal</td>
+</tr>
+<tr class="odd">
+<td><code>alertas.csv</code>, <code>procesos.csv</code>, <code>proveedores.csv</code></td>
+<td>Datos para análisis propio</td>
+</tr>
+<tr class="even">
+<td><code>procedencia.json</code></td>
+<td>Archivos oficiales usados, con fecha y huella SHA-256</td>
+</tr>
+</tbody>
+</table>
+<p><strong>AVISO:</strong> el RUC de una persona natural contiene su cédula. Todos los archivos lo muestran enmascarado. En las alertas, el informe técnico y <code>proveedores.csv</code>, una persona natural aparece como "Persona natural": una alerta describe un patrón de la entidad, no una conducta del proveedor. <code>procesos.csv</code> conserva el nombre, igual que el dato oficial del SERCOP. La opción <code>--datos-completos</code> guarda una copia sin cambios en <code>./privado</code>. No publique esa copia.</p>
+<h2 id="límites">Límites</h2>
+<ul>
+<li>El SERCOP no publica en datos abiertos las ínfimas cuantías ni las emergencias.</li>
+<li>La subasta inversa no trae presupuesto en datos abiertos. Se usa el monto adjudicado.</li>
+<li>Entre el 26 de junio y el 27 de octubre de 2025 cambió la ley de contratación. En ese periodo no se aplican reglas de límite.</li>
+</ul>
+<h2 id="proyectos-relacionados">Proyectos relacionados</h2>
+<ul>
+<li><a href="https://www.contratostransparentes.ec/">Observatorio de Contratación Pública</a> de la Fundación Ciudadanía y Desarrollo: índices y alertas de riesgo nacionales.</li>
+<li><a href="https://licita.ec">licita.ec</a>: buscador y alertas de procesos del SERCOP.</li>
+</ul>
+<p>Ojo al Gasto se centra en lo local: un cantón, preguntas a sus entidades y los pasos para presentarlas por LOTAIP.</p>
+<h2 id="documentación">Documentación</h2>
+<ul>
+<li><a href="periodistas.html">Guía para periodistas</a>: de una alerta a una nota publicable.</li>
+<li><a href="hazlo-tu.html">Hazlo tú</a>: cómo crear un proyecto así con IA, sin saber programar.</li>
+<li><a href="ejemplo-contraloria.html">Ejemplo con OCR</a>: leer un informe escaneado de la Contraloría.</li>
+<li><a href="metodologia.html">Metodología</a> y <a href="marco-legal.html">marco legal</a>.</li>
+<li><a href="auditoria-quito-2025-2026.html">Hallazgos de Quito 2025-2026</a>.</li>
+<li><a href="estilo.html">Reglas de redacción</a>.</li>
+<li>Revisiones de experiencia de uso: <a href="recorrido-cognitivo.html">recorrido cognitivo</a> y <a href="revision-diseno.html">diseño y marca</a>.</li>
+</ul>
+<h2 id="contribuir">Contribuir</h2>
+<p>Las reglas están en <code>src/veeduria/reglas.py</code>. Los umbrales y los textos legales están en <code>src/veeduria/datos/normas.toml</code>. Si cambia una norma, corrija ese archivo.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="ex">pip</span> install -e <span class="st">&quot;.[dev]&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="ex">pytest</span></span></code></pre></div>
+<h2 id="licencia">Licencia</h2>
+<p>Código: MIT. Datos del SERCOP: CC BY 3.0 Ecuador. Información del Portal de Transparencia: pública según la LOTAIP.</p>
+<footer class="pie">Ojo al Gasto · herramienta libre (licencia MIT)</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Caché de descargas (se regenera con `veeduria descargar`)
+datos/
+# Solicitudes con datos personales de quien las presenta
+solicitudes/
+# Copias sin enmascarar (--datos-completos): contienen cédulas de personas naturales
+privado/
+__pycache__/
+*.egg-info/
+.venv/
+.pytest_cache/
+.playwright-mcp/

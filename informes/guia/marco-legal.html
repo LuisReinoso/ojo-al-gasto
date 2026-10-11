@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Ojo al Gasto</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z' fill='white' stroke='%231c5cab' stroke-width='2.2'/%3E%3Ccircle cx='12' cy='12' r='4.3' fill='%23eb6834'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#1c5cab">
+  <style>
+  :root{color-scheme:light dark;--marca:#1c5cab;--linea:#e3e1dc;--text-muted:#6f6e69}
+  body{font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;max-width:760px;margin:0 auto;padding:1rem 1.1rem 4rem;color:#0b0b0b;background:#fff}
+  @media (prefers-color-scheme:dark){:root{--marca:#6da7ec;--linea:#383835;--text-muted:#9e9d95}body{color:#fff;background:#121211}a{color:#86b6ef}th{background:#242422!important}td,th{border-color:#383835!important}pre,code{background:#242422!important}blockquote{background:#1a1a19!important}}
+
+    .marca { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap;
+             padding: .7rem 0 .9rem; border-bottom: 1px solid var(--linea, #e3e1dc); margin-bottom: 1.4rem; }
+    .marca-enlace { display: inline-flex; align-items: center; gap: .45rem; text-decoration: none; color: inherit; white-space: nowrap; }
+    .marca-logo { width: 34px; height: 34px; flex: none; }
+    .marca-nombre { font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
+    .marca-lema { color: var(--text-muted, #6f6e69); font-size: .82rem; }
+
+  @media (max-width:520px){.marca-lema{display:none}}
+  a{color:#1c5cab} h1{line-height:1.15} h2{margin-top:2.4rem}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow-x:auto} th,td{border-bottom:1px solid #e3e1dc;padding:.4rem .5rem;text-align:left;vertical-align:top} th{background:#f3f2ef}
+  pre{background:#f3f2ef;padding:.8rem 1rem;border-radius:8px;overflow-x:auto} code{background:#f3f2ef;padding:.1rem .3rem;border-radius:4px;font-size:.88em}
+  blockquote{margin:1rem 0;padding:.7rem 1rem;background:#f6f7f9;border-radius:8px}
+  header#title-block-header{display:none}
+  footer.pie{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--linea);color:var(--text-muted);font-size:.85rem}
+  </style>
+</head>
+<body>
+<header class="marca">
+  <a class="marca-enlace" href="../index.html" aria-label="Ojo al Gasto: inicio">
+    <svg class="marca-logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z" fill="none" stroke="var(--marca, #1c5cab)" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="4.3" fill="#eb6834"/>
+      <circle cx="12" cy="12" r="2" fill="none" stroke="#fff" stroke-width="1.2"/>
+    </svg>
+    <span class="marca-nombre">Ojo al Gasto</span>
+  </a>
+  <span class="marca-lema">Control ciudadano de las compras municipales</span>
+</header>
+<main>
+<header id="title-block-header">
+<h1 class="title">Ojo al Gasto</h1>
+</header>
+<h1 id="marco-legal-de-la-veeduría-ciudadana-automatizada-de-gads-municipales-ecuador">Marco legal de la veeduría ciudadana automatizada de GADs municipales (Ecuador)</h1>
+<blockquote>
+<p><strong>Fecha de corte:</strong> 11 de octubre de 2026. <strong>Primer objetivo:</strong> Municipio del Distrito Metropolitano de Quito (MDMQ).</p>
+<p><strong>Convención:</strong> todo dato sin marca fue leído en el texto fuente enlazado. <code>[NO VERIFICADO]</code> = no confirmado en una fuente abierta. <code>[INFERIDO]</code> = interpretación propia, no está literal en la norma. <code>[VERIFICADO CON DATOS]</code> = contrastado con los datos abiertos del SERCOP.</p>
+<p><strong>Sobre las fuentes:</strong> casi todos los textos consolidados son compilaciones de Lexis, Ediciones Legales o Andina Ediciones publicadas en sitios <code>gob.ec</code>, no el facsímil del Registro Oficial (RO). Para cada norma se indica la última reforma que declara la compilación; las reformas posteriores están <code>[NO VERIFICADO]</code>. Este documento no es asesoría legal.</p>
+</blockquote>
+<h2 id="0-lo-que-condiciona-el-diseño-de-la-herramienta">0. Lo que condiciona el diseño de la herramienta</h2>
+<ol>
+<li><strong>La contratación pública cambió de régimen en 2025.</strong> La Ley Orgánica Reformatoria de la LOSNCP (RO Cuarto Suplemento 140, 7-oct-2025) eliminó la menor cuantía y la cotización y fijó en USD 10.000 el umbral entre ínfima cuantía y subasta, licitación o concurso. Antes, la Ley Orgánica de Integridad Pública (RO S. 68, 26-jun-2025) ya había reformado la LOSNCP; la Corte Constitucional la declaró inconstitucional por la forma (RO Edición Constitucional 96, 3-oct-2025). <code>[VERIFICADO CON DATOS]</code> En los datos del SERCOP la menor cuantía, la cotización, la contratación directa y la lista corta dejan de publicarse el 31-jul-2025, y desde el 26-jun-2025 aparecen licitaciones desde USD 10.096 (antes empezaban en USD 562.000). La herramienta aplica a cada proceso los límites vigentes en su fecha de publicación (<code>src/veeduria/datos/normas.toml</code>).</li>
+<li><strong>El Estado ya define los patrones de riesgo.</strong> La LOSNCP (art. 21) obliga al SERCOP a tener alertas tempranas automatizadas para "precios inusuales, concentración reiterada de adjudicaciones en un mismo proveedor, modificaciones frecuentes de plazos o condiciones contractuales". El RGLOSNCP (art. 426.1) añade la subdivisión de contratos y las vinculaciones. Una veeduría ciudadana puede replicar esos mismos criterios.</li>
+<li><strong>Regla anti-fraccionamiento cuantificada:</strong> según el RGLOSNCP (art. 270), la suma anual de ínfimas cuantías de los mismos bienes o servicios no puede superar USD 10.000. Las ínfimas cuantías no están en la descarga OCDS, así que esta regla queda pendiente de una fuente de datos.</li>
+<li><strong>El plazo LOTAIP admite dos lecturas.</strong> Son 10 días, prorrogables 5 (art. 34). La Defensoría del Pueblo dice "días calendario"; el Reglamento usa "término", que son días hábiles. La herramienta calcula ambos.</li>
+<li><strong>Datos de funcionarios y proveedores:</strong> según la LOPDP (art. 2, último inciso), son públicos el nombre, el cargo, el contacto profesional, la remuneración y la declaración patrimonial de los servidores públicos, y los datos de representantes y socios de personas jurídicas.</li>
+<li><strong>Nueva obligación trimestral de los GAD</strong> (COOTAD art. 198.4, reforma de febrero de 2026): publicar el indicador de gasto de inversión hasta el día 15 del mes siguiente a cada trimestre.</li>
+</ol>
+<h2 id="1-constitución-de-la-república-2008">1. Constitución de la República (2008)</h2>
+<p>RO 449, 20-oct-2008. Compilación Lexis con última modificación 30-may-2024. URL: <a href="https://arconel.gob.ec/wp-content/uploads/downloads/2024/08/CONSTITUCION_DE_LA_REPUBLICA_DEL_ECUADOR.pdf">https://arconel.gob.ec/wp-content/uploads/downloads/2024/08/CONSTITUCION_DE_LA_REPUBLICA_DEL_ECUADOR.pdf</a></p>
+<table>
+<thead>
+<tr class="header">
+<th>Art.</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>18 núm. 2</td>
+<td>Derecho a acceder libremente a la información de entidades públicas y de privados que manejen fondos del Estado. Solo hay reserva en los casos que fije la ley.</td>
+</tr>
+<tr class="even">
+<td>61 núm. 2 y 5</td>
+<td>Derecho a participar en los asuntos de interés público y a fiscalizar los actos del poder público.</td>
+</tr>
+<tr class="odd">
+<td>83 núm. 8 y 17</td>
+<td>Deber de administrar honradamente el patrimonio público y de denunciar y combatir la corrupción.</td>
+</tr>
+<tr class="even">
+<td>91</td>
+<td>Acción de acceso a la información pública, cuando la información se niega de forma expresa o tácita, o es incompleta o no fidedigna. La reserva debe haberse declarado antes de la petición.</td>
+</tr>
+<tr class="odd">
+<td>95, 96</td>
+<td>Participación protagónica y control popular; reconocimiento de toda forma de organización social.</td>
+</tr>
+<tr class="even">
+<td>100</td>
+<td>En todos los niveles de gobierno habrá instancias de participación: presupuestos participativos, rendición de cuentas, veedurías, observatorios, audiencias públicas.</td>
+</tr>
+<tr class="odd">
+<td>101</td>
+<td>Las sesiones de los GAD son públicas, con silla vacía.</td>
+</tr>
+<tr class="even">
+<td>204</td>
+<td>El pueblo es el mandante y primer fiscalizador del poder público. Función de Transparencia y Control Social.</td>
+</tr>
+<tr class="odd">
+<td>208</td>
+<td>Atribuciones del CPCCS, entre ellas coadyuvar a las veedurías e investigar denuncias de corrupción.</td>
+</tr>
+<tr class="even">
+<td>225, 227, 297</td>
+<td>Los GAD y sus empresas son sector público; principio de transparencia; quien maneja recursos públicos rinde cuentas.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-lotaip-y-su-reglamento">2. LOTAIP y su Reglamento</h2>
+<p><strong>Ley:</strong> RO Segundo Suplemento 245, 7-feb-2023. Única modificación encontrada: la Corte Constitucional declaró inconstitucional la Disposición Transitoria Novena (RO S. 367, 29-may-2024), de modo que la información del art. 19 debe estar disponible sin requisito previo. URL: <a href="https://www.bce.fin.ec/images/transparencia2024/juridico/leyorganicadetransparencia.pdf">https://www.bce.fin.ec/images/transparencia2024/juridico/leyorganicadetransparencia.pdf</a></p>
+<table>
+<thead>
+<tr class="header">
+<th>Art.</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4 núm. 1</td>
+<td>Datos abiertos: libre uso, reutilización y redistribución.</td>
+</tr>
+<tr class="even">
+<td>4 núm. 3</td>
+<td>Denegación: falta de respuesta en el plazo legal, rechazo expreso o respuesta inexacta.</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>Obligados: sector público, incluidas sus empresas públicas, y entidades asociativas de GAD.</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>Informe anual a la Defensoría hasta el último día laborable de enero, con el detalle de solicitudes y tiempos de respuesta.</td>
+</tr>
+<tr class="odd">
+<td>12-13</td>
+<td>La Defensoría del Pueblo es el órgano rector.</td>
+</tr>
+<tr class="even">
+<td>19</td>
+<td>Transparencia activa, actualizada mensualmente y en datos abiertos: 24 numerales (lista abajo).</td>
+</tr>
+<tr class="odd">
+<td>24</td>
+<td>Los GAD publican además las actas del concejo y sus comisiones, los planes de desarrollo y de uso del suelo y los trámites de sus servicios.</td>
+</tr>
+<tr class="even">
+<td>31</td>
+<td>Calidad: datos abiertos reutilizables (núm. 3), sin acreditar interés (núm. 4), en el formato pedido (núm. 5).</td>
+</tr>
+<tr class="odd">
+<td>32</td>
+<td>Solicitud física o electrónica con identificación, contacto, descripción precisa y formato deseado.</td>
+</tr>
+<tr class="even">
+<td>34</td>
+<td>Plazo de 10 días, prorrogable 5 por causas justificadas que se informen al solicitante.</td>
+</tr>
+<tr class="odd">
+<td>35</td>
+<td>No hay obligación de crear información, pero recopilar información dispersa no cuenta como crear.</td>
+</tr>
+<tr class="even">
+<td>37</td>
+<td>Si un documento mezcla información pública y reservada, se entrega una versión pública.</td>
+</tr>
+<tr class="odd">
+<td>38</td>
+<td>Responder solo con un enlace web es insuficiente.</td>
+</tr>
+<tr class="even">
+<td>39</td>
+<td>El titular de la entidad responde administrativa, civil o penalmente, incluso por no publicar o no actualizar.</td>
+</tr>
+<tr class="odd">
+<td>40-41</td>
+<td>Gestión oficiosa ante la Defensoría dentro de 30 días desde que venció el plazo de respuesta.</td>
+</tr>
+<tr class="even">
+<td>44</td>
+<td>Reconoce el derecho a la vigilancia social y la veeduría ciudadana sobre esta ley.</td>
+</tr>
+<tr class="odd">
+<td>DR Sexta</td>
+<td>El silencio administrativo positivo no se aplica a las solicitudes LOTAIP (reforma al art. 207 del COA).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Art. 19, lista mínima:</strong> 1 estructura orgánica; 2 directorio y distributivo de personal; 3 remuneraciones; 4 licencias y comisiones de servicio; 5 servicios; 6 presupuesto y su ejecución; 7 resultados de auditorías; 8 procesos de contratación; 9 contratistas incumplidos; 10 planes y programas; 11 contratos de crédito; 12 rendición de cuentas; 13 viáticos; 14 responsable de acceso a la información; 15 contratos colectivos; 16 índice de información reservada; 17 agenda de audiencias; 18 convenios; 19 donativos; 20 registro de activos de información; 21 políticas públicas; 22 formularios; 23 cuotas de acción afirmativa; 24 otra información relevante.</p>
+<p><strong>Reglamento:</strong> Decreto Ejecutivo 124, Suplemento RO 484, 24-ene-2024. URL: <a href="https://isspol.org.ec/wp-content/uploads/2026/04/REGLAMENTO-GENERAL-DE-LA-LEY-ORGANICA-DE-TRANSPARENCIA-Y-ACCESO-A-LA-INFORMACION-PUBLICA.pdf">https://isspol.org.ec/wp-content/uploads/2026/04/REGLAMENTO-GENERAL-DE-LA-LEY-ORGANICA-DE-TRANSPARENCIA-Y-ACCESO-A-LA-INFORMACION-PUBLICA.pdf</a>. Art. 11: transparencia activa en datos abiertos con formatos de la Defensoría. Art. 12: portal nacional. Art. 13: no se pueden exigir requisitos adicionales; la prórroga se motiva y comunica antes del vencimiento ("término"). Art. 15: gratuidad. Art. 26: queja ante la Defensoría por formulario web.</p>
+<p><strong>Guía de la Defensoría DEPE-DPE-035-2023:</strong> lee el plazo como "diez días calendario". URL: <a href="https://www.enamiep.gob.ec/wp-content/uploads/2024/03/DEPE-DPE-035-2023.pdf">https://www.enamiep.gob.ec/wp-content/uploads/2024/03/DEPE-DPE-035-2023.pdf</a></p>
+<p><strong>Fecha límite mensual de publicación:</strong> <code>[NO VERIFICADO]</code>. Por eso la herramienta no califica de "tardía" una publicación mensual: muestra cuántos días después del cierre del mes se publicó.</p>
+<h2 id="3-ley-orgánica-de-participación-ciudadana-lopc">3. Ley Orgánica de Participación Ciudadana (LOPC)</h2>
+<p>Suplemento RO 175, 20-abr-2010; última reforma 7-feb-2023. URL: <a href="https://www.tce.gob.ec/wp-content/uploads/2023/08/Ley-Organica-Participacion-Ciudadana.pdf">https://www.tce.gob.ec/wp-content/uploads/2023/08/Ley-Organica-Participacion-Ciudadana.pdf</a></p>
+<table>
+<thead>
+<tr class="header">
+<th>Art.</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>67-71</td>
+<td>Presupuesto participativo, obligatorio en todos los niveles de gobierno, con seguimiento de la ejecución durante todo el año.</td>
+</tr>
+<tr class="even">
+<td>77</td>
+<td>Silla vacía en los GAD.</td>
+</tr>
+<tr class="odd">
+<td>78-79</td>
+<td>Veedurías y observatorios.</td>
+</tr>
+<tr class="even">
+<td>84-86</td>
+<td>Veedurías ciudadanas: monitorean cualquier actividad del Estado; reglamentadas por el CPCCS; sin conflicto de interés; se notifica su inicio a la entidad observada.</td>
+</tr>
+<tr class="odd">
+<td>87</td>
+<td>Las instituciones deben garantizar el acceso a la información que necesite la veeduría.</td>
+</tr>
+<tr class="even">
+<td>88-95</td>
+<td>Rendición de cuentas anual. El nivel técnico rinde cuentas sobre presupuesto ejecutado y contratación de obras y servicios (art. 93).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-reglamento-general-de-veedurías-ciudadanas-cpccs">4. Reglamento General de Veedurías Ciudadanas (CPCCS)</h2>
+<p>Resolución PLE-CPCCS-388-22-11-2016 (RO 918, 9-ene-2017), reformada en 2017 y 2018. La Resolución CPCCS-PLE-SG-014-O-2026-0112 (abril de 2026) cita su texto, lo que indica que sigue vigente. URL: <a href="https://www.cpccs.gob.ec/wp-content/uploads/2020/02/reglamento-general-de-veedurias-ciudadanas.pdf">https://www.cpccs.gob.ec/wp-content/uploads/2020/02/reglamento-general-de-veedurias-ciudadanas.pdf</a></p>
+<ul>
+<li><strong>Integrantes:</strong> mínimo 3 (art. 10). Ecuatorianos en goce de derechos de participación o extranjeros con situación regular (art. 12).</li>
+<li><strong>No pueden ser veedores</strong> (art. 13): contratistas o proveedores del objeto observado, o quien tenga conflicto de intereses; parientes hasta el 4.º grado de consanguinidad o 2.º de afinidad del contratista o de los servidores involucrados; servidores cuyas funciones se relacionen con el objeto; quien ya esté en otra veeduría en curso; autoridades de elección popular y sus parientes hasta el 2.º grado; dirigentes de partidos o movimientos políticos; entre otros.</li>
+<li><strong>Atribuciones</strong> (art. 14): vigilar planificación, presupuesto y gasto; fiscalizar adquisiciones y obras; pedir información conforme a la LOTAIP.</li>
+<li><strong>Prohibiciones</strong> (art. 16): usar la información con otros fines, vincular la veeduría a partidos o intereses particulares, recibir dádivas, retrasar o impedir los contratos observados.</li>
+<li><strong>Trámite:</strong> solicitud al CPCCS (arts. 29-30), verificación en 3 días término (art. 31), inducción de al menos 6 horas (art. 32), notificación a la entidad en 2 días término (art. 36), informe final en 15 días término desde que termina (art. 39). No puede haber dos veedurías con el mismo objeto (art. 28). Si la entidad niega la información, la veeduría presenta un reporte de novedad al CPCCS (art. 27).</li>
+</ul>
+<h2 id="5-contratación-pública">5. Contratación pública</h2>
+<h3 id="51-losncp">5.1 LOSNCP</h3>
+<p>RO S. 395, 4-ago-2008; reforma integral RO Cuarto Suplemento 140, 7-oct-2025. URL: <a href="https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf">https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf</a></p>
+<table>
+<thead>
+<tr class="header">
+<th>Art.</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>16</td>
+<td>Observatorios ciudadanos permanentes de contratación pública.</td>
+</tr>
+<tr class="even">
+<td>21</td>
+<td>Portal obligatorio, en datos abiertos; alertas tempranas automatizadas del SERCOP (precios inusuales, concentración en un proveedor, modificaciones frecuentes).</td>
+</tr>
+<tr class="odd">
+<td>22</td>
+<td>El PAC se publica hasta el 15 de enero.</td>
+</tr>
+<tr class="even">
+<td>38</td>
+<td>Régimen especial: lista taxativa (medicamentos, seguridad, comunicación social, asesoría jurídica, repuestos, contratos entre entidades públicas, etc.). <code>[VERIFICADO]</code> en el texto.</td>
+</tr>
+<tr class="odd">
+<td>42, 47, 48</td>
+<td>Concurso de consultoría, subasta inversa y licitación: presupuesto mayor a USD 10.000.</td>
+</tr>
+<tr class="even">
+<td>49</td>
+<td>Quien ganó una licitación de obra no puede ganar otra en la misma entidad hasta la recepción provisional de la anterior.</td>
+</tr>
+<tr class="odd">
+<td>50</td>
+<td>Ínfima cuantía hasta USD 10.000; no puede usarse para contratación constante y recurrente ni para subdividir contratos.</td>
+</tr>
+<tr class="even">
+<td>58-60</td>
+<td>Emergencias: resolución motivada, máximo 60 días, publicación inmediata, informe de cierre.</td>
+</tr>
+<tr class="odd">
+<td>75-76</td>
+<td>Inhabilidades: entre otros, alcaldes y concejales de la jurisdicción y sus parientes, funcionarios que intervinieron en el proceso, proveedores suspendidos en el RUP.</td>
+</tr>
+<tr class="even">
+<td>101</td>
+<td>Complementarios hasta el 8 % del contrato; en obras, el conjunto de complementarios, órdenes de trabajo y diferencias de cantidades hasta el 15 %.</td>
+</tr>
+<tr class="odd">
+<td>111</td>
+<td>Registro público de incumplimientos: suspensión de 5 años para contratistas incumplidos.</td>
+</tr>
+<tr class="even">
+<td>DG Tercera</td>
+<td>Prohibido subdividir el objeto o el proyecto para eludir procedimientos.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-reglamento-general-rglosncp">5.2 Reglamento General (RGLOSNCP)</h3>
+<p>Decreto Ejecutivo 193, Noveno Suplemento RO 153, 28-oct-2025; reformas hasta DE 461 (RO Tercer Suplemento 337, 30-jul-2026). URL: <a href="https://www.tce.gob.ec/wp-content/uploads/2026/08/Reglamento-General-a-la-Ley-Orga%CC%81nica-del-Sistema-Nacional-de-Contratacio%CC%81n-Pu%CC%81blica.pdf">https://www.tce.gob.ec/wp-content/uploads/2026/08/Reglamento-General-a-la-Ley-Orga%CC%81nica-del-Sistema-Nacional-de-Contratacio%CC%81n-Pu%CC%81blica.pdf</a></p>
+<table>
+<thead>
+<tr class="header">
+<th>Art.</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>22</td>
+<td>35 tipos de información relevante de publicación obligatoria: presupuesto referencial, pliegos, actas, adjudicación, contrato, complementarios, multas, comprobantes de pago, actas de recepción, etc.</td>
+</tr>
+<tr class="even">
+<td>64</td>
+<td>Cada proceso del PAC lleva un código CPC de 9 dígitos.</td>
+</tr>
+<tr class="odd">
+<td>88</td>
+<td>Comisión técnica obligatoria cuando el presupuesto referencial es de USD 100.000 o más.</td>
+</tr>
+<tr class="even">
+<td>139</td>
+<td>Proveedor único: solo repuestos con proveedor único, desarrollo o mejora de tecnologías existentes y patentes exclusivas, con informe técnico motivado. "Lo previsto en este artículo no aplicará para el caso de servicios, obras o consultorías." <code>[VERIFICADO]</code> en el texto.</td>
+</tr>
+<tr class="odd">
+<td>269-273</td>
+<td>Ínfima cuantía: aviso público, procurar 3 proformas, reporte en 5 días término; suma anual por objeto de hasta USD 10.000, con excepciones tasadas (art. 271).</td>
+</tr>
+<tr class="even">
+<td>303-309</td>
+<td>Emergencias: publicación de la declaratoria en 3 días término, ampliaciones, informe de cierre con RUC de los contratistas.</td>
+</tr>
+<tr class="odd">
+<td>426.1</td>
+<td>Criterios de control del SERCOP: subdivisión de contratos, vinculaciones, precios inusuales, concentración en un proveedor.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="53-umbrales-en-usd">5.3 Umbrales en USD</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Periodo de publicación</th>
+<th>Régimen</th>
+<th>Límites que usa la herramienta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2024</td>
+<td>LOSNCP anterior, PIE 2024 = USD 33.296.819.775,31 (tabla oficial SERCOP)</td>
+<td>Menor cuantía bienes y servicios 66.593,64; cotización bienes y servicios 499.452,30; menor cuantía obras 233.077,74; cotización obras 998.904,59</td>
+</tr>
+<tr class="even">
+<td>1-ene-2025 a 25-jun-2025</td>
+<td>LOSNCP anterior, PIE 2025 = USD 36.063.017.083,08</td>
+<td>Menor cuantía bienes y servicios 72.126,03; cotización bienes y servicios 540.945,26; menor cuantía obras 252.441,12; cotización obras 1.081.890,51</td>
+</tr>
+<tr class="odd">
+<td>26-jun-2025 a 27-oct-2025</td>
+<td>Transición (Ley de Integridad Pública, declaratoria de inconstitucionalidad, reforma de octubre)</td>
+<td>Ninguno: no hay umbral verificado</td>
+</tr>
+<tr class="even">
+<td>Desde 28-oct-2025</td>
+<td>LOSNCP reformada + RGLOSNCP (DE 193)</td>
+<td>Ínfima cuantía hasta 10.000; comisión técnica desde 100.000</td>
+</tr>
+</tbody>
+</table>
+<p><code>[VERIFICADO CON DATOS]</code> Los montos máximos observados en todo el país en 2025 coinciden con los límites del PIE 2025: ningún proceso de menor cuantía de bienes y servicios supera USD 72.126, ni de cotización de bienes y servicios USD 540.824, ni de menor cuantía de obras USD 252.440. Fuentes de las tablas: 2024 <a href="https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2024/01/montos_contratacion_2024.pdf">https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2024/01/montos_contratacion_2024.pdf</a> ; 2025 <a href="https://registrodelapropiedad.quito.gob.ec/wp-content/uploads/2025/01/Montos-de-contratacion-2025.pdf">https://registrodelapropiedad.quito.gob.ec/wp-content/uploads/2025/01/Montos-de-contratacion-2025.pdf</a></p>
+<h2 id="6-cootad">6. COOTAD</h2>
+<p>RO S. 303, 19-oct-2010; compilación reformada al 30-oct-2025 (<a href="https://legalcloud.ec/wp-content/uploads/2025/10/COOTAD-30102025-Digital.pdf">https://legalcloud.ec/wp-content/uploads/2025/10/COOTAD-30102025-Digital.pdf</a>) y reforma de RO Sexto Suplemento 229, 23-feb-2026.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Art.</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>57, 87</td>
+<td>El concejo aprueba el presupuesto y la liquidación y fiscaliza al alcalde.</td>
+</tr>
+<tr class="even">
+<td>198.1, 198.4 (2026)</td>
+<td>Al menos 70 % de los egresos no financieros a inversión (65 % en 2026, 68 % en 2027); indicador trimestral publicado hasta el día 15 del mes siguiente. Su aplicación al DMQ es <code>[INFERIDO]</code>.</td>
+</tr>
+<tr class="odd">
+<td>233-248</td>
+<td>Calendario presupuestario: anteproyecto hasta el 20 de octubre; proyecto definitivo hasta el 31 de octubre; aprobación hasta el 10 de diciembre.</td>
+</tr>
+<tr class="even">
+<td>238, 241</td>
+<td>La asamblea local prioriza la inversión y emite resolución de conformidad sobre el anteproyecto.</td>
+</tr>
+<tr class="odd">
+<td>249</td>
+<td>Al menos 10 % de los ingresos no tributarios para grupos de atención prioritaria.</td>
+</tr>
+<tr class="even">
+<td>265, 266</td>
+<td>Liquidación hasta el 31 de enero; rendición de cuentas anual sobre ejecución presupuestaria.</td>
+</tr>
+<tr class="odd">
+<td>302, 311, 312</td>
+<td>Participación y control social, silla vacía y responsabilidad por incumplirlos.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-código-orgánico-de-planificación-y-finanzas-públicas">7. Código Orgánico de Planificación y Finanzas Públicas</h2>
+<p>Segundo RO Suplemento 306, 22-oct-2010; última reforma 28-ago-2025. URL: <a href="https://www.tce.gob.ec/wp-content/uploads/2025/09/Codigo-Organico-de-Planificacion-y-Finanzas-Publicas.pdf">https://www.tce.gob.ec/wp-content/uploads/2025/09/Codigo-Organico-de-Planificacion-y-Finanzas-Publicas.pdf</a>. Art. 115: no hay contrato sin certificación presupuestaria. Art. 119: el ejecutivo del GAD presenta al concejo un informe semestral de ejecución dentro de 90 días. Arts. 174-175: libre acceso ciudadano a la información presupuestaria.</p>
+<h2 id="8-contraloría-general-del-estado">8. Contraloría General del Estado</h2>
+<p>LOCGE, Suplemento RO 595, 12-jun-2002. Art. 94: acción popular para denunciar irregularidades en la administración pública. Art. 45 núm. 14: incumplir la LOTAIP genera responsabilidad administrativa culposa. Reglamento de Denuncias (Acuerdo 045-CG-2018, <a href="https://www.contraloria.gob.ec/WFDescarga.aspx?id=605&amp;tipo=nor">https://www.contraloria.gob.ec/WFDescarga.aspx?id=605&amp;tipo=nor</a>): requisitos de identificación y relato de hechos, no se admiten denuncias anónimas y se protege la identidad del denunciante. Los informes de auditoría se publican por obligación del art. 19 núm. 7 de la LOTAIP.</p>
+<h2 id="9-protección-de-datos-personales-lopdp">9. Protección de datos personales (LOPDP)</h2>
+<p>Quinto Suplemento RO 459, 26-may-2021. URL: <a href="https://www.sot.gob.ec/wp-content/uploads/2024/11/21.-Ley-Organica-de-Proteccion-de-datos.pdf">https://www.sot.gob.ec/wp-content/uploads/2024/11/21.-Ley-Organica-de-Proteccion-de-datos.pdf</a></p>
+<ul>
+<li>Art. 2 lit. g: la ley no se aplica a datos de personas jurídicas (razón social, RUC de sociedad, contratos).</li>
+<li>Art. 2, último inciso: son públicos el nombre, cargo y contacto profesional de servidores públicos, su remuneración y declaración patrimonial, y los datos de representantes y socios de personas jurídicas.</li>
+<li>Art. 10 lit. e: minimización.</li>
+</ul>
+<p>Consecuencia para la herramienta <code>[INFERIDO]</code>: se publican nombres de proveedores, RUC y montos tal como los publica el SERCOP. No se publican cédulas, domicilios ni parentescos de personas naturales.</p>
+<h2 id="10-normativa-del-distrito-metropolitano-de-quito">10. Normativa del Distrito Metropolitano de Quito</h2>
+<p>Código Municipal, Ordenanza Metropolitana 072-2024 (RO Edición Especial 1606, 30-may-2024), copia con modificaciones al 1-ago-2024: <a href="https://www.quito-turismo.gob.ec/descargas/2024/CODIGO_MUNICIPAL_01-08-2024.pdf">https://www.quito-turismo.gob.ec/descargas/2024/CODIGO_MUNICIPAL_01-08-2024.pdf</a>. Las reformas posteriores están <code>[NO VERIFICADO]</code>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Ubicación</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>arts. 320-329</td>
+<td>Publicidad de toda actividad municipal en formatos abiertos; transparencia proactiva (art. 324).</td>
+</tr>
+<tr class="even">
+<td>art. 362</td>
+<td>Solicitudes de acceso al MDMQ: plazo de 10 días, prorrogable 5.</td>
+</tr>
+<tr class="odd">
+<td>art. 436-438</td>
+<td>Observatorios y veedurías sobre contratos y obras del municipio y sus empresas; las veedurías las califica el CPCCS.</td>
+</tr>
+<tr class="even">
+<td>art. 440 y ss.</td>
+<td>Rendición de cuentas anual y presupuesto participativo.</td>
+</tr>
+<tr class="odd">
+<td>arts. 67.79-67.94</td>
+<td>Silla vacía en el Concejo Metropolitano.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="11-reglas-automatizables-y-su-estado-en-la-herramienta">11. Reglas automatizables y su estado en la herramienta</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Regla</th>
+<th>Norma</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Posible fraccionamiento (procesos al mismo proveedor que juntos superan un límite)</td>
+<td>LOSNCP DG Tercera y art. 50; RGLOSNCP 270, 426.1</td>
+<td>Implementada, con límites por régimen</td>
+</tr>
+<tr class="even">
+<td>Presupuesto al borde de un límite</td>
+<td>Límites de la tabla 5.3</td>
+<td>Implementada</td>
+</tr>
+<tr class="odd">
+<td>Un solo oferente, comparado con la tasa nacional</td>
+<td>LOSNCP 47; RGLOSNCP 426.1</td>
+<td>Implementada</td>
+</tr>
+<tr class="even">
+<td>Proveedor único usado para servicios u obras</td>
+<td>RGLOSNCP 139</td>
+<td>Implementada (desde 28-oct-2025)</td>
+</tr>
+<tr class="odd">
+<td>Subasta, licitación o concurso por USD 10.000 o menos</td>
+<td>LOSNCP 42, 47, 48, 50</td>
+<td>Implementada (desde 7-oct-2025)</td>
+</tr>
+<tr class="even">
+<td>Contratación sin concurso por USD 50.000 o más</td>
+<td>LOSNCP 38</td>
+<td>Implementada</td>
+</tr>
+<tr class="odd">
+<td>Concentración de adjudicaciones en un proveedor</td>
+<td>LOSNCP 21; RGLOSNCP 426.1</td>
+<td>Implementada (tabla de proveedores)</td>
+</tr>
+<tr class="even">
+<td>Adjudicación al precio máximo; plazos de oferta atípicos</td>
+<td>LOSNCP 21; RGLOSNCP 426.1</td>
+<td>Implementada (comparación estadística)</td>
+</tr>
+<tr class="odd">
+<td>Solicitudes LOTAIP sin responder</td>
+<td>LOTAIP 4 núm. 3, 34</td>
+<td>Implementada (estadística del portal y generador de solicitudes con plazos)</td>
+</tr>
+<tr class="even">
+<td>Numerales de transparencia faltantes y días hasta la publicación</td>
+<td>LOTAIP 19, 24</td>
+<td>Implementada</td>
+</tr>
+<tr class="odd">
+<td>Datos publicados ilegibles (RUC en notación científica)</td>
+<td>LOTAIP 4 núm. 1, 19, 31 núm. 3</td>
+<td>Implementada</td>
+</tr>
+<tr class="even">
+<td>Ejecución presupuestaria</td>
+<td>LOTAIP 19 núm. 6; COPFP 119</td>
+<td>Implementada (informativa)</td>
+</tr>
+<tr class="odd">
+<td>Informes de Contraloría</td>
+<td>LOTAIP 19 núm. 7</td>
+<td>Implementada (listado)</td>
+</tr>
+<tr class="even">
+<td>Fraccionamiento de ínfimas cuantías (suma anual por CPC &gt; USD 10.000)</td>
+<td>RGLOSNCP 270, 271</td>
+<td>Pendiente: falta fuente abierta de ínfimas</td>
+</tr>
+<tr class="odd">
+<td>Emergencias: plazos de publicación, duración, informe de cierre</td>
+<td>LOSNCP 58-60; RGLOSNCP 303-309</td>
+<td>Pendiente: las emergencias no están en OCDS</td>
+</tr>
+<tr class="even">
+<td>Complementarios sobre el 8 % o el 15 %</td>
+<td>LOSNCP 101</td>
+<td>Pendiente: requiere documentos del contrato</td>
+</tr>
+<tr class="odd">
+<td>Inhabilidades y vínculos</td>
+<td>LOSNCP 75-76</td>
+<td>Pendiente: requiere registros societarios</td>
+</tr>
+<tr class="even">
+<td>Contratista incumplido que vuelve a ganar</td>
+<td>LOSNCP 111</td>
+<td>Pendiente: en Quito los RUC del numeral 9 son ilegibles</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-pendientes-de-verificación">12. Pendientes de verificación</h2>
+<ol>
+<li>Cifra exacta y RO del PIE 2026 (la Asamblea aprobó USD 46.255 millones el 29-nov-2025). Hoy no se usa en ninguna regla.</li>
+<li>Umbrales vigentes entre el 26-jun-2025 y el 27-oct-2025.</li>
+<li>Reformas a la LOSNCP posteriores al 7-oct-2025 y al RGLOSNCP posteriores al 30-jul-2026.</li>
+<li>Fecha límite mensual de publicación LOTAIP fijada por la Defensoría.</li>
+<li>Reformas al Código Municipal de Quito posteriores al 1-ago-2024 (por ejemplo, Ordenanza 095-2025).</li>
+<li>Correspondencia exacta entre la categoría "Bienes y Servicios únicos" del SERCOP y el art. 139 del RGLOSNCP <code>[INFERIDO]</code>.</li>
+</ol>
+<footer class="pie">Ojo al Gasto · herramienta libre (licencia MIT)</footer>
+</main>
+</body>
+</html>

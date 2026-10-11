@@ -1,0 +1,30 @@
+# Municipio de San Miguel de Ibarra y sus entidades. Generado con: veeduria entidades "ibarra"
+
+nombre = "Municipio de San Miguel de Ibarra"
+canton = "Ibarra"
+provincia = "Imbabura"
+id_transparencia = 895
+
+[[rucs]]
+ruc = "1060000260001"
+nombre = "GAD Municipal de San Miguel de Ibarra"
+
+[[rucs]]
+ruc = "1060031300001"
+nombre = "EMAPA-I - Agua Potable y Alcantarillado de Ibarra"
+
+[[rucs]]
+ruc = "1060021420001"
+nombre = "Cuerpo de Bomberos de Ibarra"
+
+[[rucs]]
+ruc = "1060031140001"
+nombre = "EP Municipal de Faenamiento del Cantón Ibarra"
+
+[[rucs]]
+ruc = "1091704338001"
+nombre = "Comercibarra - Mercado Mayorista de Ibarra"
+
+[[rucs]]
+ruc = "1060034160001"
+nombre = "Registro de la Propiedad del Cantón Ibarra"

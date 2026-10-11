@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿En qué gasta {{ e.canton }}? · {{ marca.nombre }}</title>
+{% set a0 = anuales[0] if anuales else none %}
+<meta name="description" content="{% if a0 %}{{ a0.monto|millones }} millones de dólares en {{ a0.procesos|miles }} compras en {{ a0.anio }}. {% endif %}Mire en qué gasta {{ e.canton }} y qué preguntar. Datos oficiales.">
+<meta property="og:title" content="¿En qué gasta {{ e.canton }}? · {{ marca.nombre }}">
+<meta property="og:description" content="{% if a0 %}{{ a0.monto|millones }} millones de dólares en {{ a0.procesos|miles }} compras en {{ a0.anio }}. {% endif %}Mire en qué y qué preguntar. Datos oficiales.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1c5cab">
+<link rel="icon" href="{{ favicon }}">
+<style>
+  .viz-root {
+    color-scheme: light;
+    --surface-0: #ffffff; --surface-1: #fcfcfb; --surface-2: #f3f2ef; --linea: #e3e1dc;
+    --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #6f6e69;
+    --series-1: #2a78d6; --referencia: #b9b7b0; --enlace: #1c5cab;
+    --marca: #1c5cab; --sobre-marca: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --surface-0: #121211; --surface-1: #1a1a19; --surface-2: #242422; --linea: #383835;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #9e9d95;
+      --series-1: #3987e5; --referencia: #6b6a64; --enlace: #86b6ef;
+      --marca: #6da7ec; --sobre-marca: #0b0b0b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .viz-root { background: var(--surface-0); color: var(--text-primary); font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; min-height: 100vh; }
+  main { max-width: 760px; margin: 0 auto; padding: 1rem 1.1rem 4rem; }
+  a { color: var(--enlace); }
+  h1 { font-size: clamp(2rem, 7vw, 3rem); line-height: 1.1; margin: .3rem 0 .6rem; letter-spacing: -.01em; }
+  h2 { font-size: 1.35rem; margin: 2.8rem 0 .3rem; }
+  section h3 { font-size: 1.15rem; margin: 2rem 0 .3rem; }
+  .sub { color: var(--text-secondary); margin: 0; }
+  .muted { color: var(--text-muted); font-size: .88rem; }
+  {{ css_marca }}
+  .anios { display: flex; gap: .5rem; margin: 1.6rem 0 .4rem; flex-wrap: wrap; }
+  .anios button { font: inherit; font-size: .95rem; padding: .35rem .9rem; border-radius: 999px; border: 1px solid var(--linea); background: var(--surface-1); color: var(--text-secondary); cursor: pointer; min-height: 40px; }
+  .anios button[aria-pressed="true"] { background: var(--text-primary); color: var(--surface-0); border-color: var(--text-primary); }
+  .heroe { margin: 1.2rem 0 .4rem; }
+  .heroe .valor { font-size: clamp(3rem, 13vw, 4.6rem); font-weight: 650; line-height: 1; letter-spacing: -.02em; }
+  .heroe .valor small { font-size: .42em; font-weight: 600; letter-spacing: 0; }
+  .heroe p { margin: .5rem 0 0; color: var(--text-secondary); font-size: 1.05rem; }
+  .boton { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 44px; padding: .55rem 1.1rem;
+           border-radius: 10px; border: 2px solid var(--marca); background: var(--marca); color: var(--sobre-marca); font: inherit; font-weight: 650;
+           text-decoration: none; cursor: pointer; }
+  .boton.secundario { background: transparent; color: var(--marca); }
+  .boton:focus-visible { outline: 3px solid #eb6834; outline-offset: 2px; }
+  .acciones { display: flex; gap: .6rem; flex-wrap: wrap; margin: 1.2rem 0; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .7rem; margin: 1.4rem 0; }
+  .tile { background: var(--surface-1); border: 1px solid var(--linea); border-radius: 12px; padding: .85rem 1rem; }
+  .tile .etiqueta { color: var(--text-secondary); font-size: .9rem; }
+  .tile .numero { font-size: 1.7rem; font-weight: 650; margin-top: .15rem; }
+  .barras { list-style: none; margin: 1rem 0 .4rem; padding: 0; }
+  .barras li { margin: 0 0 1.05rem; }
+  .barras .texto { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+  .barras .nombre { font-weight: 560; }
+  .barras .detalle { color: var(--text-muted); font-size: .85rem; }
+  .pista { display: flex; align-items: center; gap: .55rem; margin-top: .3rem; }
+  .barra { height: 14px; border-radius: 0 4px 4px 0; background: var(--series-1); min-width: 2px; }
+  .barra.ref { background: var(--referencia); }
+  .pista .cifra { font-size: .92rem; color: var(--text-primary); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .leyenda { display: flex; gap: 1.2rem; font-size: .88rem; color: var(--text-secondary); margin: .6rem 0 .2rem; }
+  .leyenda i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: .35rem; vertical-align: -1px; }
+  details.tabla { margin: .2rem 0 0; font-size: .9rem; }
+  details.tabla summary { cursor: pointer; color: var(--text-secondary); }
+  table { border-collapse: collapse; width: 100%; margin: .5rem 0; font-size: .9rem; }
+  th, td { text-align: left; padding: .35rem .4rem; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pregunta { background: var(--surface-1); border: 1px solid var(--linea); border-radius: 12px; padding: 1rem 1.1rem; margin: .9rem 0; }
+  .pregunta .tema { font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+  .pregunta h3 { margin: .3rem 0 .4rem; font-size: 1.08rem; }
+  .pregunta p { margin: 0; color: var(--text-secondary); }
+  .pregunta ul { margin: .5rem 0 0; padding-left: 1.1rem; font-size: .9rem; color: var(--text-secondary); }
+  .sugerido { margin-top: .7rem; border-top: 1px solid var(--linea); padding-top: .5rem; }
+  .sugerido summary { cursor: pointer; font-weight: 600; color: var(--enlace); min-height: 40px; display: flex; align-items: center; }
+  .sugerido blockquote { margin: .3rem 0 .7rem; padding: .7rem .9rem; background: var(--surface-0); border: 1px solid var(--linea); border-radius: 8px; font-size: .92rem; }
+  .pasos { counter-reset: paso; list-style: none; padding: 0; margin: .8rem 0; }
+  .pasos li { counter-increment: paso; position: relative; padding-left: 2.6rem; margin: 0 0 1rem; }
+  .pasos li::before { content: counter(paso); position: absolute; left: 0; top: .05rem; width: 1.8rem; height: 1.8rem; border-radius: 50%;
+                      background: var(--marca); color: var(--sobre-marca); font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: .95rem; }
+  .aviso { background: var(--surface-2); border-radius: 10px; padding: .9rem 1.1rem; margin: 1.6rem 0; font-size: .95rem; color: var(--text-secondary); }
+  .aviso b { color: var(--text-primary); }
+  pre { background: var(--surface-2); padding: .8rem 1rem; border-radius: 8px; overflow-x: auto; font-size: .85rem; }
+  footer.pie { margin-top: 3.5rem; padding-top: 1rem; border-top: 1px solid var(--linea); color: var(--text-muted); font-size: .85rem; }
+  #tip { position: fixed; pointer-events: none; background: var(--text-primary); color: var(--surface-0); font-size: .85rem; padding: .4rem .6rem; border-radius: 6px; max-width: 280px; opacity: 0; transition: opacity .1s; z-index: 10; }
+  [data-anio-panel][hidden] { display: none; }
+  @media (max-width: 520px) { .marca-lema { display: none; } }
+  @media print { .anios, .acciones { display: none; } [data-anio-panel][hidden] { display: block; } }
+</style>
+</head>
+<body>
+<div class="viz-root">
+<main>
+{% with raiz="../" %}{% include "_marca.html.j2" %}{% endwith %}
+<p class="sub">Compras públicas · {{ e.nombre }}</p>
+<h1>¿En qué gasta {{ e.canton }}?</h1>
+<p class="sub">Compras del municipio y de sus {{ e.rucs|length - 1 }} empresas y entidades. Datos oficiales al {{ fecha_datos }}.</p>
+
+<div class="anios" role="group" aria-label="Año">
+{% for a in anuales %}<button type="button" data-anio="{{ a.anio }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ a.anio }}{% if a.anio == anio_curso %} (en curso){% endif %}</button>{% endfor %}
+</div>
+
+{% for a in anuales %}
+<section data-anio-panel="{{ a.anio }}" {{ "hidden" if not loop.first }}>
+  <div class="heroe">
+    <div class="valor">{{ a.monto|millones }}<small> millones de dólares</small></div>
+    <p>en <b>{{ a.procesos|miles }} compras y contratos</b> que el municipio y sus empresas publicaron en {{ a.anio }}{% if a.anio == anio_curso %}, hasta el {{ fecha_datos }}{% endif %}.</p>
+  </div>
+</section>
+{% endfor %}
+
+<div class="acciones">
+  <button type="button" class="boton secundario" id="compartir">Compartir</button>
+  <a class="boton secundario" href="#detalle">Ver en qué se gastó</a>
+</div>
+
+<h2 id="preguntar">Lo que puede preguntar</h2>
+<p class="muted">Estas preguntas son para la entidad. No son acusaciones. Cualquier persona puede presentarlas. Los pasos están al final de esta sección.</p>
+{% for p in preguntas %}
+<div class="pregunta">
+  <div class="tema">Pregunta abierta · {{ p.tema }}</div>
+  <h3>{{ p.titulo }}</h3>
+  <p>{{ p.texto }}</p>
+  {% if p.procesos %}<ul>{% for codigo, url, objeto, monto in p.procesos %}<li><a href="{{ url }}">{{ codigo }}</a>: {{ objeto }} (USD {{ monto|miles }})</li>{% endfor %}</ul>{% endif %}
+  <details class="sugerido">
+    <summary>Ver el texto sugerido para preguntar</summary>
+    <blockquote id="pedido-{{ loop.index }}">{{ p.pedido }}</blockquote>
+    <button type="button" class="boton secundario" data-copiar="pedido-{{ loop.index }}">Copiar el texto</button>
+  </details>
+</div>
+{% endfor %}
+
+<h3 id="como-preguntar" style="font-size:1.2rem;margin-top:2rem">Cómo presentar su pregunta</h3>
+<ol class="pasos">
+  <li>Escriba una carta a la máxima autoridad de la entidad. Incluya su nombre, su cédula, un correo para la respuesta y la información que pide. Puede usar el texto sugerido.</li>
+  <li>Preséntela en la ventanilla de la entidad o en línea en el <a href="{{ solicitud_js.portal }}" target="_blank" rel="noopener">Portal Nacional de Transparencia</a>. No necesita explicar para qué la quiere (LOTAIP, art. 31).</li>
+  <li>Guarde el comprobante de recepción. Desde esa fecha corre el plazo.</li>
+  <li>La entidad debe responder en {{ solicitud_js.dias }} días, o en {{ solicitud_js.dias + solicitud_js.prorroga }} si le avisa una prórroga (LOTAIP, art. 34).</li>
+  <li>Si no responde, pida ayuda a la Defensoría del Pueblo dentro de 30 días, o presente una acción de acceso a la información ante un juez (Constitución, art. 91).</li>
+</ol>
+
+<h2 id="detalle">En qué se gastó</h2>
+{% for a in anuales %}
+<section data-anio-panel="{{ a.anio }}" {{ "hidden" if not loop.first }}>
+  <p class="muted">Año {{ a.anio }}. Cambie el año arriba.</p>
+
+  <h3>Las 5 compras más grandes</h3>
+  <p class="muted">Presupuesto de cada proceso. Toque el código para ver la ficha oficial.</p>
+  {% set tope = a.mayores[0].monto if a.mayores else 1 %}
+  <ul class="barras">
+  {% for m in a.mayores %}
+    <li>
+      <div class="nombre">{{ m.objeto }}</div>
+      <div class="detalle">{{ m.entidad }} · {{ m.tipo|lower }} · <a href="{{ m.url }}">{{ m.codigo }}</a></div>
+      <div class="pista"><div class="barra" style="width:{{ (82 * m.monto / tope)|round(1) }}%" data-tip="{{ m.objeto }}: USD {{ m.monto|miles }}"></div><span class="cifra">{{ m.monto|millones }} M</span></div>
+    </li>
+  {% endfor %}
+  </ul>
+
+  <h3>¿En qué se va el dinero?</h3>
+  <p class="muted">El catálogo electrónico es la tienda del Estado: suministros, limpieza, seguridad y otros.</p>
+  {% set tope = a.por_categoria[0][1] if a.por_categoria else 1 %}
+  <ul class="barras">
+  {% for nombre, monto, parte in a.por_categoria %}
+    <li>
+      <div class="texto"><span class="nombre">{{ nombre }}</span><span class="detalle">{{ parte|pct(0) }} del total</span></div>
+      <div class="pista"><div class="barra" style="width:{{ (82 * monto / tope)|round(1) }}%" data-tip="{{ nombre }}: USD {{ monto|miles }} ({{ parte|pct }})"></div><span class="cifra">{{ monto|millones }} M</span></div>
+    </li>
+  {% endfor %}
+  </ul>
+
+  <h3>¿Quién compra?</h3>
+  {% set tope = a.por_entidad[0][1] if a.por_entidad else 1 %}
+  <ul class="barras">
+  {% for nombre, monto, parte in a.por_entidad %}
+    <li>
+      <div class="texto"><span class="nombre">{{ nombre }}</span><span class="detalle">{{ parte|pct(0) }}</span></div>
+      <div class="pista"><div class="barra" style="width:{{ (82 * monto / tope)|round(1) }}%" data-tip="{{ nombre }}: USD {{ monto|miles }}"></div><span class="cifra">{{ monto|millones }} M</span></div>
+    </li>
+  {% endfor %}
+  </ul>
+  <details class="tabla"><summary>Ver estos datos en tabla</summary>
+  <table>
+    <tr><th>Categoría o entidad</th><th class="n">USD</th><th class="n">%</th></tr>
+    {% for nombre, monto, parte in a.por_categoria + a.por_entidad %}<tr><td>{{ nombre }}</td><td class="n">{{ monto|miles }}</td><td class="n">{{ parte|pct }}</td></tr>{% endfor %}
+  </table>
+  </details>
+
+  <div class="tiles">
+    <div class="tile"><div class="etiqueta">Contratado sin concurso de ofertas</div><div class="numero">{{ (a.sin_concurso / a.monto)|pct if a.monto else "—" }}</div><div class="muted">{{ a.sin_concurso|millones }} M en contratación directa o régimen especial</div></div>
+  </div>
+</section>
+{% endfor %}
+
+{% if competencia %}
+<h2>¿Compiten los proveedores?</h2>
+<p class="muted">Procesos con <b>un solo</b> oferente, {{ anios|join(" y ") }}. Menos es mejor: más ofertas dan mejores precios.</p>
+<div class="leyenda"><span><i style="background:var(--series-1)"></i>{{ e.canton }}</span><span><i style="background:var(--referencia)"></i>Todo el país</span></div>
+{% set tope = tope_competencia %}
+<ul class="barras">
+{% for c in competencia %}
+  <li>
+    <div class="nombre">{{ c.tipo }} <span class="detalle">({{ c.procesos|miles }} procesos)</span></div>
+    <div class="pista"><div class="barra" style="width:{{ (82 * c.entidad / tope)|round(1) }}%" data-tip="{{ e.canton }}: {{ c.entidad|pct }} con un solo oferente"></div><span class="cifra">{{ c.entidad|pct(0) }}</span></div>
+    <div class="pista"><div class="barra ref" style="width:{{ (82 * c.pais / tope)|round(1) }}%" data-tip="Todo el país: {{ c.pais|pct }}"></div><span class="cifra">{{ c.pais|pct(0) }}</span></div>
+  </li>
+{% endfor %}
+</ul>
+<p>{{ frase_competencia }}</p>
+{% endif %}
+
+<div class="aviso"><b>Esto no acusa a nadie.</b> Resume datos que publica el Estado. Un patrón puede tener una explicación válida. Los documentos de identidad de personas naturales están ocultos.</div>
+
+<h2>Compruébelo usted</h2>
+<p>Fuentes: <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos">datos abiertos del SERCOP</a> y <a href="https://transparencia.dpe.gob.ec">Portal Nacional de Transparencia</a>. La herramienta es libre. Ejecútela y compare las cifras.</p>
+<pre># en una copia del código de veeduria-ec
+pip install .
+veeduria auditar entidades/{{ archivo_entidad }} --anios {{ anios|join(" ") }}</pre>
+<p class="muted">Datos usados: {{ procedencia.n_sercop }} archivos mensuales del SERCOP, cada uno con todas las compras públicas del país en ese mes ({{ base_procesos|miles }} procesos en total; {{ r.procesos|miles }} de {{ e.canton }}), y {{ procedencia.n_pnt }} archivos que la entidad publicó en el Portal de Transparencia. Descargados {% if procedencia.desde == procedencia.hasta %}el {{ procedencia.desde }}{% else %}entre el {{ procedencia.desde }} y el {{ procedencia.hasta }}{% endif %}. La huella SHA-256 de cada archivo está en <a href="procedencia.json">procedencia.json</a>: misma huella, mismos datos.</p>
+<p class="muted">Las alertas y el informe técnico muestran a un proveedor persona natural como "Persona natural". <code>procesos.csv</code> incluye los nombres de los proveedores tal como los publica el SERCOP.</p>
+<p>Más detalle: <a href="informe.html">informe técnico</a> · <a href="alertas.csv">alertas.csv</a> · <a href="procesos.csv">procesos.csv</a>. Periodistas: <a href="../guia/periodistas.html">de una alerta a una nota</a>. Su cantón: <a href="../guia/hazlo-tu.html">guía paso a paso</a>.</p>
+
+<footer class="pie">{{ marca.nombre }} · herramienta libre (licencia MIT) · datos del SERCOP procesados y resumidos, bajo licencia <a href="https://creativecommons.org/licenses/by/3.0/ec/">CC BY 3.0 Ecuador</a> · no es una veeduría registrada en el CPCCS · generado el {{ generado }}</footer>
+</main>
+<div id="tip" role="tooltip"></div>
+</div>
+<script>
+  document.querySelectorAll(".anios button").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll(".anios button").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    document.querySelectorAll("[data-anio-panel]").forEach(s => s.hidden = s.dataset.anioPanel !== b.dataset.anio);
+  }));
+  const tip = document.getElementById("tip");
+  document.querySelectorAll(".pista").forEach(fila => {
+    const barra = fila.querySelector("[data-tip]");
+    if (!barra) return;
+    fila.addEventListener("pointermove", ev => {
+      tip.textContent = barra.dataset.tip;
+      tip.style.left = Math.min(ev.clientX + 12, innerWidth - 290) + "px";
+      tip.style.top = (ev.clientY + 14) + "px";
+      tip.style.opacity = 1;
+    });
+    fila.addEventListener("pointerleave", () => tip.style.opacity = 0);
+  });
+  document.getElementById("compartir").addEventListener("click", async () => {
+    const datos = { title: document.title, text: document.querySelector('meta[name="description"]').content, url: location.href };
+    if (navigator.share) { try { await navigator.share(datos); } catch (e) {} return; }
+    location.href = "https://wa.me/?text=" + encodeURIComponent(datos.text + " " + datos.url);
+  });
+  document.querySelectorAll("[data-copiar]").forEach(b => b.addEventListener("click", async () => {
+    const texto = document.getElementById(b.dataset.copiar).textContent.trim();
+    try { await navigator.clipboard.writeText(texto); b.textContent = "Copiado ✓"; } catch (_) { b.textContent = "No se pudo copiar"; }
+    setTimeout(() => b.textContent = "Copiar el texto", 2500);
+  }));
+</script>
+</body>
+</html>

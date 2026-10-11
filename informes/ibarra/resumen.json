@@ -1,0 +1,28 @@
+{
+  "entidad": "Municipio de San Miguel de Ibarra",
+  "canton": "Ibarra",
+  "anios": [
+    2025,
+    2026
+  ],
+  "generado": "11/10/2026 10:03",
+  "procesos": 1132,
+  "monto_usd": 70136897.24,
+  "monto_sin_concurso_usd": 1386282.9,
+  "alertas_por_regla": {
+    "Adjudicado al precio máximo": 53,
+    "Contratación sin concurso": 7,
+    "Plazo de ofertas muy corto": 1,
+    "Proveedor único para servicios u obras": 5,
+    "Un solo oferente": 83
+  },
+  "hallazgos": [
+    "En <b>Cotización</b>, el 58,3 % de los procesos tuvo un solo oferente, frente al 22,9 % del país (14 procesos; se esperarían unos 6). Que ocurra por azar es improbable (probabilidad menor a 1 en 1.000).",
+    "En <b>Lista corta</b>, el 87,5 % de los procesos tuvo un solo oferente, frente al 34,3 % del país (7 procesos; se esperarían unos 3). Que ocurra por azar es improbable (probabilidad 0,003).",
+    "El <b>2,0 %</b> del monto (USD 1,4 M) se contrató por régimen especial o contratación directa, sin concurso de ofertas.",
+    "El proveedor que más recibe es <b>BUENO Y CASTRO INGENIEROS ASOCIADOS CIA.LTDA.</b>: USD 4,4 M en 1 proceso (8,1 % de lo adjudicado sin catálogo).",
+    "En la transparencia LOTAIP, de 20 meses evaluados hubo <b>1 mes incompleto</b> (incompleto: falta algún numeral que la entidad sí publica otros meses).",
+    "Publica la información de transparencia de cada mes, en promedio, <b>14 días después del cierre del mes</b> (entre 12 y 17).",
+    "A agosto de 2026 había ejecutado (devengado) el <b>30,8 %</b> de su presupuesto codificado (un ritmo parejo daría cerca del 66,7 %)."
+  ]
+}

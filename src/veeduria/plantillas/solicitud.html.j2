@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solicitud de acceso a la información - {{ e.nombre }}</title>
+<style>
+  body { font: 12pt/1.5 Georgia, "Times New Roman", serif; max-width: 21cm; margin: 2cm auto; padding: 0 1.5cm; color: #111; }
+  .der { text-align: right; } .firma { margin-top: 3.5cm; } .notas { font: 10pt/1.4 system-ui, sans-serif; border-top: 1px dashed #999; margin-top: 2cm; padding-top: .6cm; color: #444; }
+  .pedido { white-space: pre-wrap; border-left: 3px solid #333; padding-left: .8em; }
+  @media print { .notas { display: none; } body { margin: 0 auto; } }
+</style></head>
+<body>
+<p class="der">{{ ciudad }}, {{ fecha }}</p>
+<p>{% if autoridad.first_name_authority %}{{ autoridad.first_name_authority }} {{ autoridad.last_name_authority }}<br>{{ autoridad.job_authority }}<br>{% else %}Máxima autoridad<br>{% endif %}{{ autoridad.name or e.nombre }}<br>Presente.-</p>
+<p><b>Asunto: Solicitud de acceso a la información pública</b></p>
+<p>Yo, {{ nombre }}, con cédula de ciudadanía No. {{ cedula }}, en ejercicio del derecho de acceso a la información pública reconocido en {{ l.base_derecho }}, solicito comedidamente que se me entregue la siguiente información:</p>
+<p class="pedido">{{ pedido }}</p>
+<p>Pido que la información se entregue en formato digital y abierto (hojas de cálculo CSV o XLSX para los datos, y PDF para los documentos), según {{ l.base_formato }}. Si alguna parte de la información estuviera clasificada como reservada o confidencial, solicito que se me indique la resolución que lo dispone y que se entregue el resto, conforme al {{ l.base_reserva }}.</p>
+<p>{{ l.texto_plazo_solicitud }} Contados desde la presentación de esta solicitud, el plazo vence el <b>{{ plazos.calendario }}</b>, o el <b>{{ plazos.calendario_prorroga }}</b> si la entidad notifica una prórroga motivada.</p>
+<p>Recibiré la respuesta en el correo electrónico {{ correo }}{% if telefono %} y en el teléfono {{ telefono }}{% endif %}.</p>
+<p>Atentamente,</p>
+<p class="firma">______________________________<br>{{ nombre }}<br>C.C. {{ cedula }}</p>
+<div class="notas">
+<b>Notas para quien presenta la solicitud (no se imprimen):</b>
+<ul>
+<li>Preséntela por la ventanilla de la entidad o por el Portal Nacional de Transparencia ({{ l.portal }}) y guarde el número o la fe de recepción: desde esa fecha corre el plazo.</li>
+<li><pre style="white-space:pre-wrap;font:inherit;margin:0">{{ texto_plazos }}</pre></li>
+<li>Sea concreto: periodo, dependencia, número de contrato o de proceso.</li>
+</ul>
+</div>
+</body></html>

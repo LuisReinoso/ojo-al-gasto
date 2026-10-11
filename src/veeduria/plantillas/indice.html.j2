@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ marca.nombre }}: ¿en qué gasta su municipio?</title>
+<meta name="description" content="Compras públicas de los municipios del Ecuador, explicadas con datos oficiales. Vea en qué gastan y qué preguntar.">
+<meta property="og:title" content="{{ marca.nombre }}: ¿en qué gasta su municipio?">
+<meta property="og:description" content="Compras públicas de los municipios del Ecuador, explicadas con datos oficiales.">
+<meta name="theme-color" content="#1c5cab">
+<link rel="icon" href="{{ favicon }}">
+<style>
+  :root { color-scheme: light dark; --marca: #1c5cab; --linea: #e3e1dc; --text-muted: #6f6e69; --fondo: #fff; --tarjeta: #fcfcfb; --texto: #0b0b0b; }
+  @media (prefers-color-scheme: dark) { :root { --marca: #6da7ec; --linea: #383835; --text-muted: #9e9d95; --fondo: #121211; --tarjeta: #1a1a19; --texto: #fff; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 1rem 1.1rem 4rem; }
+  {{ css_marca }}
+  @media (max-width: 520px) { .marca-lema { display: none; } }
+  h1 { font-size: clamp(2rem, 8vw, 2.8rem); line-height: 1.08; margin: 1rem 0 .6rem; letter-spacing: -.02em; font-weight: 800; }
+  .sub { color: var(--text-muted); margin: 0 0 1.6rem; }
+  .ciudades { display: grid; gap: .8rem; }
+  .ciudad { display: block; text-decoration: none; color: inherit; background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 14px; padding: 1rem 1.1rem; }
+  .ciudad:hover { border-color: var(--marca); }
+  .ciudad:focus-visible { outline: 3px solid #eb6834; outline-offset: 2px; }
+  .ciudad .nombre { font-size: 1.45rem; font-weight: 800; }
+  .ciudad .cifra { font-size: 1.05rem; margin-top: .2rem; }
+  .ciudad .ir { color: var(--marca); font-weight: 700; margin-top: .4rem; }
+  h2 { font-size: 1.1rem; margin: 2.4rem 0 .6rem; }
+  ul { padding-left: 1.1rem; } li { margin: .45rem 0; }
+  a { color: var(--marca); }
+  .muted { color: var(--text-muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+<main>
+{% with raiz="" %}{% include "_marca.html.j2" %}{% endwith %}
+<h1>¿En qué gasta su municipio?</h1>
+<p class="sub">Compras públicas explicadas con datos oficiales. Vea en qué se gasta y qué puede preguntar.</p>
+
+<div class="ciudades">
+{% for c in ciudades %}
+  <a class="ciudad" href="{{ c.carpeta }}/publico.html">
+    <div class="nombre">{{ c.canton }}</div>
+    <div class="cifra"><b>{{ c.monto|millones }} millones de dólares</b> en {{ c.procesos|miles }} compras ({{ c.anios|join(" y ") }})</div>
+    <div class="ir">Ver en qué gasta →</div>
+  </a>
+{% endfor %}
+</div>
+
+<h2>Para periodistas y veedurías</h2>
+<ul>
+  <li><a href="guia/periodistas.html">De una alerta a una nota</a>: verificar, pedir la versión de la entidad y reducir el riesgo legal.</li>
+  <li>Informes técnicos con todas las alertas: {% for c in ciudades %}<a href="{{ c.carpeta }}/informe.html">{{ c.canton }}</a>{{ ", " if not loop.last }}{% endfor %}.</li>
+  <li><a href="guia/ejemplo-contraloria.html">Leer con OCR un informe escaneado de la Contraloría</a>.</li>
+</ul>
+
+<h2>Hágalo con su cantón</h2>
+<ul>
+  <li><a href="guia/hazlo-tu.html">Guía paso a paso con inteligencia artificial</a>. No necesita saber programar.</li>
+  <li><a href="guia/README.html">Instalación y comandos</a> · <a href="guia/metodologia.html">Metodología</a> · <a href="guia/marco-legal.html">Marco legal</a></li>
+</ul>
+
+<p class="muted">Herramienta libre (licencia MIT). Datos del SERCOP y del Portal Nacional de Transparencia. Esto no acusa a nadie: muestra datos públicos y preguntas para las entidades.</p>
+</main>
+</body>
+</html>

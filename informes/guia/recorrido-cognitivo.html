@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Ojo al Gasto</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z' fill='white' stroke='%231c5cab' stroke-width='2.2'/%3E%3Ccircle cx='12' cy='12' r='4.3' fill='%23eb6834'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#1c5cab">
+  <style>
+  :root{color-scheme:light dark;--marca:#1c5cab;--linea:#e3e1dc;--text-muted:#6f6e69}
+  body{font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;max-width:760px;margin:0 auto;padding:1rem 1.1rem 4rem;color:#0b0b0b;background:#fff}
+  @media (prefers-color-scheme:dark){:root{--marca:#6da7ec;--linea:#383835;--text-muted:#9e9d95}body{color:#fff;background:#121211}a{color:#86b6ef}th{background:#242422!important}td,th{border-color:#383835!important}pre,code{background:#242422!important}blockquote{background:#1a1a19!important}}
+
+    .marca { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap;
+             padding: .7rem 0 .9rem; border-bottom: 1px solid var(--linea, #e3e1dc); margin-bottom: 1.4rem; }
+    .marca-enlace { display: inline-flex; align-items: center; gap: .45rem; text-decoration: none; color: inherit; white-space: nowrap; }
+    .marca-logo { width: 34px; height: 34px; flex: none; }
+    .marca-nombre { font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
+    .marca-lema { color: var(--text-muted, #6f6e69); font-size: .82rem; }
+
+  @media (max-width:520px){.marca-lema{display:none}}
+  a{color:#1c5cab} h1{line-height:1.15} h2{margin-top:2.4rem}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow-x:auto} th,td{border-bottom:1px solid #e3e1dc;padding:.4rem .5rem;text-align:left;vertical-align:top} th{background:#f3f2ef}
+  pre{background:#f3f2ef;padding:.8rem 1rem;border-radius:8px;overflow-x:auto} code{background:#f3f2ef;padding:.1rem .3rem;border-radius:4px;font-size:.88em}
+  blockquote{margin:1rem 0;padding:.7rem 1rem;background:#f6f7f9;border-radius:8px}
+  header#title-block-header{display:none}
+  footer.pie{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--linea);color:var(--text-muted);font-size:.85rem}
+  </style>
+</head>
+<body>
+<header class="marca">
+  <a class="marca-enlace" href="../index.html" aria-label="Ojo al Gasto: inicio">
+    <svg class="marca-logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z" fill="none" stroke="var(--marca, #1c5cab)" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="4.3" fill="#eb6834"/>
+      <circle cx="12" cy="12" r="2" fill="none" stroke="#fff" stroke-width="1.2"/>
+    </svg>
+    <span class="marca-nombre">Ojo al Gasto</span>
+  </a>
+  <span class="marca-lema">Control ciudadano de las compras municipales</span>
+</header>
+<main>
+<header id="title-block-header">
+<h1 class="title">Ojo al Gasto</h1>
+</header>
+<h1 id="recorrido-cognitivo-11-oct-2026">Recorrido cognitivo (11-oct-2026)</h1>
+<p>Método: Cognitive Walkthrough (Wharton et al., 1994). Evaluación predictiva sobre capturas en un teléfono de 390 px. Valide con 5 usuarios reales.</p>
+<h2 id="usuarios">Usuarios</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Persona</th>
+<th>Perfil</th>
+<th>Llega desde</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ciudadana</td>
+<td>Vive en Quito. Sin formación técnica. Usa el teléfono</td>
+<td>Un enlace en WhatsApp</td>
+</tr>
+<tr class="even">
+<td>Periodista local</td>
+<td>Conoce la LOTAIP. Poco tiempo. No usa la terminal</td>
+<td>Un enlace o el índice</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tarea-1-entender-en-qué-gasta-quito">Tarea 1: entender en qué gasta Quito</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Paso</th>
+<th>Q1 Objetivo claro</th>
+<th>Q2 Acción visible</th>
+<th>Q3 Acción comprensible</th>
+<th>Q4 Retroalimentación</th>
+<th>Problema</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Abrir el índice</td>
+<td>⚠️</td>
+<td>⚠️</td>
+<td>✅</td>
+<td>✅</td>
+<td>La ciudad aparece en tercer lugar, debajo de dos guías</td>
+</tr>
+<tr class="even">
+<td>2. Tocar "Quito"</td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+<td>✅</td>
+<td>El enlace es texto pequeño en una lista</td>
+</tr>
+<tr class="odd">
+<td>3. Leer la cifra principal</td>
+<td>✅</td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+<td>"566,7 millones" no tiene una referencia cercana</td>
+</tr>
+<tr class="even">
+<td>4. Ver las compras más grandes</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>Ninguno</td>
+</tr>
+</tbody>
+</table>
+<p>Éxito estimado: 80 %.</p>
+<h2 id="tarea-2-hacer-una-pregunta-a-la-entidad">Tarea 2: hacer una pregunta a la entidad</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Paso</th>
+<th>Q1</th>
+<th>Q2</th>
+<th>Q3</th>
+<th>Q4</th>
+<th>Problema</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Encontrar las preguntas</td>
+<td>⚠️</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>Están al final, tras unas 5 pantallas</td>
+</tr>
+<tr class="even">
+<td>2. Elegir una pregunta</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>Ninguno</td>
+</tr>
+<tr class="odd">
+<td>3. Preparar la solicitud</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>No hay botón. El generador solo funciona en la terminal</td>
+</tr>
+<tr class="even">
+<td>4. Presentar la solicitud</td>
+<td>⚠️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>No hay enlace al portal ni explicación del plazo</td>
+</tr>
+</tbody>
+</table>
+<p>Éxito estimado: menos del 5 %. <strong>Bloqueo crítico.</strong></p>
+<h2 id="tarea-3-periodista-verifica-un-proceso-desde-una-alerta">Tarea 3: periodista verifica un proceso desde una alerta</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Paso</th>
+<th>Q1</th>
+<th>Q2</th>
+<th>Q3</th>
+<th>Q4</th>
+<th>Problema</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Abrir el informe técnico</td>
+<td>✅</td>
+<td>⚠️</td>
+<td>⚠️</td>
+<td>✅</td>
+<td>Desde la página pública el enlace está al final</td>
+</tr>
+<tr class="even">
+<td>2. Llegar a las alertas</td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+<td>✅</td>
+<td>No hay índice de secciones; hay que desplazarse mucho</td>
+</tr>
+<tr class="odd">
+<td>3. Leer la tabla de alertas</td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+<td>✅</td>
+<td>La tabla es ancha; en el teléfono hay que desplazar a los lados</td>
+</tr>
+<tr class="even">
+<td>4. Abrir la ficha oficial</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>Ninguno</td>
+</tr>
+</tbody>
+</table>
+<p>Éxito estimado: 55 %.</p>
+<h2 id="correcciones-por-prioridad">Correcciones por prioridad</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Prioridad</th>
+<th>Corrección</th>
+<th>Tarea</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>P0</td>
+<td>Texto sugerido que se puede copiar en cada pregunta, y pasos para presentarla por el canal oficial. El sitio no envía solicitudes ni pide datos personales</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>P0</td>
+<td>Mostrar las 3 preguntas principales justo después de la cifra principal</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>P0</td>
+<td>Enlace al Portal Nacional de Transparencia y plazos de respuesta</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>P1</td>
+<td>Identidad: nombre, logo y colores propios</td>
+<td>1, 2, 3</td>
+</tr>
+<tr class="odd">
+<td>P1</td>
+<td>Índice con la ciudad como tarjeta grande, primero</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>P1</td>
+<td>Botón "Compartir" (WhatsApp y otros) y vista previa del enlace</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>P1</td>
+<td>Barra de secciones en el informe técnico</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>P2</td>
+<td>En el teléfono, alertas como tarjetas en lugar de tablas anchas</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<footer class="pie">Ojo al Gasto · herramienta libre (licencia MIT)</footer>
+</main>
+</body>
+</html>

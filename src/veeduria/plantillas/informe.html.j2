@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Informe técnico: {{ e.canton }} · {{ marca.nombre }}</title>
+<link rel="icon" href="{{ favicon }}">
+<meta name="theme-color" content="#1c5cab">
+<style>
+  :root { --tinta:#1b1f24; --suave:#5b6470; --linea:#d9dee4; --fondo:#f6f7f9; --alta:#b42318; --media:#b54708; --baja:#475467; --ok:#067647; --marca:#1c5cab; --serie:#2a78d6; }
+  * { box-sizing: border-box; }
+  body { font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--tinta); margin: 0; background: #fff; }
+  main { max-width: 1100px; margin: 0 auto; padding: 1rem 1rem 4rem; }
+  {{ css_marca }}
+  @media (max-width: 520px) { .marca-lema { display: none; } }
+  h1 { font-size: 1.7rem; margin: .2rem 0; } h2 { margin-top: 2.6rem; border-bottom: 2px solid var(--tinta); padding-bottom: .3rem; scroll-margin-top: 3.5rem; }
+  h3 { margin-top: 1.6rem; }
+  .sub { color: var(--suave); }
+  .cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: .8rem; margin: 1.2rem 0; }
+  .cifras article { background: var(--fondo); border-radius: 10px; padding: .9rem 1rem; }
+  .cifras b { display: block; font-size: 1.55rem; } .cifras span { color: var(--suave); font-size: .9rem; }
+  main > article { background: var(--fondo); border-radius: 10px; padding: .9rem 1.1rem; margin: 1rem 0; }
+  .nota { color: var(--suave); font-size: .9rem; }
+  table { border-collapse: collapse; width: 100%; font-size: .9rem; margin: .6rem 0 1rem; }
+  th, td { border-bottom: 1px solid var(--linea); padding: .4rem .5rem; text-align: left; vertical-align: top; }
+  th { background: var(--fondo); position: sticky; top: 0; }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tabla { overflow-x: auto; max-height: 34rem; overflow-y: auto; border: 1px solid var(--linea); border-radius: 8px; }
+  .tabla table { margin: 0; }
+  .nivel { font-weight: 600; font-size: .8rem; text-transform: uppercase; }
+  .alta { color: var(--alta); } .media { color: var(--media); } .baja { color: var(--baja); } .ok { color: var(--ok); }
+  .barra-mini { background: var(--linea); border-radius: 4px; height: .7rem; min-width: 80px; }
+  .barra-mini i { display: block; height: 100%; border-radius: 4px; background: var(--serie); }
+  details { margin: .6rem 0; } summary { cursor: pointer; font-weight: 600; }
+  a { color: #1849a9; }
+  ol li, ul li { margin: .3rem 0; }
+  .secciones { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--linea); margin: 0 0 1rem; }
+  .secciones ul { display: flex; gap: .4rem; overflow-x: auto; list-style: none; padding: .5rem 0; margin: 0; scrollbar-width: none; }
+  .secciones li { margin: 0; flex: none; }
+  .secciones a { display: inline-block; text-decoration: none; font-size: .88rem; padding: .35rem .75rem; border: 1px solid var(--linea); border-radius: 999px; color: var(--tinta); background: var(--fondo); }
+  footer.pie { margin-top: 3rem; color: var(--suave); font-size: .85rem; border-top: 1px solid var(--linea); padding-top: 1rem; }
+  @media print { .tabla { max-height: none; overflow: visible; } .secciones { display: none; } }
+</style>
+</head>
+<body>
+{% with raiz="../" %}{% include "_marca.html.j2" %}{% endwith %}
+<main>
+<p class="sub">Informe técnico · generado el {{ generado }} · <a href="publico.html">ver el resumen para el público</a></p>
+<h1>{{ e.nombre }}</h1>
+<p class="sub">Compras públicas {{ anios|join(" y ") }} · {{ e.rucs|length }} entidades (municipio y empresas metropolitanas) · datos oficiales del SERCOP y de la Defensoría del Pueblo</p>
+
+<nav class="secciones" aria-label="Secciones"><ul>
+<li><a href="#importante">Lo importante</a></li><li><a href="#alertas">Alertas</a></li><li><a href="#gasto">Gasto</a></li><li><a href="#competencia">Competencia</a></li><li><a href="#transparencia">Transparencia</a></li>{% if ppto %}<li><a href="#presupuesto">Presupuesto</a></li>{% endif %}{% if contraloria is not none and not contraloria.empty %}<li><a href="#contraloria">Contraloría</a></li>{% endif %}<li><a href="#acciones">Qué hacer</a></li>
+</ul></nav>
+<article><b>Cómo leer este informe.</b> Una alerta no es una acusación. Indica un patrón que la ley o la buena práctica piden revisar, y en muchos casos tiene una explicación legítima. Antes de publicar o denunciar, abra el proceso en el portal del SERCOP, lea sus documentos y pida información a la entidad. Este informe sirve para eso: le dice <i>dónde mirar</i>.</article>
+
+<div class="cifras">
+  <article><b>{{ r.procesos|miles }}</b><span>procesos de compra publicados</span></article>
+  <article><b>{{ r.monto|usd_m }}</b><span>en presupuesto de esos procesos</span></article>
+  <article><b>{{ (r.directo_monto / r.monto)|pct if r.monto else "—" }}</b><span>del monto se contrató sin concurso de ofertas</span></article>
+  <article><b>{{ conteo_alertas.get("Posible fraccionamiento", 0)|miles }}</b><span>procesos con posible fraccionamiento</span></article>
+  {% if saip_destacado is defined and saip_destacado is not none %}{% set s = saip_destacado %}
+  <article><b>{{ s.sin_responder|miles }} de {{ s.recibidas|miles }}</b><span>solicitudes de información sin responder en {{ s.anio|int }}</span></article>
+  {% endif %}
+  {% if ppto %}<article><b>{{ ppto.ejecucion|pct }}</b><span>del presupuesto ejecutado a {{ mes_nombre(ppto.mes) }} {{ ppto.anio }}</span></article>{% endif %}
+</div>
+
+<h2 id="importante">1. Lo más importante</h2>
+<ol>
+{% for h in hallazgos %}<li>{{ h|safe }}</li>{% endfor %}
+</ol>
+
+<h2 id="gasto">2. ¿En qué gasta?</h2>
+<p>Los 10 procesos más grandes publicados en {{ anios|join(" y ") }}:</p>
+<div class="tabla"><table>
+<tr><th>Fecha</th><th>Entidad</th><th>Objeto</th><th>Procedimiento</th><th class="n">Monto (USD)</th><th>Proveedor</th></tr>
+{% for p in r.mayores.itertuples() %}
+<tr><td>{{ p.fecha_publicacion|fecha }}</td><td>{{ p.buyer_name|corto(40) }}</td><td><a href="{{ p.url_sercop }}">{{ p.objeto|corto(140) }}</a></td><td>{{ p.tipo }}</td><td class="n">{{ p.monto|miles }}</td><td>{{ p.proveedor|default("sin adjudicar", true) }}</td></tr>
+{% endfor %}
+</table></div>
+
+<h3>Por entidad</h3>
+<div class="tabla"><table>
+<tr><th>Entidad</th><th class="n">Procesos</th><th class="n">Monto (USD)</th><th></th></tr>
+{% set maximo = r.por_entidad.monto.max() %}
+{% for nombre, f in r.por_entidad.iterrows() %}
+<tr><td>{{ nombre }}</td><td class="n">{{ f.procesos|miles }}</td><td class="n">{{ f.monto|miles }}</td><td><div class="barra-mini"><i style="width:{{ (100 * f.monto / maximo)|round(1) }}%"></i></div></td></tr>
+{% endfor %}
+</table></div>
+
+<h3>Por tipo de procedimiento</h3>
+<div class="tabla"><table>
+<tr><th>Procedimiento</th><th class="n">Procesos</th><th class="n">Monto (USD)</th><th class="n">% del monto</th></tr>
+{% for nombre, f in r.por_tipo.iterrows() %}
+<tr><td>{{ nombre or "sin dato" }}</td><td class="n">{{ f.procesos|miles }}</td><td class="n">{{ f.monto|miles }}</td><td class="n">{{ (f.monto / r.monto)|pct }}</td></tr>
+{% endfor %}
+</table></div>
+
+<h2 id="competencia">3. ¿Hubo competencia?</h2>
+<p>En los procedimientos competitivos la ley espera que varios proveedores compitan. La tabla compara la proporción de procesos con <b>un solo oferente</b> en {{ e.canton }} con la de todo el país en el mismo periodo. "Prob. por azar" es la probabilidad de ver tantos casos o más si la entidad se comportara como el promedio nacional; se marca en rojo si es menor a {{ "%.3f"|format(umbral_p)|replace(".", ",") }} (0,05 dividido entre el número de procedimientos comparados, para no ver patrones donde solo hay azar).</p>
+<div class="tabla"><table>
+<tr><th>Procedimiento</th><th class="n">Procesos</th><th class="n">Con un solo oferente</th><th class="n">{{ e.canton }}</th><th class="n">País</th><th class="n">Esperados si fuera como el país</th><th class="n">Prob. por azar</th></tr>
+{% for nombre, f in tasas.iterrows() %}
+<tr><td>{{ nombre }}</td><td class="n">{{ f.procesos|miles }}</td><td class="n">{{ f.un_oferente|miles }}</td><td class="n {{ 'alta' if f.tasa_entidad > 1.5 * f.tasa_nacional and f.un_oferente >= 5 and f.p_valor < umbral_p else '' }}">{{ f.tasa_entidad|pct }}</td><td class="n">{{ f.tasa_nacional|pct }}</td><td class="n">{{ f.esperados|round(0)|int }}</td><td class="n">{{ prob(f.p_valor) if f.tasa_entidad > f.tasa_nacional else "—" }}</td></tr>
+{% endfor %}
+</table></div>
+
+<h3>Proveedores que más dinero reciben</h3>
+<p class="nota">Sin compras por catálogo electrónico. "Directos" = contratos sin concurso; "1 oferente" = ganó siendo el único participante.</p>
+<div class="tabla"><table>
+<tr><th>Proveedor</th><th>RUC</th><th class="n">Procesos</th><th class="n">Monto (USD)</th><th class="n">% del total</th><th class="n">Directos</th><th class="n">1 oferente</th></tr>
+{% for p in proveedores.itertuples() %}
+<tr><td>{{ p.proveedor }}</td><td>{{ p.ruc_proveedor }}</td><td class="n">{{ p.procesos }}</td><td class="n">{{ p.monto|miles }}</td><td class="n">{{ p.participacion|pct }}</td><td class="n">{{ p.directos }}</td><td class="n">{{ p.un_oferente }}</td></tr>
+{% endfor %}
+</table></div>
+
+<h2 id="alertas">4. Alertas de contratación</h2>
+<p>{{ alertas|length|miles }} alertas en {{ alertas.ocid.nunique()|miles if not alertas.empty else 0 }} procesos. El detalle completo está en <code>alertas.csv</code>.</p>
+{% for regla in orden_reglas if regla in grupos %}{% set g = grupos[regla] %}
+<details {{ "open" if loop.first }}>
+<summary><span class="nivel {{ g.nivel.iloc[0] }}">{{ g.nivel.iloc[0] }}</span> · {{ regla }} ({{ g.ocid.nunique()|miles }} procesos, USD {{ g.drop_duplicates("ocid").monto.sum()|miles }})</summary>
+<p>{{ descripciones[regla] }}</p>
+<p class="nota">Base legal: {{ g.base_legal.unique()|join(" / ") }}</p>
+<div class="tabla"><table>
+<tr><th>Fecha</th><th>Código</th><th>Entidad</th><th>Objeto</th><th>Proveedor</th><th class="n">Monto (USD)</th><th>Por qué</th></tr>
+{% for a in g.sort_values(["grupo", "fecha_publicacion"] if "grupo" in g and g.grupo.notna().any() else ["monto"], ascending=[True, True] if "grupo" in g and g.grupo.notna().any() else [False]).head(limite_filas).itertuples() %}
+<tr><td>{{ a.fecha_publicacion|fecha }}</td><td><a href="{{ a.url_sercop }}">{{ a.codigo }}</a></td><td>{{ a.buyer_name|corto(35) }}</td><td>{{ a.objeto|corto(120) }}</td><td>{{ a.proveedor|default("—", true) }}</td><td class="n">{{ a.monto|miles }}</td><td>{{ a.explicacion }}</td></tr>
+{% endfor %}
+</table></div>
+{% if g|length > limite_filas %}<p class="nota">Se muestran {{ limite_filas }} de {{ g|length }}. Vea <code>alertas.csv</code>.</p>{% endif %}
+</details>
+{% endfor %}
+
+<h2 id="transparencia">5. Transparencia (LOTAIP)</h2>
+{% if cumplimiento is not none and not cumplimiento.empty %}
+<p>La LOTAIP (art. 19) obliga a publicar cada mes, en datos abiertos, la información de transparencia activa en el Portal Nacional de Transparencia.
+{% if dia_limite %}Plazo usado: hasta el día {{ dia_limite }} del mes siguiente.{% else %}No se encontró en la norma una fecha límite mensual verificada, por eso se muestra cuántos días después del cierre de cada mes se publicó, sin calificarlo como atraso.{% endif %}</p>
+<div class="tabla"><table>
+<tr><th>Mes</th><th class="n">Numerales publicados</th><th>Publicado el</th><th class="n">Días tras el cierre</th>{% if dia_limite %}<th class="n">Días de atraso</th>{% endif %}<th>Estado</th><th>Faltan</th></tr>
+{% for c in cumplimiento.itertuples() %}
+<tr><td>{{ mes_nombre(c.mes) }} {{ c.anio }}</td><td class="n">{{ c.numerales_publicados }}</td><td>{{ c.ultima_publicacion|fecha }}</td><td class="n">{{ c.dias_tras_cierre|int if c.dias_tras_cierre == c.dias_tras_cierre else "" }}</td>
+{% if dia_limite %}<td class="n">{{ c.dias_atraso|int if c.dias_atraso == c.dias_atraso else "" }}</td>{% endif %}
+<td class="{{ 'ok' if c.estado in ('a tiempo', 'publicado') else ('baja' if c.estado == 'pendiente' else 'alta') }}">{{ c.estado }}</td><td>{{ c.faltantes|join(", ") }}</td></tr>
+{% endfor %}
+</table></div>
+{% endif %}
+
+{% if saip is not none and not saip.empty %}
+<h3>Solicitudes de acceso a la información</h3>
+<div class="tabla"><table>
+<tr><th>Año</th><th class="n">Recibidas</th><th class="n">Respondidas</th><th class="n">Sin responder</th><th class="n">% sin responder</th></tr>
+{% for s in saip.itertuples() %}
+<tr><td>{{ s.anio|int }}</td><td class="n">{{ s.recibidas|miles }}</td><td class="n">{{ s.respondidas|miles }}</td><td class="n">{{ s.sin_responder|miles }}</td><td class="n">{{ (s.sin_responder / s.recibidas)|pct if s.recibidas else "—" }}</td></tr>
+{% endfor %}
+</table></div>
+<p class="nota">Fuente: Portal Nacional de Transparencia. La cifra del año en curso es parcial y algunas solicitudes pueden estar aún dentro de plazo.</p>
+{% endif %}
+
+{% if calidad %}
+<h3>Calidad de los datos publicados</h3>
+<ul>
+{% for numeral, c in calidad.items() %}
+<li><b>{{ numeral }}</b> ({{ mes_nombre(c.periodo[1]) }} {{ c.periodo[0] }}, {{ c.filas|miles }} filas):
+{% if c.ruc_ilegibles %}<span class="alta">{{ c.ruc_ilegibles|miles }} RUC de contratistas publicados en notación científica (p. ej. «1,76818E+12»)</span>. El número se perdió y no se puede saber quién es el contratista. Es información no reutilizable, contraria al formato de datos abiertos que exige la LOTAIP.
+{% else %}<span class="ok">identificadores legibles</span>.{% endif %}
+<a href="{{ c.url }}">archivo</a></li>
+{% endfor %}
+{% if cruce %}<li><b>Cruce con SERCOP:</b> la entidad reporta en LOTAIP {{ cruce.en_lotaip|miles }} códigos de proceso. {{ cruce.encontrados_en_sercop|miles }} aparecen en los datos abiertos del SERCOP y {{ cruce.fuera_de_ocds|miles }} son de tipos que el SERCOP no publica en esa descarga (catálogo electrónico, ínfimas cuantías, arrendamientos). {% if cruce.no_encontrados %}{{ cruce.no_encontrados|length }} procedimientos de {{ anios|join(" o ") }} no aparecen: {{ cruce.no_encontrados[:15]|join(", ") }}{{ "…" if cruce.no_encontrados|length > 15 }}. Puede deberse a que los publicó otra entidad del municipio o a un error de código; vale la pena preguntar.{% endif %}</li>{% endif %}
+</ul>
+{% endif %}
+
+{% if ppto %}
+<h2 id="presupuesto">6. Presupuesto: ¿cuánto se ha ejecutado?</h2>
+<p>Ejecución presupuestaria publicada por la entidad (LOTAIP, numeral 6) a {{ mes_nombre(ppto.mes) }} de {{ ppto.anio }}: se devengó el <b>{{ ppto.ejecucion|pct }}</b> de {{ ppto.codificado|usd_m }} codificados. A esa fecha, una ejecución pareja estaría cerca del {{ (ppto.mes / 12)|pct }}.</p>
+<div class="tabla"><table>
+<tr><th>Grupo de gasto</th><th class="n">Codificado</th><th class="n">Devengado</th><th class="n">Ejecución</th><th></th></tr>
+{% for nombre, g in ppto.por_grupo.iterrows() %}
+<tr><td>{{ nombre }}</td><td class="n">{{ g.codificado|miles }}</td><td class="n">{{ g.devengado|miles }}</td><td class="n {{ 'alta' if g.ejecucion < 0.5 * ppto.mes / 12 else '' }}">{{ g.ejecucion|pct }}</td><td><div class="barra-mini"><i style="width:{{ [100 * g.ejecucion, 100]|min|round(1) }}%"></i></div></td></tr>
+{% endfor %}
+</table></div>
+{% if ppto.valores_ilegibles %}<p class="nota">{{ ppto.valores_ilegibles }} valores del archivo no se pudieron leer como número.</p>{% endif %}
+<p class="nota">Fuente: <a href="{{ ppto.url }}">archivo publicado por la entidad</a>.</p>
+{% endif %}
+
+{% if contraloria is not none and not contraloria.empty %}
+<h2 id="contraloria">7. Informes de la Contraloría</h2>
+<p>La entidad reporta {{ contraloria|length }} informes de auditoría o exámenes especiales. Son públicos y suelen detallar responsabilidades.</p>
+<div class="tabla"><table>
+<tr><th>Informe</th><th>Tipo</th><th>Qué se examinó</th><th>Periodo</th><th>Área</th></tr>
+{% for c in contraloria.head(60).itertuples() %}
+<tr><td>{% if c.enlace and c.enlace.startswith("http") %}<a href="{{ c.enlace }}">{{ c.informe }}</a>{% else %}{{ c.informe }}{% endif %}</td><td>{{ c.tipo }}</td><td>{{ c.examen|corto(220) }}</td><td>{{ c.periodo }}</td><td>{{ c.area|corto(80) }}</td></tr>
+{% endfor %}
+</table></div>
+{% endif %}
+
+<h2 id="acciones">8. ¿Qué puede hacer usted?</h2>
+<ol>
+<li><b>Pida información.</b> Genere una solicitud LOTAIP con <code>veeduria solicitud</code>. La entidad tiene un plazo legal para responder; si no lo hace, puede acudir a la Defensoría del Pueblo o presentar una acción de acceso a la información pública.</li>
+<li><b>Revise el proceso.</b> Cada código de este informe enlaza al proceso en los datos abiertos del SERCOP. En el portal de compras públicas están los pliegos, las ofertas y las actas.</li>
+<li><b>Forme una veeduría.</b> El Consejo de Participación Ciudadana y Control Social (CPCCS) registra y acompaña veedurías ciudadanas sobre obras y contratos concretos.</li>
+<li><b>Denuncie con pruebas.</b> La Contraloría General del Estado recibe denuncias ciudadanas sobre el uso de recursos públicos.</li>
+</ol>
+<p class="nota">Base legal detallada en <code>docs/marco-legal.md</code> del proyecto.</p>
+
+<h2 id="metodologia">Metodología y límites</h2>
+<ul class="nota">
+<li>Contratación: descarga masiva OCDS del SERCOP (licencia <a href="https://creativecommons.org/licenses/by/3.0/ec/">CC BY 3.0 Ecuador</a>); datos procesados y resumidos. Un proceso cuenta en el año en que se publicó. El monto es el presupuesto referencial; si falta (catálogo electrónico y subasta inversa), se usa lo adjudicado.</li>
+<li>La descarga OCDS <b>no incluye ínfimas cuantías ni contrataciones de emergencia</b>. Esos gastos no están en este informe.</li>
+<li>La línea base nacional usa todas las entidades del país en el mismo periodo: {{ base_procesos|miles }} procesos.</li>
+<li>Límites de procedimiento según la fecha de publicación de cada proceso:
+<ul>{% for g in regimenes %}<li>{{ g.desde|fecha }} a {{ g.hasta|fecha if g.hasta.year < 2090 else "hoy" }}, {{ g.nombre }}: bienes y servicios {% for n, v in g.bienes_servicios %}{{ n }} USD {{ v|miles }}{{ "; " if not loop.last }}{% endfor %}; obras {% for n, v in g.obras %}{{ n }} USD {{ v|miles }}{{ "; " if not loop.last }}{% endfor %}.</li>{% endfor %}
+<li>Entre el 26/06/2025 y el 27/10/2025 (transición de la reforma de la LOSNCP) no hay un límite verificado y no se aplican las reglas de límite.</li></ul></li>
+<li>Transparencia: servicios públicos del Portal Nacional de Transparencia de la Defensoría del Pueblo.</li>
+</ul>
+
+<footer class="pie">Generado con <b>{{ marca.nombre }}</b> (veeduria-ec), herramienta libre (licencia MIT). Los datos son de las fuentes oficiales citadas; los errores de origen se reportan tal cual. Entidades incluidas: {% for x in e.rucs %}{{ x.nombre }} ({{ x.ruc }}){{ "; " if not loop.last }}{% endfor %}.</footer>
+</main></body></html>

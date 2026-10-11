@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Ojo al Gasto</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z' fill='white' stroke='%231c5cab' stroke-width='2.2'/%3E%3Ccircle cx='12' cy='12' r='4.3' fill='%23eb6834'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#1c5cab">
+  <style>
+  :root{color-scheme:light dark;--marca:#1c5cab;--linea:#e3e1dc;--text-muted:#6f6e69}
+  body{font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;max-width:760px;margin:0 auto;padding:1rem 1.1rem 4rem;color:#0b0b0b;background:#fff}
+  @media (prefers-color-scheme:dark){:root{--marca:#6da7ec;--linea:#383835;--text-muted:#9e9d95}body{color:#fff;background:#121211}a{color:#86b6ef}th{background:#242422!important}td,th{border-color:#383835!important}pre,code{background:#242422!important}blockquote{background:#1a1a19!important}}
+
+    .marca { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap;
+             padding: .7rem 0 .9rem; border-bottom: 1px solid var(--linea, #e3e1dc); margin-bottom: 1.4rem; }
+    .marca-enlace { display: inline-flex; align-items: center; gap: .45rem; text-decoration: none; color: inherit; white-space: nowrap; }
+    .marca-logo { width: 34px; height: 34px; flex: none; }
+    .marca-nombre { font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
+    .marca-lema { color: var(--text-muted, #6f6e69); font-size: .82rem; }
+
+  @media (max-width:520px){.marca-lema{display:none}}
+  a{color:#1c5cab} h1{line-height:1.15} h2{margin-top:2.4rem}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow-x:auto} th,td{border-bottom:1px solid #e3e1dc;padding:.4rem .5rem;text-align:left;vertical-align:top} th{background:#f3f2ef}
+  pre{background:#f3f2ef;padding:.8rem 1rem;border-radius:8px;overflow-x:auto} code{background:#f3f2ef;padding:.1rem .3rem;border-radius:4px;font-size:.88em}
+  blockquote{margin:1rem 0;padding:.7rem 1rem;background:#f6f7f9;border-radius:8px}
+  header#title-block-header{display:none}
+  footer.pie{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--linea);color:var(--text-muted);font-size:.85rem}
+  </style>
+</head>
+<body>
+<header class="marca">
+  <a class="marca-enlace" href="../index.html" aria-label="Ojo al Gasto: inicio">
+    <svg class="marca-logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z" fill="none" stroke="var(--marca, #1c5cab)" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="4.3" fill="#eb6834"/>
+      <circle cx="12" cy="12" r="2" fill="none" stroke="#fff" stroke-width="1.2"/>
+    </svg>
+    <span class="marca-nombre">Ojo al Gasto</span>
+  </a>
+  <span class="marca-lema">Control ciudadano de las compras municipales</span>
+</header>
+<main>
+<header id="title-block-header">
+<h1 class="title">Ojo al Gasto</h1>
+</header>
+<h1 id="revisión-de-diseño-visual-y-marca-11-oct-2026">Revisión de diseño visual y marca (11-oct-2026)</h1>
+<p>Método: UI Design Review, 10 dimensiones. Base: capturas en un teléfono de 390 px del índice, la página pública de Quito y el informe técnico.</p>
+<h2 id="puntaje-antes-de-los-cambios-58100">Puntaje antes de los cambios: 58/100</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Dimensión</th>
+<th>Puntaje</th>
+<th>Observación</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Jerarquía visual</td>
+<td>6</td>
+<td>La cifra principal destaca. Las preguntas, que son lo más útil, están al final</td>
+</tr>
+<tr class="even">
+<td>Tipografía</td>
+<td>7</td>
+<td>Legible, 16-17 px, interlineado 1,55. Sin personalidad en los títulos</td>
+</tr>
+<tr class="odd">
+<td>Color</td>
+<td>7</td>
+<td>Paleta validada y modo oscuro. Sin color de marca</td>
+</tr>
+<tr class="even">
+<td>Espaciado</td>
+<td>7</td>
+<td>Aire suficiente</td>
+</tr>
+<tr class="odd">
+<td>Consistencia</td>
+<td>5</td>
+<td>El índice, el informe y las guías usan estilos distintos</td>
+</tr>
+<tr class="even">
+<td>Imágenes y gráficos</td>
+<td>6</td>
+<td>Barras claras. Sin logo ni ícono; el navegador no tiene ícono de pestaña</td>
+</tr>
+<tr class="odd">
+<td>Diseño y grilla</td>
+<td>6</td>
+<td>Una columna correcta en el teléfono. Tablas anchas en el informe</td>
+</tr>
+<tr class="even">
+<td>Componentes</td>
+<td>4</td>
+<td>No hay botones de acción. Los enlaces hacen todo el trabajo</td>
+</tr>
+<tr class="odd">
+<td>Marca y personalidad</td>
+<td>1</td>
+<td>Sin nombre, logo ni identidad. "veeduria-ec" es un nombre técnico</td>
+</tr>
+<tr class="even">
+<td>Estándares actuales</td>
+<td>7</td>
+<td>Limpio y rápido. Sin botón de compartir ni vista previa para WhatsApp</td>
+</tr>
+</tbody>
+</table>
+<h2 id="decisiones-de-marca">Decisiones de marca</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Elemento</th>
+<th>Decisión</th>
+<th>Razón</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nombre</td>
+<td><strong>Ojo al Gasto</strong></td>
+<td>Expresión ecuatoriana. Dice qué hace. No se encontró otro proyecto de transparencia con ese nombre. "Lupa Pública" y "Lupa Ciudadana" ya existen</td>
+</tr>
+<tr class="even">
+<td>Lema</td>
+<td>Control ciudadano de las compras municipales</td>
+<td>Control social (Constitución, art. 95). No se usa "veeduría" porque las veedurías se registran en el CPCCS</td>
+</tr>
+<tr class="odd">
+<td>Logo</td>
+<td>Un ojo con una moneda como pupila</td>
+<td>Se lee en 16 px. Funciona como ícono de pestaña</td>
+</tr>
+<tr class="even">
+<td>Color principal</td>
+<td>Azul <code>#1c5cab</code>; en modo oscuro <code>#6da7ec</code> con texto oscuro</td>
+<td>Confianza institucional. Contraste medido: 6,63:1 con blanco; 7,49:1 sobre fondo oscuro</td>
+</tr>
+<tr class="odd">
+<td>Color de atención</td>
+<td>Naranja <code>#eb6834</code></td>
+<td>Solo en el logo. Nunca en texto ni en bordes decorativos</td>
+</tr>
+<tr class="even">
+<td>Tipografía</td>
+<td>Fuente del sistema; títulos en peso 800</td>
+<td>Rápida, sin descargas, sin rastreo de terceros</td>
+</tr>
+<tr class="odd">
+<td>Tono</td>
+<td>Serio, cercano, sin adjetivos</td>
+<td>Coherente con docs/estilo.md</td>
+</tr>
+</tbody>
+</table>
+<p>El nombre está en un solo lugar (<code>src/veeduria/informe.py</code>, <code>MARCA</code>). Para cambiarlo, edite ese valor.</p>
+<h2 id="segunda-revisión-11-oct-2026">Segunda revisión (11-oct-2026)</h2>
+<p>Las tarjetas con borde de color a la izquierda son un patrón típico de interfaces generadas con IA. Se reemplazaron por tarjetas con un borde fino uniforme y por cajas de fondo gris suave.</p>
+<p>Se probó Pico CSS como base visual. El resultado se vio genérico y poco profesional, y se descartó. El diseño propio se mantiene.</p>
+<h2 id="cambios-aplicados">Cambios aplicados</h2>
+<ol>
+<li>Encabezado de marca común en todas las páginas, con logo e ícono de pestaña.</li>
+<li>Página pública: las preguntas van justo después de la cifra principal.</li>
+<li>Cada pregunta tiene un texto sugerido que se puede copiar, y una guía de 5 pasos para presentarla por el canal oficial. El sitio no envía solicitudes ni pide datos personales.</li>
+<li>Botón "Compartir" y vista previa para WhatsApp (etiquetas Open Graph).</li>
+<li>Índice: cada ciudad es una tarjeta grande, primero.</li>
+<li>Informe técnico: barra de secciones.</li>
+</ol>
+<footer class="pie">Ojo al Gasto · herramienta libre (licencia MIT)</footer>
+</main>
+</body>
+</html>

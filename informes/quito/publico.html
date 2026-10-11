@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿En qué gasta Quito? · Ojo al Gasto</title>
+
+<meta name="description" content="566,7 millones de dólares en 5.677 compras en 2025. Mire en qué gasta Quito y qué preguntar. Datos oficiales.">
+<meta property="og:title" content="¿En qué gasta Quito? · Ojo al Gasto">
+<meta property="og:description" content="566,7 millones de dólares en 5.677 compras en 2025. Mire en qué y qué preguntar. Datos oficiales.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1c5cab">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 24 24&#39;%3E%3Cpath d=&#39;M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z&#39; fill=&#39;white&#39; stroke=&#39;%231c5cab&#39; stroke-width=&#39;2.2&#39;/%3E%3Ccircle cx=&#39;12&#39; cy=&#39;12&#39; r=&#39;4.3&#39; fill=&#39;%23eb6834&#39;/%3E%3C/svg%3E">
+<style>
+  .viz-root {
+    color-scheme: light;
+    --surface-0: #ffffff; --surface-1: #fcfcfb; --surface-2: #f3f2ef; --linea: #e3e1dc;
+    --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #6f6e69;
+    --series-1: #2a78d6; --referencia: #b9b7b0; --enlace: #1c5cab;
+    --marca: #1c5cab; --sobre-marca: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --surface-0: #121211; --surface-1: #1a1a19; --surface-2: #242422; --linea: #383835;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #9e9d95;
+      --series-1: #3987e5; --referencia: #6b6a64; --enlace: #86b6ef;
+      --marca: #6da7ec; --sobre-marca: #0b0b0b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .viz-root { background: var(--surface-0); color: var(--text-primary); font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; min-height: 100vh; }
+  main { max-width: 760px; margin: 0 auto; padding: 1rem 1.1rem 4rem; }
+  a { color: var(--enlace); }
+  h1 { font-size: clamp(2rem, 7vw, 3rem); line-height: 1.1; margin: .3rem 0 .6rem; letter-spacing: -.01em; }
+  h2 { font-size: 1.35rem; margin: 2.8rem 0 .3rem; }
+  section h3 { font-size: 1.15rem; margin: 2rem 0 .3rem; }
+  .sub { color: var(--text-secondary); margin: 0; }
+  .muted { color: var(--text-muted); font-size: .88rem; }
+  
+  .marca { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap;
+           padding: .7rem 0 .9rem; border-bottom: 1px solid var(--linea, #e3e1dc); margin-bottom: 1.4rem; }
+  .marca-enlace { display: inline-flex; align-items: center; gap: .45rem; text-decoration: none; color: inherit; white-space: nowrap; }
+  .marca-logo { width: 34px; height: 34px; flex: none; }
+  .marca-nombre { font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
+  .marca-lema { color: var(--text-muted, #6f6e69); font-size: .82rem; }
+
+  .anios { display: flex; gap: .5rem; margin: 1.6rem 0 .4rem; flex-wrap: wrap; }
+  .anios button { font: inherit; font-size: .95rem; padding: .35rem .9rem; border-radius: 999px; border: 1px solid var(--linea); background: var(--surface-1); color: var(--text-secondary); cursor: pointer; min-height: 40px; }
+  .anios button[aria-pressed="true"] { background: var(--text-primary); color: var(--surface-0); border-color: var(--text-primary); }
+  .heroe { margin: 1.2rem 0 .4rem; }
+  .heroe .valor { font-size: clamp(3rem, 13vw, 4.6rem); font-weight: 650; line-height: 1; letter-spacing: -.02em; }
+  .heroe .valor small { font-size: .42em; font-weight: 600; letter-spacing: 0; }
+  .heroe p { margin: .5rem 0 0; color: var(--text-secondary); font-size: 1.05rem; }
+  .boton { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 44px; padding: .55rem 1.1rem;
+           border-radius: 10px; border: 2px solid var(--marca); background: var(--marca); color: var(--sobre-marca); font: inherit; font-weight: 650;
+           text-decoration: none; cursor: pointer; }
+  .boton.secundario { background: transparent; color: var(--marca); }
+  .boton:focus-visible { outline: 3px solid #eb6834; outline-offset: 2px; }
+  .acciones { display: flex; gap: .6rem; flex-wrap: wrap; margin: 1.2rem 0; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .7rem; margin: 1.4rem 0; }
+  .tile { background: var(--surface-1); border: 1px solid var(--linea); border-radius: 12px; padding: .85rem 1rem; }
+  .tile .etiqueta { color: var(--text-secondary); font-size: .9rem; }
+  .tile .numero { font-size: 1.7rem; font-weight: 650; margin-top: .15rem; }
+  .barras { list-style: none; margin: 1rem 0 .4rem; padding: 0; }
+  .barras li { margin: 0 0 1.05rem; }
+  .barras .texto { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+  .barras .nombre { font-weight: 560; }
+  .barras .detalle { color: var(--text-muted); font-size: .85rem; }
+  .pista { display: flex; align-items: center; gap: .55rem; margin-top: .3rem; }
+  .barra { height: 14px; border-radius: 0 4px 4px 0; background: var(--series-1); min-width: 2px; }
+  .barra.ref { background: var(--referencia); }
+  .pista .cifra { font-size: .92rem; color: var(--text-primary); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .leyenda { display: flex; gap: 1.2rem; font-size: .88rem; color: var(--text-secondary); margin: .6rem 0 .2rem; }
+  .leyenda i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: .35rem; vertical-align: -1px; }
+  details.tabla { margin: .2rem 0 0; font-size: .9rem; }
+  details.tabla summary { cursor: pointer; color: var(--text-secondary); }
+  table { border-collapse: collapse; width: 100%; margin: .5rem 0; font-size: .9rem; }
+  th, td { text-align: left; padding: .35rem .4rem; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pregunta { background: var(--surface-1); border: 1px solid var(--linea); border-radius: 12px; padding: 1rem 1.1rem; margin: .9rem 0; }
+  .pregunta .tema { font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+  .pregunta h3 { margin: .3rem 0 .4rem; font-size: 1.08rem; }
+  .pregunta p { margin: 0; color: var(--text-secondary); }
+  .pregunta ul { margin: .5rem 0 0; padding-left: 1.1rem; font-size: .9rem; color: var(--text-secondary); }
+  .sugerido { margin-top: .7rem; border-top: 1px solid var(--linea); padding-top: .5rem; }
+  .sugerido summary { cursor: pointer; font-weight: 600; color: var(--enlace); min-height: 40px; display: flex; align-items: center; }
+  .sugerido blockquote { margin: .3rem 0 .7rem; padding: .7rem .9rem; background: var(--surface-0); border: 1px solid var(--linea); border-radius: 8px; font-size: .92rem; }
+  .pasos { counter-reset: paso; list-style: none; padding: 0; margin: .8rem 0; }
+  .pasos li { counter-increment: paso; position: relative; padding-left: 2.6rem; margin: 0 0 1rem; }
+  .pasos li::before { content: counter(paso); position: absolute; left: 0; top: .05rem; width: 1.8rem; height: 1.8rem; border-radius: 50%;
+                      background: var(--marca); color: var(--sobre-marca); font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: .95rem; }
+  .aviso { background: var(--surface-2); border-radius: 10px; padding: .9rem 1.1rem; margin: 1.6rem 0; font-size: .95rem; color: var(--text-secondary); }
+  .aviso b { color: var(--text-primary); }
+  pre { background: var(--surface-2); padding: .8rem 1rem; border-radius: 8px; overflow-x: auto; font-size: .85rem; }
+  footer.pie { margin-top: 3.5rem; padding-top: 1rem; border-top: 1px solid var(--linea); color: var(--text-muted); font-size: .85rem; }
+  #tip { position: fixed; pointer-events: none; background: var(--text-primary); color: var(--surface-0); font-size: .85rem; padding: .4rem .6rem; border-radius: 6px; max-width: 280px; opacity: 0; transition: opacity .1s; z-index: 10; }
+  [data-anio-panel][hidden] { display: none; }
+  @media (max-width: 520px) { .marca-lema { display: none; } }
+  @media print { .anios, .acciones { display: none; } [data-anio-panel][hidden] { display: block; } }
+</style>
+</head>
+<body>
+<div class="viz-root">
+<main>
+
+<header class="marca">
+  <a class="marca-enlace" href="../index.html" aria-label="Ojo al Gasto: inicio">
+    <svg class="marca-logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z" fill="none" stroke="var(--marca, #1c5cab)" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="4.3" fill="#eb6834"/>
+      <circle cx="12" cy="12" r="2" fill="none" stroke="#fff" stroke-width="1.2"/>
+    </svg>
+    <span class="marca-nombre">Ojo al Gasto</span>
+  </a>
+  <span class="marca-lema">Control ciudadano de las compras municipales</span>
+</header>
+<p class="sub">Compras públicas · Municipio del Distrito Metropolitano de Quito</p>
+<h1>¿En qué gasta Quito?</h1>
+<p class="sub">Compras del municipio y de sus 17 empresas y entidades. Datos oficiales al 9 de octubre de 2026.</p>
+
+<div class="anios" role="group" aria-label="Año">
+<button type="button" data-anio="2025" aria-pressed="true">2025</button><button type="button" data-anio="2026" aria-pressed="false">2026 (en curso)</button>
+</div>
+
+
+<section data-anio-panel="2025" >
+  <div class="heroe">
+    <div class="valor">566,7<small> millones de dólares</small></div>
+    <p>en <b>5.677 compras y contratos</b> que el municipio y sus empresas publicaron en 2025.</p>
+  </div>
+</section>
+
+<section data-anio-panel="2026" hidden>
+  <div class="heroe">
+    <div class="valor">340,7<small> millones de dólares</small></div>
+    <p>en <b>2.549 compras y contratos</b> que el municipio y sus empresas publicaron en 2026, hasta el 9 de octubre de 2026.</p>
+  </div>
+</section>
+
+
+<div class="acciones">
+  <button type="button" class="boton secundario" id="compartir">Compartir</button>
+  <a class="boton secundario" href="#detalle">Ver en qué se gastó</a>
+</div>
+
+<h2 id="preguntar">Lo que puede preguntar</h2>
+<p class="muted">Estas preguntas son para la entidad. No son acusaciones. Cualquier persona puede presentarlas. Los pasos están al final de esta sección.</p>
+
+<div class="pregunta">
+  <div class="tema">Pregunta abierta · Contratación</div>
+  <h3>EPMMOP - Movilidad y Obras Públicas: ¿por qué se contrataron por separado 2 procesos parecidos con el mismo proveedor?</h3>
+  <p>Suman USD 650.000 en pocas semanas; cada uno quedó bajo el límite de cotización de bienes y servicios. Juntos habrían requerido un procedimiento más exigente. Puede haber una explicación válida.</p>
+  <ul><li><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTS-EPMMOP-2025-003-741823">COTS-EPMMOP-2025-003</a>: Contratación del servicio de mantenimiento predictivo, preventivo o correctivo… (USD 350.000)</li><li><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTS-EPMMOP-2025-006-741823">COTS-EPMMOP-2025-006</a>: Contratación del servicio de mantenimiento preventivo o correctivo de… (USD 300.000)</li></ul>
+  <details class="sugerido">
+    <summary>Ver el texto sugerido para preguntar</summary>
+    <blockquote id="pedido-1">Copia de los informes de necesidad, estudios de mercado, pliegos, contratos y actas de entrega-recepción de los procesos COTS-EPMMOP-2025-003, COTS-EPMMOP-2025-006, y la justificación técnica y legal para contratarlos por separado y no en un solo procedimiento.</blockquote>
+    <button type="button" class="boton secundario" data-copiar="pedido-1">Copiar el texto</button>
+  </details>
+</div>
+
+<div class="pregunta">
+  <div class="tema">Pregunta abierta · Contratación</div>
+  <h3>GAD del Distrito Metropolitano de Quito: ¿por qué se contrataron por separado 2 procesos parecidos con el mismo proveedor?</h3>
+  <p>Suman USD 108.907 en pocas semanas; cada uno quedó bajo el límite de comisión técnica obligatoria. Juntos superan el monto desde el que el Reglamento exige comisión técnica. Puede haber una explicación válida.</p>
+  <ul><li><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-MDMQ-2026-105-41357">LICS-MDMQ-2026-105</a>: Servicio de mantenimiento preventivo y correctivo incluye repuestos de bombas… (USD 71.312)</li><li><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-MDMQ-2026-106-41357">LICS-MDMQ-2026-106</a>: Servicio de mantenimiento preventivo y correctivo incluye repuestos para los… (USD 37.596)</li></ul>
+  <details class="sugerido">
+    <summary>Ver el texto sugerido para preguntar</summary>
+    <blockquote id="pedido-2">Copia de los informes de necesidad, estudios de mercado, pliegos, contratos y actas de entrega-recepción de los procesos LICS-MDMQ-2026-105, LICS-MDMQ-2026-106, y la justificación técnica y legal para contratarlos por separado y no en un solo procedimiento.</blockquote>
+    <button type="button" class="boton secundario" data-copiar="pedido-2">Copiar el texto</button>
+  </details>
+</div>
+
+<div class="pregunta">
+  <div class="tema">Pregunta abierta · Contratación</div>
+  <h3>GAD del Distrito Metropolitano de Quito: ¿por qué se contrataron por separado 2 procesos parecidos con el mismo proveedor?</h3>
+  <p>Suman USD 137.188 en pocas semanas; cada uno quedó bajo el límite de comisión técnica obligatoria. Juntos superan el monto desde el que el Reglamento exige comisión técnica. Puede haber una explicación válida.</p>
+  <ul><li><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-MDMQ-2026-4908-41357">SIE-MDMQ-2026-4908</a>: Adquisición de implementos deportivos para el fortalecimiento de los espacios… (USD 69.024)</li><li><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-MDMQ-2026-4911-41357">SIE-MDMQ-2026-4911</a>: Adquisición de maquinaria deportiva para el centro deportivo Metropolitano… (USD 68.164)</li></ul>
+  <details class="sugerido">
+    <summary>Ver el texto sugerido para preguntar</summary>
+    <blockquote id="pedido-3">Copia de los informes de necesidad, estudios de mercado, pliegos, contratos y actas de entrega-recepción de los procesos SIE-MDMQ-2026-4908, SIE-MDMQ-2026-4911, y la justificación técnica y legal para contratarlos por separado y no en un solo procedimiento.</blockquote>
+    <button type="button" class="boton secundario" data-copiar="pedido-3">Copiar el texto</button>
+  </details>
+</div>
+
+<div class="pregunta">
+  <div class="tema">Pregunta abierta · Presupuesto</div>
+  <h3>¿Qué pasa con la obra pública?</h3>
+  <p>A agosto de 2026 se había ejecutado el 13,9 % del presupuesto de obras públicas (USD 11.783.785 de USD 84.931.372). Un ritmo parejo daría cerca del 67 %.</p>
+  
+  <details class="sugerido">
+    <summary>Ver el texto sugerido para preguntar</summary>
+    <blockquote id="pedido-4">Listado de las obras financiadas con el grupo de gasto 75 (obras públicas) en 2026, con el monto codificado, el monto devengado, el porcentaje de avance físico y la fecha prevista de terminación de cada una, y las causas de los retrasos.</blockquote>
+    <button type="button" class="boton secundario" data-copiar="pedido-4">Copiar el texto</button>
+  </details>
+</div>
+
+<div class="pregunta">
+  <div class="tema">Pregunta abierta · Transparencia</div>
+  <h3>¿Por qué quedaron solicitudes de información sin respuesta?</h3>
+  <p>Según el Portal Nacional de Transparencia, en 2025 constan 102 de 317 solicitudes de acceso a la información sin respuesta. Para la ley, no responder es negar la información.</p>
+  
+  <details class="sugerido">
+    <summary>Ver el texto sugerido para preguntar</summary>
+    <blockquote id="pedido-5">Listado de las solicitudes de acceso a la información pública recibidas en 2025 que no fueron respondidas, con su fecha de ingreso, el tema solicitado y el motivo de la falta de respuesta.</blockquote>
+    <button type="button" class="boton secundario" data-copiar="pedido-5">Copiar el texto</button>
+  </details>
+</div>
+
+<div class="pregunta">
+  <div class="tema">Pregunta abierta · Datos abiertos</div>
+  <h3>¿Por qué no se puede saber a quién se contrató?</h3>
+  <p>En los archivos de transparencia de la entidad, 790 números de RUC de contratistas están dañados (una hoja de cálculo los convirtió a notación científica). La ley exige datos abiertos reutilizables.</p>
+  
+  <details class="sugerido">
+    <summary>Ver el texto sugerido para preguntar</summary>
+    <blockquote id="pedido-6">El conjunto de datos del numeral 8 del artículo 19 de la LOTAIP (procesos de contratación) del último mes publicado, con el RUC completo de cada contratista en formato de texto, en un archivo CSV.</blockquote>
+    <button type="button" class="boton secundario" data-copiar="pedido-6">Copiar el texto</button>
+  </details>
+</div>
+
+
+<h3 id="como-preguntar" style="font-size:1.2rem;margin-top:2rem">Cómo presentar su pregunta</h3>
+<ol class="pasos">
+  <li>Escriba una carta a la máxima autoridad de la entidad. Incluya su nombre, su cédula, un correo para la respuesta y la información que pide. Puede usar el texto sugerido.</li>
+  <li>Preséntela en la ventanilla de la entidad o en línea en el <a href="https://transparencia.dpe.gob.ec" target="_blank" rel="noopener">Portal Nacional de Transparencia</a>. No necesita explicar para qué la quiere (LOTAIP, art. 31).</li>
+  <li>Guarde el comprobante de recepción. Desde esa fecha corre el plazo.</li>
+  <li>La entidad debe responder en 10 días, o en 15 si le avisa una prórroga (LOTAIP, art. 34).</li>
+  <li>Si no responde, pida ayuda a la Defensoría del Pueblo dentro de 30 días, o presente una acción de acceso a la información ante un juez (Constitución, art. 91).</li>
+</ol>
+
+<h2 id="detalle">En qué se gastó</h2>
+
+<section data-anio-panel="2025" >
+  <p class="muted">Año 2025. Cambie el año arriba.</p>
+
+  <h3>Las 5 compras más grandes</h3>
+  <p class="muted">Presupuesto de cada proceso. Toque el código para ver la ficha oficial.</p>
+  
+  <ul class="barras">
+  
+    <li>
+      <div class="nombre">Servicio de mantenimiento preventivo y correctivo del material rodante de la primera línea del Metro de Quito</div>
+      <div class="detalle">EP Metro de Quito · bienes y servicios únicos · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-PU-EPMMQ-2025-001-410205">RE-PU-EPMMQ-2025-001</a></div>
+      <div class="pista"><div class="barra" style="width:82.0%" data-tip="Servicio de mantenimiento preventivo y correctivo del material rodante de la primera línea del Metro de Quito: USD 35.650.000"></div><span class="cifra">35,6 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Rehabilitación vial de calzadas exteriores: Av. Galo Plaza Lasso (tramo: intercambiador el Labrador -…</div>
+      <div class="detalle">EPMMOP - Movilidad y Obras Públicas · licitación · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-EPMMOP-2025-003-741823">LICO-EPMMOP-2025-003</a></div>
+      <div class="pista"><div class="barra" style="width:34.4%" data-tip="Rehabilitación vial de calzadas exteriores: Av. Galo Plaza Lasso (tramo: intercambiador el Labrador -…: USD 14.947.660"></div><span class="cifra">14,9 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Servicio de operación de los centros de revisión técnica vehicular para el Distrito Metropolitano de Quito…</div>
+      <div class="detalle">GAD del Distrito Metropolitano de Quito · subasta inversa electrónica · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-MDMQ-2025-1409-41357">SIE-MDMQ-2025-1409</a></div>
+      <div class="pista"><div class="barra" style="width:29.5%" data-tip="Servicio de operación de los centros de revisión técnica vehicular para el Distrito Metropolitano de Quito…: USD 12.840.064"></div><span class="cifra">12,8 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Consultoría para los estudios definitivos de la extensión a la ofelia de la primera línea del Metro de…</div>
+      <div class="detalle">EP Metro de Quito · concurso publico · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-CPC-EPMMQ-2025-001-410205">CPC-EPMMQ-2025-001</a></div>
+      <div class="pista"><div class="barra" style="width:27.4%" data-tip="Consultoría para los estudios definitivos de la extensión a la ofelia de la primera línea del Metro de…: USD 11.900.000"></div><span class="cifra">11,9 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Rehabilitación de la Av. Panamericana Norte desde el intercambiador de Carcelén hasta el inicio de la…</div>
+      <div class="detalle">EPMMOP - Movilidad y Obras Públicas · licitación · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-EPMMOP-2025-017-741823">LICO-EPMMOP-2025-017</a></div>
+      <div class="pista"><div class="barra" style="width:22.4%" data-tip="Rehabilitación de la Av. Panamericana Norte desde el intercambiador de Carcelén hasta el inicio de la…: USD 9.758.992"></div><span class="cifra">9,76 M</span></div>
+    </li>
+  
+  </ul>
+
+  <h3>¿En qué se va el dinero?</h3>
+  <p class="muted">El catálogo electrónico es la tienda del Estado: suministros, limpieza, seguridad y otros.</p>
+  
+  <ul class="barras">
+  
+    <li>
+      <div class="texto"><span class="nombre">Obras</span><span class="detalle">41 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:82.0%" data-tip="Obras: USD 234.167.129 (41,3 %)"></div><span class="cifra">234,2 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Servicios</span><span class="detalle">30 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:58.8%" data-tip="Servicios: USD 168.042.082 (29,7 %)"></div><span class="cifra">168,0 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Compras por catálogo electrónico</span><span class="detalle">15 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:28.8%" data-tip="Compras por catálogo electrónico: USD 82.319.381 (14,5 %)"></div><span class="cifra">82,3 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Bienes</span><span class="detalle">15 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:28.8%" data-tip="Bienes: USD 82.188.929 (14,5 %)"></div><span class="cifra">82,2 M</span></div>
+    </li>
+  
+  </ul>
+
+  <h3>¿Quién compra?</h3>
+  
+  <ul class="barras">
+  
+    <li>
+      <div class="texto"><span class="nombre">GAD del Distrito Metropolitano de Quito</span><span class="detalle">25 %</span></div>
+      <div class="pista"><div class="barra" style="width:82.0%" data-tip="GAD del Distrito Metropolitano de Quito: USD 142.573.802"></div><span class="cifra">142,6 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">EPMMOP - Movilidad y Obras Públicas</span><span class="detalle">25 %</span></div>
+      <div class="pista"><div class="barra" style="width:81.6%" data-tip="EPMMOP - Movilidad y Obras Públicas: USD 141.877.160"></div><span class="cifra">141,9 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">EPMAPS - Agua Potable y Saneamiento</span><span class="detalle">17 %</span></div>
+      <div class="pista"><div class="barra" style="width:55.8%" data-tip="EPMAPS - Agua Potable y Saneamiento: USD 97.024.504"></div><span class="cifra">97,0 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">EP Metro de Quito</span><span class="detalle">10 %</span></div>
+      <div class="pista"><div class="barra" style="width:32.5%" data-tip="EP Metro de Quito: USD 56.438.204"></div><span class="cifra">56,4 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">EMGIRS - Gestión Integral de Residuos Sólidos</span><span class="detalle">5 %</span></div>
+      <div class="pista"><div class="barra" style="width:16.8%" data-tip="EMGIRS - Gestión Integral de Residuos Sólidos: USD 29.149.771"></div><span class="cifra">29,1 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">EPMTPQ - Transporte de Pasajeros</span><span class="detalle">4 %</span></div>
+      <div class="pista"><div class="barra" style="width:14.0%" data-tip="EPMTPQ - Transporte de Pasajeros: USD 24.331.037"></div><span class="cifra">24,3 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Otras entidades</span><span class="detalle">13 %</span></div>
+      <div class="pista"><div class="barra" style="width:43.3%" data-tip="Otras entidades: USD 75.323.042"></div><span class="cifra">75,3 M</span></div>
+    </li>
+  
+  </ul>
+  <details class="tabla"><summary>Ver estos datos en tabla</summary>
+  <table>
+    <tr><th>Categoría o entidad</th><th class="n">USD</th><th class="n">%</th></tr>
+    <tr><td>Obras</td><td class="n">234.167.129</td><td class="n">41,3 %</td></tr><tr><td>Servicios</td><td class="n">168.042.082</td><td class="n">29,7 %</td></tr><tr><td>Compras por catálogo electrónico</td><td class="n">82.319.381</td><td class="n">14,5 %</td></tr><tr><td>Bienes</td><td class="n">82.188.929</td><td class="n">14,5 %</td></tr><tr><td>GAD del Distrito Metropolitano de Quito</td><td class="n">142.573.802</td><td class="n">25,2 %</td></tr><tr><td>EPMMOP - Movilidad y Obras Públicas</td><td class="n">141.877.160</td><td class="n">25,0 %</td></tr><tr><td>EPMAPS - Agua Potable y Saneamiento</td><td class="n">97.024.504</td><td class="n">17,1 %</td></tr><tr><td>EP Metro de Quito</td><td class="n">56.438.204</td><td class="n">10,0 %</td></tr><tr><td>EMGIRS - Gestión Integral de Residuos Sólidos</td><td class="n">29.149.771</td><td class="n">5,1 %</td></tr><tr><td>EPMTPQ - Transporte de Pasajeros</td><td class="n">24.331.037</td><td class="n">4,3 %</td></tr><tr><td>Otras entidades</td><td class="n">75.323.042</td><td class="n">13,3 %</td></tr>
+  </table>
+  </details>
+
+  <div class="tiles">
+    <div class="tile"><div class="etiqueta">Contratado sin concurso de ofertas</div><div class="numero">15,6 %</div><div class="muted">88,4 M en contratación directa o régimen especial</div></div>
+  </div>
+</section>
+
+<section data-anio-panel="2026" hidden>
+  <p class="muted">Año 2026. Cambie el año arriba.</p>
+
+  <h3>Las 5 compras más grandes</h3>
+  <p class="muted">Presupuesto de cada proceso. Toque el código para ver la ficha oficial.</p>
+  
+  <ul class="barras">
+  
+    <li>
+      <div class="nombre">Construcción, rehabilitación y obras complementarias de la Av. Escalón 1 - tramo 1</div>
+      <div class="detalle">EPMMOP - Movilidad y Obras Públicas · licitación · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-EPMMOP-2026-001-741823">LICO-EPMMOP-2026-001</a></div>
+      <div class="pista"><div class="barra" style="width:82.0%" data-tip="Construcción, rehabilitación y obras complementarias de la Av. Escalón 1 - tramo 1: USD 27.774.396"></div><span class="cifra">27,8 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Servicio de tratamiento de lixiviados del relleno sanitario de Quito</div>
+      <div class="detalle">EMGIRS - Gestión Integral de Residuos Sólidos · licitación · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICS-EMGIRS-2026-007-325307">LICS-EMGIRS-2026-007</a></div>
+      <div class="pista"><div class="barra" style="width:24.9%" data-tip="Servicio de tratamiento de lixiviados del relleno sanitario de Quito: USD 8.419.425"></div><span class="cifra">8,42 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Construcción, rehabilitación y mantenimiento vial estación labrador</div>
+      <div class="detalle">EPMMOP - Movilidad y Obras Públicas · licitación · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-EPMMOP-2026-004-741823">LICO-EPMMOP-2026-004</a></div>
+      <div class="pista"><div class="barra" style="width:23.7%" data-tip="Construcción, rehabilitación y mantenimiento vial estación labrador: USD 8.012.901"></div><span class="cifra">8,01 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Orden de compra para adquirir los siguientes productos: punto de servicio institucional de 24 horas de lunes…</div>
+      <div class="detalle">EPMTPQ - Transporte de Pasajeros · catálogo electrónico - gran compra mejor oferta · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-CE-20260003086490-282215">CE-20260003086490</a></div>
+      <div class="pista"><div class="barra" style="width:23.1%" data-tip="Orden de compra para adquirir los siguientes productos: punto de servicio institucional de 24 horas de lunes…: USD 7.812.917"></div><span class="cifra">7,81 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Construcción de la zona 1 del cubeto NO.1 en el predio del complejo ambiental</div>
+      <div class="detalle">EMGIRS - Gestión Integral de Residuos Sólidos · contratos entre entidades públicas o sus subsidiarias · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-RE-CEP-EMGIRS-2026-003-325307">RE-CEP-EMGIRS-2026-003</a></div>
+      <div class="pista"><div class="barra" style="width:22.1%" data-tip="Construcción de la zona 1 del cubeto NO.1 en el predio del complejo ambiental: USD 7.471.922"></div><span class="cifra">7,47 M</span></div>
+    </li>
+  
+  </ul>
+
+  <h3>¿En qué se va el dinero?</h3>
+  <p class="muted">El catálogo electrónico es la tienda del Estado: suministros, limpieza, seguridad y otros.</p>
+  
+  <ul class="barras">
+  
+    <li>
+      <div class="texto"><span class="nombre">Obras</span><span class="detalle">40 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:82.0%" data-tip="Obras: USD 136.982.478 (40,2 %)"></div><span class="cifra">137,0 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Servicios</span><span class="detalle">24 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:49.0%" data-tip="Servicios: USD 81.805.926 (24,0 %)"></div><span class="cifra">81,8 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Compras por catálogo electrónico</span><span class="detalle">23 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:46.8%" data-tip="Compras por catálogo electrónico: USD 78.135.095 (22,9 %)"></div><span class="cifra">78,1 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Bienes</span><span class="detalle">13 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:26.2%" data-tip="Bienes: USD 43.797.044 (12,9 %)"></div><span class="cifra">43,8 M</span></div>
+    </li>
+  
+  </ul>
+
+  <h3>¿Quién compra?</h3>
+  
+  <ul class="barras">
+  
+    <li>
+      <div class="texto"><span class="nombre">EPMMOP - Movilidad y Obras Públicas</span><span class="detalle">35 %</span></div>
+      <div class="pista"><div class="barra" style="width:82.0%" data-tip="EPMMOP - Movilidad y Obras Públicas: USD 119.373.010"></div><span class="cifra">119,4 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">GAD del Distrito Metropolitano de Quito</span><span class="detalle">27 %</span></div>
+      <div class="pista"><div class="barra" style="width:63.9%" data-tip="GAD del Distrito Metropolitano de Quito: USD 92.993.609"></div><span class="cifra">93,0 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">EMGIRS - Gestión Integral de Residuos Sólidos</span><span class="detalle">11 %</span></div>
+      <div class="pista"><div class="barra" style="width:25.5%" data-tip="EMGIRS - Gestión Integral de Residuos Sólidos: USD 37.092.399"></div><span class="cifra">37,1 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">EPMAPS - Agua Potable y Saneamiento</span><span class="detalle">7 %</span></div>
+      <div class="pista"><div class="barra" style="width:16.1%" data-tip="EPMAPS - Agua Potable y Saneamiento: USD 23.509.130"></div><span class="cifra">23,5 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">EPMTPQ - Transporte de Pasajeros</span><span class="detalle">6 %</span></div>
+      <div class="pista"><div class="barra" style="width:14.7%" data-tip="EPMTPQ - Transporte de Pasajeros: USD 21.338.940"></div><span class="cifra">21,3 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Cuerpo de Bomberos del DMQ</span><span class="detalle">6 %</span></div>
+      <div class="pista"><div class="barra" style="width:14.2%" data-tip="Cuerpo de Bomberos del DMQ: USD 20.704.519"></div><span class="cifra">20,7 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Otras entidades</span><span class="detalle">8 %</span></div>
+      <div class="pista"><div class="barra" style="width:17.7%" data-tip="Otras entidades: USD 25.708.936"></div><span class="cifra">25,7 M</span></div>
+    </li>
+  
+  </ul>
+  <details class="tabla"><summary>Ver estos datos en tabla</summary>
+  <table>
+    <tr><th>Categoría o entidad</th><th class="n">USD</th><th class="n">%</th></tr>
+    <tr><td>Obras</td><td class="n">136.982.478</td><td class="n">40,2 %</td></tr><tr><td>Servicios</td><td class="n">81.805.926</td><td class="n">24,0 %</td></tr><tr><td>Compras por catálogo electrónico</td><td class="n">78.135.095</td><td class="n">22,9 %</td></tr><tr><td>Bienes</td><td class="n">43.797.044</td><td class="n">12,9 %</td></tr><tr><td>EPMMOP - Movilidad y Obras Públicas</td><td class="n">119.373.010</td><td class="n">35,0 %</td></tr><tr><td>GAD del Distrito Metropolitano de Quito</td><td class="n">92.993.609</td><td class="n">27,3 %</td></tr><tr><td>EMGIRS - Gestión Integral de Residuos Sólidos</td><td class="n">37.092.399</td><td class="n">10,9 %</td></tr><tr><td>EPMAPS - Agua Potable y Saneamiento</td><td class="n">23.509.130</td><td class="n">6,9 %</td></tr><tr><td>EPMTPQ - Transporte de Pasajeros</td><td class="n">21.338.940</td><td class="n">6,3 %</td></tr><tr><td>Cuerpo de Bomberos del DMQ</td><td class="n">20.704.519</td><td class="n">6,1 %</td></tr><tr><td>Otras entidades</td><td class="n">25.708.936</td><td class="n">7,5 %</td></tr>
+  </table>
+  </details>
+
+  <div class="tiles">
+    <div class="tile"><div class="etiqueta">Contratado sin concurso de ofertas</div><div class="numero">10,1 %</div><div class="muted">34,3 M en contratación directa o régimen especial</div></div>
+  </div>
+</section>
+
+
+
+<h2>¿Compiten los proveedores?</h2>
+<p class="muted">Procesos con <b>un solo</b> oferente, 2025 y 2026. Menos es mejor: más ofertas dan mejores precios.</p>
+<div class="leyenda"><span><i style="background:var(--series-1)"></i>Quito</span><span><i style="background:var(--referencia)"></i>Todo el país</span></div>
+
+<ul class="barras">
+
+  <li>
+    <div class="nombre">Subasta Inversa Electrónica <span class="detalle">(1.050 procesos)</span></div>
+    <div class="pista"><div class="barra" style="width:21.4%" data-tip="Quito: 9,0 % con un solo oferente"></div><span class="cifra">9 %</span></div>
+    <div class="pista"><div class="barra ref" style="width:40.1%" data-tip="Todo el país: 17,0 %"></div><span class="cifra">17 %</span></div>
+  </li>
+
+  <li>
+    <div class="nombre">Licitación <span class="detalle">(492 procesos)</span></div>
+    <div class="pista"><div class="barra" style="width:23.5%" data-tip="Quito: 10,0 % con un solo oferente"></div><span class="cifra">10 %</span></div>
+    <div class="pista"><div class="barra ref" style="width:51.0%" data-tip="Todo el país: 21,6 %"></div><span class="cifra">22 %</span></div>
+  </li>
+
+  <li>
+    <div class="nombre">Cotización <span class="detalle">(151 procesos)</span></div>
+    <div class="pista"><div class="barra" style="width:20.3%" data-tip="Quito: 8,6 % con un solo oferente"></div><span class="cifra">9 %</span></div>
+    <div class="pista"><div class="barra ref" style="width:54.1%" data-tip="Todo el país: 22,9 %"></div><span class="cifra">23 %</span></div>
+  </li>
+
+  <li>
+    <div class="nombre">Menor Cuantía <span class="detalle">(125 procesos)</span></div>
+    <div class="pista"><div class="barra" style="width:22.7%" data-tip="Quito: 9,6 % con un solo oferente"></div><span class="cifra">10 %</span></div>
+    <div class="pista"><div class="barra ref" style="width:82.0%" data-tip="Todo el país: 34,7 %"></div><span class="cifra">35 %</span></div>
+  </li>
+
+  <li>
+    <div class="nombre">Concurso público <span class="detalle">(47 procesos)</span></div>
+    <div class="pista"><div class="barra" style="width:25.1%" data-tip="Quito: 10,6 % con un solo oferente"></div><span class="cifra">11 %</span></div>
+    <div class="pista"><div class="barra ref" style="width:62.6%" data-tip="Todo el país: 26,5 %"></div><span class="cifra">27 %</span></div>
+  </li>
+
+</ul>
+<p>En 5 de 5 tipos de procedimiento, Quito tuvo menos procesos con un solo oferente que el promedio del país.</p>
+
+
+<div class="aviso"><b>Esto no acusa a nadie.</b> Resume datos que publica el Estado. Un patrón puede tener una explicación válida. Los documentos de identidad de personas naturales están ocultos.</div>
+
+<h2>Compruébelo usted</h2>
+<p>Fuentes: <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos">datos abiertos del SERCOP</a> y <a href="https://transparencia.dpe.gob.ec">Portal Nacional de Transparencia</a>. La herramienta es libre. Ejecútela y compare las cifras.</p>
+<pre># en una copia del código de veeduria-ec
+pip install .
+veeduria auditar entidades/quito.toml --anios 2025 2026</pre>
+<p class="muted">Datos usados: 22 archivos mensuales del SERCOP, cada uno con todas las compras públicas del país en ese mes (298.368 procesos en total; 8.226 de Quito), y 27 archivos que la entidad publicó en el Portal de Transparencia. Descargados el 11 de octubre de 2026. La huella SHA-256 de cada archivo está en <a href="procedencia.json">procedencia.json</a>: misma huella, mismos datos.</p>
+<p class="muted">Las alertas y el informe técnico muestran a un proveedor persona natural como "Persona natural". <code>procesos.csv</code> incluye los nombres de los proveedores tal como los publica el SERCOP.</p>
+<p>Más detalle: <a href="informe.html">informe técnico</a> · <a href="alertas.csv">alertas.csv</a> · <a href="procesos.csv">procesos.csv</a>. Periodistas: <a href="../guia/periodistas.html">de una alerta a una nota</a>. Su cantón: <a href="../guia/hazlo-tu.html">guía paso a paso</a>.</p>
+
+<footer class="pie">Ojo al Gasto · herramienta libre (licencia MIT) · datos del SERCOP procesados y resumidos, bajo licencia <a href="https://creativecommons.org/licenses/by/3.0/ec/">CC BY 3.0 Ecuador</a> · no es una veeduría registrada en el CPCCS · generado el 11/10/2026 10:03</footer>
+</main>
+<div id="tip" role="tooltip"></div>
+</div>
+<script>
+  document.querySelectorAll(".anios button").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll(".anios button").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    document.querySelectorAll("[data-anio-panel]").forEach(s => s.hidden = s.dataset.anioPanel !== b.dataset.anio);
+  }));
+  const tip = document.getElementById("tip");
+  document.querySelectorAll(".pista").forEach(fila => {
+    const barra = fila.querySelector("[data-tip]");
+    if (!barra) return;
+    fila.addEventListener("pointermove", ev => {
+      tip.textContent = barra.dataset.tip;
+      tip.style.left = Math.min(ev.clientX + 12, innerWidth - 290) + "px";
+      tip.style.top = (ev.clientY + 14) + "px";
+      tip.style.opacity = 1;
+    });
+    fila.addEventListener("pointerleave", () => tip.style.opacity = 0);
+  });
+  document.getElementById("compartir").addEventListener("click", async () => {
+    const datos = { title: document.title, text: document.querySelector('meta[name="description"]').content, url: location.href };
+    if (navigator.share) { try { await navigator.share(datos); } catch (e) {} return; }
+    location.href = "https://wa.me/?text=" + encodeURIComponent(datos.text + " " + datos.url);
+  });
+  document.querySelectorAll("[data-copiar]").forEach(b => b.addEventListener("click", async () => {
+    const texto = document.getElementById(b.dataset.copiar).textContent.trim();
+    try { await navigator.clipboard.writeText(texto); b.textContent = "Copiado ✓"; } catch (_) { b.textContent = "No se pudo copiar"; }
+    setTimeout(() => b.textContent = "Copiar el texto", 2500);
+  }));
+</script>
+</body>
+</html>

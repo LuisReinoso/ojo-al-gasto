@@ -1,0 +1,34 @@
+{{ ciudad }}, {{ fecha }}
+
+{% if autoridad.first_name_authority %}{{ autoridad.first_name_authority }} {{ autoridad.last_name_authority }}
+{{ autoridad.job_authority }}
+{% else %}Máxima autoridad
+{% endif %}{{ autoridad.name or e.nombre }}
+Presente.-
+
+**Asunto: Solicitud de acceso a la información pública**
+
+Yo, {{ nombre }}, con cédula de ciudadanía No. {{ cedula }}, en ejercicio del derecho de acceso a la información pública reconocido en {{ l.base_derecho }}, solicito comedidamente que se me entregue la siguiente información:
+
+{{ pedido }}
+
+Pido que la información se entregue en formato digital y abierto (hojas de cálculo CSV o XLSX para los datos, y PDF para los documentos), según {{ l.base_formato }}. Si alguna parte de la información estuviera clasificada como reservada o confidencial, solicito que se me indique la resolución que lo dispone y que se entregue el resto, conforme al {{ l.base_reserva }}.
+
+{{ l.texto_plazo_solicitud }} Contados desde la presentación de esta solicitud, el plazo vence el **{{ plazos.calendario }}**, o el **{{ plazos.calendario_prorroga }}** si la entidad notifica una prórroga motivada.
+
+Recibiré la respuesta en el correo electrónico {{ correo }}{% if telefono %} y en el teléfono {{ telefono }}{% endif %}.
+
+Atentamente,
+
+
+
+{{ nombre }}
+C.C. {{ cedula }}
+
+---
+
+*Notas para quien presenta la solicitud (no forman parte del oficio):*
+
+- Preséntela por la ventanilla de la entidad o por el Portal Nacional de Transparencia ({{ l.portal }}) y **guarde el número o la fe de recepción**: desde esa fecha corre el plazo.
+- {{ texto_plazos | replace("\n", "\n  ") }}
+- Sea concreto: periodo, dependencia, número de contrato o de proceso. Una pregunta precisa es más difícil de evadir.

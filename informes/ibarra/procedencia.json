@@ -1,0 +1,305 @@
+{
+  "herramienta": "veeduria-ec 0.1.0",
+  "comando": "veeduria auditar entidades/ibarra.toml --anios 2025 2026",
+  "generado": "2026-10-11T10:03:26",
+  "fuentes": {
+    "SERCOP (OCDS, CC BY 3.0 EC)": "https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos",
+    "Portal Nacional de Transparencia (Defensoría del Pueblo)": "https://transparencia.dpe.gob.ec"
+  },
+  "archivos": [
+    {
+      "archivo": "sercop/ocds_2025_01.zip",
+      "descargado": "2026-10-11T08:15:24",
+      "bytes": 346535,
+      "sha256": "a720c6b91517bba64bbc885f6a06afba0a70bf54c4934ccda54b59b571b27f8d"
+    },
+    {
+      "archivo": "sercop/ocds_2025_02.zip",
+      "descargado": "2026-10-11T08:15:28",
+      "bytes": 2610081,
+      "sha256": "46bcc351bd8f044378d471be0a2b26efcd1b699236621627d55adb42c3411b23"
+    },
+    {
+      "archivo": "sercop/ocds_2025_03.zip",
+      "descargado": "2026-10-11T08:15:32",
+      "bytes": 3700271,
+      "sha256": "ab91416ac464cb17a2c02fb653350e1c5547aae4eec5dff8b7866f393f80ddb7"
+    },
+    {
+      "archivo": "sercop/ocds_2025_04.zip",
+      "descargado": "2026-10-11T08:15:35",
+      "bytes": 4764097,
+      "sha256": "3c1192f8d3c623db59a7a111e4652bb1e6db8d819f93232cb8e16b6f5ab16270"
+    },
+    {
+      "archivo": "sercop/ocds_2025_05.zip",
+      "descargado": "2026-10-11T08:15:36",
+      "bytes": 3217391,
+      "sha256": "3d6d9995590d6ddc104e512effb2c8d3d90801a8366f9c398ecb039914e3bc05"
+    },
+    {
+      "archivo": "sercop/ocds_2025_06.zip",
+      "descargado": "2026-10-11T08:15:37",
+      "bytes": 3407103,
+      "sha256": "535bb0f196c2106deda9a77c85facbda25a63e4fc11aa470da84ffa9603779c6"
+    },
+    {
+      "archivo": "sercop/ocds_2025_07.zip",
+      "descargado": "2026-10-11T08:15:39",
+      "bytes": 3861159,
+      "sha256": "7f96c1af69c2d46fb1b6c9977864fa2b75c27b5341f8646f93df8e0fa1c05d9a"
+    },
+    {
+      "archivo": "sercop/ocds_2025_08.zip",
+      "descargado": "2026-10-11T08:15:40",
+      "bytes": 2028407,
+      "sha256": "ca6a2adf0f5ab9602899b5235220d5c4e561e5d5dc2c7d0e0528e3113eb06cdc"
+    },
+    {
+      "archivo": "sercop/ocds_2025_09.zip",
+      "descargado": "2026-10-11T08:15:40",
+      "bytes": 2132539,
+      "sha256": "3bfb77d903829839dbaf539d5600387d3bfd864cb6dd1e9e0b98306f32d91b17"
+    },
+    {
+      "archivo": "sercop/ocds_2025_10.zip",
+      "descargado": "2026-10-11T08:15:41",
+      "bytes": 2521413,
+      "sha256": "bc8330cfe4cc602edd2d597f68c76dcda5d3060462b2aee09bc997ade8c56d07"
+    },
+    {
+      "archivo": "sercop/ocds_2025_11.zip",
+      "descargado": "2026-10-11T08:15:42",
+      "bytes": 2732310,
+      "sha256": "63c3d122ea7a6003f6eb1934234a0717072956f3bdbb81901f21af934e099006"
+    },
+    {
+      "archivo": "sercop/ocds_2025_12.zip",
+      "descargado": "2026-10-11T08:15:43",
+      "bytes": 3112772,
+      "sha256": "207dd40ffa73675164306b76feca8c17729187de25b485171259ef3ef6f4cf91"
+    },
+    {
+      "archivo": "sercop/ocds_2026_01.zip",
+      "descargado": "2026-10-11T08:15:44",
+      "bytes": 580848,
+      "sha256": "3cb2eb11639991ca67d8e37bd33fe3ca909ad965407e8267f762706464267ded"
+    },
+    {
+      "archivo": "sercop/ocds_2026_02.zip",
+      "descargado": "2026-10-11T08:15:44",
+      "bytes": 1975389,
+      "sha256": "066ba861ec642d050ad4119f0d5e550dfda89910855ced6e098d50fad509a886"
+    },
+    {
+      "archivo": "sercop/ocds_2026_03.zip",
+      "descargado": "2026-10-11T08:15:45",
+      "bytes": 2931091,
+      "sha256": "c954f5c943d0a052bd3720603237e9fe9d86bac605464f31c0d15d5ac0665a8d"
+    },
+    {
+      "archivo": "sercop/ocds_2026_04.zip",
+      "descargado": "2026-10-11T08:15:46",
+      "bytes": 2917529,
+      "sha256": "4644e72216bb6ae562da86ac3e1b1d6c67fa1e670e8b7f931c111ad30476aa77"
+    },
+    {
+      "archivo": "sercop/ocds_2026_05.zip",
+      "descargado": "2026-10-11T08:15:48",
+      "bytes": 2026185,
+      "sha256": "a6c3fb657263167c2f0574c59135bdf3084b5dffb329265472b553dedaa55587"
+    },
+    {
+      "archivo": "sercop/ocds_2026_06.zip",
+      "descargado": "2026-10-11T08:15:48",
+      "bytes": 2617560,
+      "sha256": "56a9333ab587f5cb26abaf4ccae461460ebbe94b9e72bb8bfe37b4bd657dba10"
+    },
+    {
+      "archivo": "sercop/ocds_2026_07.zip",
+      "descargado": "2026-10-11T08:15:49",
+      "bytes": 2493215,
+      "sha256": "bb0cc3c6f31d7d68fe3d98733c1a01e2dfb89f3ed1aebc2131a97af37ef5680e"
+    },
+    {
+      "archivo": "sercop/ocds_2026_08.zip",
+      "descargado": "2026-10-11T08:15:50",
+      "bytes": 1693699,
+      "sha256": "3f2502e44705bfe78ba44026496bb60645f6b0af232123dbe0d7d618e8841216"
+    },
+    {
+      "archivo": "sercop/ocds_2026_09.zip",
+      "descargado": "2026-10-11T08:15:50",
+      "bytes": 1012529,
+      "sha256": "4143cd9221f7bd8593f66429943868576d1dce6fc93d396abb1723f021ca8964"
+    },
+    {
+      "archivo": "sercop/ocds_2026_10.zip",
+      "descargado": "2026-10-11T08:15:51",
+      "bytes": 217807,
+      "sha256": "4a9094d80d4e2eb57736fa84854ea194ef69adc63dc716d4937c7a612b80c07b"
+    },
+    {
+      "archivo": "transparencia/895/Numeral_6_2026_08.csv",
+      "descargado": "2026-10-11T08:38:24",
+      "bytes": 83077,
+      "sha256": "7dd8e3d8bbee329e3891cf27a2aaf6e6f770e3929069a47a6fe856ad76cefed9"
+    },
+    {
+      "archivo": "transparencia/895/Numeral_7_2026_08.csv",
+      "descargado": "2026-10-11T08:38:25",
+      "bytes": 26892,
+      "sha256": "a6c1c92e06c1f1c9f3d3b2bc3aed4368724bd5305a6b191a0347a64bd453418f"
+    },
+    {
+      "archivo": "transparencia/895/Numeral_8_2026_08.csv",
+      "descargado": "2026-10-11T08:38:25",
+      "bytes": 24546,
+      "sha256": "78519fadd02b890bf204113f2b5831455e595a3d07952b5d3f577762c6fa5a01"
+    },
+    {
+      "archivo": "transparencia/895/Numeral_9_2026_08.csv",
+      "descargado": "2026-10-11T08:38:25",
+      "bytes": 27323,
+      "sha256": "c49d5c8439fa5179e1fd4c63a30f5b1a24925724dde40de3e544d24da2b4df27"
+    },
+    {
+      "archivo": "transparencia/895/activa_2025_01.json",
+      "descargado": "2026-10-11T08:38:20",
+      "bytes": 48643,
+      "sha256": "a98f999a531c80f1a2808533a8365c8f99b33321e835fb52b18b52e0db2bead8"
+    },
+    {
+      "archivo": "transparencia/895/activa_2025_02.json",
+      "descargado": "2026-10-11T08:38:20",
+      "bytes": 48670,
+      "sha256": "847ebc75e08a6edb29bc2e07930bf2ceb563248457db01e696be06a7b4e2fbe6"
+    },
+    {
+      "archivo": "transparencia/895/activa_2025_03.json",
+      "descargado": "2026-10-11T08:38:20",
+      "bytes": 48670,
+      "sha256": "864630495f4aef676b6494c338b096a4334fa33f9ce88947dce3994ece2d9f32"
+    },
+    {
+      "archivo": "transparencia/895/activa_2025_04.json",
+      "descargado": "2026-10-11T08:38:20",
+      "bytes": 48670,
+      "sha256": "10152c26e335be41ac096591bd241871787a5af69a0417d62302323463de7bc2"
+    },
+    {
+      "archivo": "transparencia/895/activa_2025_05.json",
+      "descargado": "2026-10-11T08:38:21",
+      "bytes": 48751,
+      "sha256": "6b0496bab0f3ac136f630f456723cb238ee8ff12ee0abfa815d6c755a59b0ca7"
+    },
+    {
+      "archivo": "transparencia/895/activa_2025_06.json",
+      "descargado": "2026-10-11T08:38:21",
+      "bytes": 46945,
+      "sha256": "eb31590686b7b7f23b9f764f02b90ab2716b9049cd8975de04f117703ea0ccb6"
+    },
+    {
+      "archivo": "transparencia/895/activa_2025_07.json",
+      "descargado": "2026-10-11T08:38:21",
+      "bytes": 48571,
+      "sha256": "2b73158084810c54ff6bdfd92b01353be1f3565d62829499e2861caf2afc0e4d"
+    },
+    {
+      "archivo": "transparencia/895/activa_2025_08.json",
+      "descargado": "2026-10-11T08:38:21",
+      "bytes": 48751,
+      "sha256": "604fd208193ebe5facaf91703381a31b85261d6238b604bf008c905db0de360a"
+    },
+    {
+      "archivo": "transparencia/895/activa_2025_09.json",
+      "descargado": "2026-10-11T08:38:21",
+      "bytes": 48748,
+      "sha256": "368c1564e2ac6d53d5bfa5f7b2567e729ea3718ec29ac8813b280da22b2996a0"
+    },
+    {
+      "archivo": "transparencia/895/activa_2025_10.json",
+      "descargado": "2026-10-11T08:38:22",
+      "bytes": 48883,
+      "sha256": "1a971740eac6d481de463419bcfacb44d262e56ad68627bc33b55f69ae2150f9"
+    },
+    {
+      "archivo": "transparencia/895/activa_2025_11.json",
+      "descargado": "2026-10-11T08:38:22",
+      "bytes": 48988,
+      "sha256": "4306e96f650ffbb492faa542d5c4aa1380ac830f1c9a1251bc5e83923f1c335b"
+    },
+    {
+      "archivo": "transparencia/895/activa_2025_12.json",
+      "descargado": "2026-10-11T08:38:22",
+      "bytes": 48987,
+      "sha256": "dac28fe0a36bed52f735f9a9ddac58e6165dc22560755c88fa021c206d905eb4"
+    },
+    {
+      "archivo": "transparencia/895/activa_2026_01.json",
+      "descargado": "2026-10-11T08:38:22",
+      "bytes": 48855,
+      "sha256": "4a18d012e3449d410c577944d4a297e736ce06e443266d4e8038e999add62193"
+    },
+    {
+      "archivo": "transparencia/895/activa_2026_02.json",
+      "descargado": "2026-10-11T08:38:22",
+      "bytes": 48855,
+      "sha256": "2fcc49d23b4afc6892e729984a13bdf9ddbfdafdf211109795d95e514f3841c8"
+    },
+    {
+      "archivo": "transparencia/895/activa_2026_03.json",
+      "descargado": "2026-10-11T08:38:23",
+      "bytes": 48855,
+      "sha256": "59262eed960ef612c2a75e55ca556b86b44f8a610a3a8d62a820bd8b7afe9e9d"
+    },
+    {
+      "archivo": "transparencia/895/activa_2026_04.json",
+      "descargado": "2026-10-11T08:38:23",
+      "bytes": 48824,
+      "sha256": "1343300abd152196ff90187cfa0a1ebe3eba634b012942a7d832210cc69a76e5"
+    },
+    {
+      "archivo": "transparencia/895/activa_2026_05.json",
+      "descargado": "2026-10-11T08:38:23",
+      "bytes": 48855,
+      "sha256": "802b5a0e655cc6c1a193c8151bbddb000236aad25135bff11898a6b1fb60ea46"
+    },
+    {
+      "archivo": "transparencia/895/activa_2026_06.json",
+      "descargado": "2026-10-11T08:38:23",
+      "bytes": 48824,
+      "sha256": "9ec60225dd3e38a561b2a98c03f58b943ee1257d3d39d38602f730a65d04b8ce"
+    },
+    {
+      "archivo": "transparencia/895/activa_2026_07.json",
+      "descargado": "2026-10-11T08:38:23",
+      "bytes": 48855,
+      "sha256": "3559dda10a17a181c5e28e2f66fc39be7d131547ba169669f516ab48fa757201"
+    },
+    {
+      "archivo": "transparencia/895/activa_2026_08.json",
+      "descargado": "2026-10-11T10:03:26",
+      "bytes": 48855,
+      "sha256": "c95d36c96272215b16714732b904bbf2ee6ce5243cfa7f1b665e29533f44481f"
+    },
+    {
+      "archivo": "transparencia/895/activa_2026_09.json",
+      "descargado": "2026-10-11T10:03:26",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "archivo": "transparencia/895/saip_2025.json",
+      "descargado": "2026-10-11T08:38:24",
+      "bytes": 204,
+      "sha256": "1038f8559257677bd8bcf0b2846027d093f18ce253e7e1e347788cd1a0692fd0"
+    },
+    {
+      "archivo": "transparencia/895/saip_2026.json",
+      "descargado": "2026-10-11T10:03:25",
+      "bytes": 204,
+      "sha256": "6c0bff1869454d9bfedc894e2053ff33993c40c63436f4a5c4f2fc42339b3c28"
+    }
+  ]
+}

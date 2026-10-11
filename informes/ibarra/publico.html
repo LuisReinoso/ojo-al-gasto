@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿En qué gasta Ibarra? · Ojo al Gasto</title>
+
+<meta name="description" content="43,2 millones de dólares en 809 compras en 2025. Mire en qué gasta Ibarra y qué preguntar. Datos oficiales.">
+<meta property="og:title" content="¿En qué gasta Ibarra? · Ojo al Gasto">
+<meta property="og:description" content="43,2 millones de dólares en 809 compras en 2025. Mire en qué y qué preguntar. Datos oficiales.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1c5cab">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 24 24&#39;%3E%3Cpath d=&#39;M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z&#39; fill=&#39;white&#39; stroke=&#39;%231c5cab&#39; stroke-width=&#39;2.2&#39;/%3E%3Ccircle cx=&#39;12&#39; cy=&#39;12&#39; r=&#39;4.3&#39; fill=&#39;%23eb6834&#39;/%3E%3C/svg%3E">
+<style>
+  .viz-root {
+    color-scheme: light;
+    --surface-0: #ffffff; --surface-1: #fcfcfb; --surface-2: #f3f2ef; --linea: #e3e1dc;
+    --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #6f6e69;
+    --series-1: #2a78d6; --referencia: #b9b7b0; --enlace: #1c5cab;
+    --marca: #1c5cab; --sobre-marca: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --surface-0: #121211; --surface-1: #1a1a19; --surface-2: #242422; --linea: #383835;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #9e9d95;
+      --series-1: #3987e5; --referencia: #6b6a64; --enlace: #86b6ef;
+      --marca: #6da7ec; --sobre-marca: #0b0b0b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .viz-root { background: var(--surface-0); color: var(--text-primary); font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; min-height: 100vh; }
+  main { max-width: 760px; margin: 0 auto; padding: 1rem 1.1rem 4rem; }
+  a { color: var(--enlace); }
+  h1 { font-size: clamp(2rem, 7vw, 3rem); line-height: 1.1; margin: .3rem 0 .6rem; letter-spacing: -.01em; }
+  h2 { font-size: 1.35rem; margin: 2.8rem 0 .3rem; }
+  section h3 { font-size: 1.15rem; margin: 2rem 0 .3rem; }
+  .sub { color: var(--text-secondary); margin: 0; }
+  .muted { color: var(--text-muted); font-size: .88rem; }
+  
+  .marca { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap;
+           padding: .7rem 0 .9rem; border-bottom: 1px solid var(--linea, #e3e1dc); margin-bottom: 1.4rem; }
+  .marca-enlace { display: inline-flex; align-items: center; gap: .45rem; text-decoration: none; color: inherit; white-space: nowrap; }
+  .marca-logo { width: 34px; height: 34px; flex: none; }
+  .marca-nombre { font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
+  .marca-lema { color: var(--text-muted, #6f6e69); font-size: .82rem; }
+
+  .anios { display: flex; gap: .5rem; margin: 1.6rem 0 .4rem; flex-wrap: wrap; }
+  .anios button { font: inherit; font-size: .95rem; padding: .35rem .9rem; border-radius: 999px; border: 1px solid var(--linea); background: var(--surface-1); color: var(--text-secondary); cursor: pointer; min-height: 40px; }
+  .anios button[aria-pressed="true"] { background: var(--text-primary); color: var(--surface-0); border-color: var(--text-primary); }
+  .heroe { margin: 1.2rem 0 .4rem; }
+  .heroe .valor { font-size: clamp(3rem, 13vw, 4.6rem); font-weight: 650; line-height: 1; letter-spacing: -.02em; }
+  .heroe .valor small { font-size: .42em; font-weight: 600; letter-spacing: 0; }
+  .heroe p { margin: .5rem 0 0; color: var(--text-secondary); font-size: 1.05rem; }
+  .boton { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 44px; padding: .55rem 1.1rem;
+           border-radius: 10px; border: 2px solid var(--marca); background: var(--marca); color: var(--sobre-marca); font: inherit; font-weight: 650;
+           text-decoration: none; cursor: pointer; }
+  .boton.secundario { background: transparent; color: var(--marca); }
+  .boton:focus-visible { outline: 3px solid #eb6834; outline-offset: 2px; }
+  .acciones { display: flex; gap: .6rem; flex-wrap: wrap; margin: 1.2rem 0; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .7rem; margin: 1.4rem 0; }
+  .tile { background: var(--surface-1); border: 1px solid var(--linea); border-radius: 12px; padding: .85rem 1rem; }
+  .tile .etiqueta { color: var(--text-secondary); font-size: .9rem; }
+  .tile .numero { font-size: 1.7rem; font-weight: 650; margin-top: .15rem; }
+  .barras { list-style: none; margin: 1rem 0 .4rem; padding: 0; }
+  .barras li { margin: 0 0 1.05rem; }
+  .barras .texto { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+  .barras .nombre { font-weight: 560; }
+  .barras .detalle { color: var(--text-muted); font-size: .85rem; }
+  .pista { display: flex; align-items: center; gap: .55rem; margin-top: .3rem; }
+  .barra { height: 14px; border-radius: 0 4px 4px 0; background: var(--series-1); min-width: 2px; }
+  .barra.ref { background: var(--referencia); }
+  .pista .cifra { font-size: .92rem; color: var(--text-primary); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .leyenda { display: flex; gap: 1.2rem; font-size: .88rem; color: var(--text-secondary); margin: .6rem 0 .2rem; }
+  .leyenda i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: .35rem; vertical-align: -1px; }
+  details.tabla { margin: .2rem 0 0; font-size: .9rem; }
+  details.tabla summary { cursor: pointer; color: var(--text-secondary); }
+  table { border-collapse: collapse; width: 100%; margin: .5rem 0; font-size: .9rem; }
+  th, td { text-align: left; padding: .35rem .4rem; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pregunta { background: var(--surface-1); border: 1px solid var(--linea); border-radius: 12px; padding: 1rem 1.1rem; margin: .9rem 0; }
+  .pregunta .tema { font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+  .pregunta h3 { margin: .3rem 0 .4rem; font-size: 1.08rem; }
+  .pregunta p { margin: 0; color: var(--text-secondary); }
+  .pregunta ul { margin: .5rem 0 0; padding-left: 1.1rem; font-size: .9rem; color: var(--text-secondary); }
+  .sugerido { margin-top: .7rem; border-top: 1px solid var(--linea); padding-top: .5rem; }
+  .sugerido summary { cursor: pointer; font-weight: 600; color: var(--enlace); min-height: 40px; display: flex; align-items: center; }
+  .sugerido blockquote { margin: .3rem 0 .7rem; padding: .7rem .9rem; background: var(--surface-0); border: 1px solid var(--linea); border-radius: 8px; font-size: .92rem; }
+  .pasos { counter-reset: paso; list-style: none; padding: 0; margin: .8rem 0; }
+  .pasos li { counter-increment: paso; position: relative; padding-left: 2.6rem; margin: 0 0 1rem; }
+  .pasos li::before { content: counter(paso); position: absolute; left: 0; top: .05rem; width: 1.8rem; height: 1.8rem; border-radius: 50%;
+                      background: var(--marca); color: var(--sobre-marca); font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: .95rem; }
+  .aviso { background: var(--surface-2); border-radius: 10px; padding: .9rem 1.1rem; margin: 1.6rem 0; font-size: .95rem; color: var(--text-secondary); }
+  .aviso b { color: var(--text-primary); }
+  pre { background: var(--surface-2); padding: .8rem 1rem; border-radius: 8px; overflow-x: auto; font-size: .85rem; }
+  footer.pie { margin-top: 3.5rem; padding-top: 1rem; border-top: 1px solid var(--linea); color: var(--text-muted); font-size: .85rem; }
+  #tip { position: fixed; pointer-events: none; background: var(--text-primary); color: var(--surface-0); font-size: .85rem; padding: .4rem .6rem; border-radius: 6px; max-width: 280px; opacity: 0; transition: opacity .1s; z-index: 10; }
+  [data-anio-panel][hidden] { display: none; }
+  @media (max-width: 520px) { .marca-lema { display: none; } }
+  @media print { .anios, .acciones { display: none; } [data-anio-panel][hidden] { display: block; } }
+</style>
+</head>
+<body>
+<div class="viz-root">
+<main>
+
+<header class="marca">
+  <a class="marca-enlace" href="../index.html" aria-label="Ojo al Gasto: inicio">
+    <svg class="marca-logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z" fill="none" stroke="var(--marca, #1c5cab)" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="4.3" fill="#eb6834"/>
+      <circle cx="12" cy="12" r="2" fill="none" stroke="#fff" stroke-width="1.2"/>
+    </svg>
+    <span class="marca-nombre">Ojo al Gasto</span>
+  </a>
+  <span class="marca-lema">Control ciudadano de las compras municipales</span>
+</header>
+<p class="sub">Compras públicas · Municipio de San Miguel de Ibarra</p>
+<h1>¿En qué gasta Ibarra?</h1>
+<p class="sub">Compras del municipio y de sus 5 empresas y entidades. Datos oficiales al 9 de octubre de 2026.</p>
+
+<div class="anios" role="group" aria-label="Año">
+<button type="button" data-anio="2025" aria-pressed="true">2025</button><button type="button" data-anio="2026" aria-pressed="false">2026 (en curso)</button>
+</div>
+
+
+<section data-anio-panel="2025" >
+  <div class="heroe">
+    <div class="valor">43,2<small> millones de dólares</small></div>
+    <p>en <b>809 compras y contratos</b> que el municipio y sus empresas publicaron en 2025.</p>
+  </div>
+</section>
+
+<section data-anio-panel="2026" hidden>
+  <div class="heroe">
+    <div class="valor">26,9<small> millones de dólares</small></div>
+    <p>en <b>323 compras y contratos</b> que el municipio y sus empresas publicaron en 2026, hasta el 9 de octubre de 2026.</p>
+  </div>
+</section>
+
+
+<div class="acciones">
+  <button type="button" class="boton secundario" id="compartir">Compartir</button>
+  <a class="boton secundario" href="#detalle">Ver en qué se gastó</a>
+</div>
+
+<h2 id="preguntar">Lo que puede preguntar</h2>
+<p class="muted">Estas preguntas son para la entidad. No son acusaciones. Cualquier persona puede presentarlas. Los pasos están al final de esta sección.</p>
+
+
+<h3 id="como-preguntar" style="font-size:1.2rem;margin-top:2rem">Cómo presentar su pregunta</h3>
+<ol class="pasos">
+  <li>Escriba una carta a la máxima autoridad de la entidad. Incluya su nombre, su cédula, un correo para la respuesta y la información que pide. Puede usar el texto sugerido.</li>
+  <li>Preséntela en la ventanilla de la entidad o en línea en el <a href="https://transparencia.dpe.gob.ec" target="_blank" rel="noopener">Portal Nacional de Transparencia</a>. No necesita explicar para qué la quiere (LOTAIP, art. 31).</li>
+  <li>Guarde el comprobante de recepción. Desde esa fecha corre el plazo.</li>
+  <li>La entidad debe responder en 10 días, o en 15 si le avisa una prórroga (LOTAIP, art. 34).</li>
+  <li>Si no responde, pida ayuda a la Defensoría del Pueblo dentro de 30 días, o presente una acción de acceso a la información ante un juez (Constitución, art. 91).</li>
+</ol>
+
+<h2 id="detalle">En qué se gastó</h2>
+
+<section data-anio-panel="2025" >
+  <p class="muted">Año 2025. Cambie el año arriba.</p>
+
+  <h3>Las 5 compras más grandes</h3>
+  <p class="muted">Presupuesto de cada proceso. Toque el código para ver la ficha oficial.</p>
+  
+  <ul class="barras">
+  
+    <li>
+      <div class="nombre">Construcción del centro de salud tipo C ubicado en la ciudad de Ibarra, provincia de Imbabura</div>
+      <div class="detalle">GAD Municipal de San Miguel de Ibarra · licitación · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2025-001-2783">LICO-GADM-IBARRA-2025-001</a></div>
+      <div class="pista"><div class="barra" style="width:82.0%" data-tip="Construcción del centro de salud tipo C ubicado en la ciudad de Ibarra, provincia de Imbabura: USD 4.417.244"></div><span class="cifra">4,42 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Adquisición de maquinaria pesada con financiamiento del BDE para fortalecer el equipo caminero municipal en…</div>
+      <div class="detalle">GAD Municipal de San Miguel de Ibarra · subasta inversa electrónica · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2025-066-2783">SIE-GADM-IBARRA-2025-066</a></div>
+      <div class="pista"><div class="barra" style="width:36.1%" data-tip="Adquisición de maquinaria pesada con financiamiento del BDE para fortalecer el equipo caminero municipal en…: USD 1.946.739"></div><span class="cifra">1,95 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Mejoramiento de los sistemas de agua potable de las comunidades del Ramal Ambuqui, parroquia Ambuqui</div>
+      <div class="detalle">GAD Municipal de San Miguel de Ibarra · licitación · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2025-003-2783">LICO-GADM-IBARRA-2025-003</a></div>
+      <div class="pista"><div class="barra" style="width:32.2%" data-tip="Mejoramiento de los sistemas de agua potable de las comunidades del Ramal Ambuqui, parroquia Ambuqui: USD 1.732.650"></div><span class="cifra">1,73 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Culminación de la cancha deportiva del estadio de la Parroquia Salinas, construcción del estadio de Lita,…</div>
+      <div class="detalle">GAD Municipal de San Miguel de Ibarra · cotización · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-010-2783">COTO-GADM-IBARRA-2025-010</a></div>
+      <div class="pista"><div class="barra" style="width:19.7%" data-tip="Culminación de la cancha deportiva del estadio de la Parroquia Salinas, construcción del estadio de Lita,…: USD 1.063.203"></div><span class="cifra">1,06 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Construcción parque Infantil Primavera, construcción del parque Recreativo Nuevo Hogar- parroquia el…</div>
+      <div class="detalle">GAD Municipal de San Miguel de Ibarra · cotización · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-COTO-GADM-IBARRA-2025-008-2783">COTO-GADM-IBARRA-2025-008</a></div>
+      <div class="pista"><div class="barra" style="width:19.0%" data-tip="Construcción parque Infantil Primavera, construcción del parque Recreativo Nuevo Hogar- parroquia el…: USD 1.021.061"></div><span class="cifra">1,02 M</span></div>
+    </li>
+  
+  </ul>
+
+  <h3>¿En qué se va el dinero?</h3>
+  <p class="muted">El catálogo electrónico es la tienda del Estado: suministros, limpieza, seguridad y otros.</p>
+  
+  <ul class="barras">
+  
+    <li>
+      <div class="texto"><span class="nombre">Obras</span><span class="detalle">57 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:82.0%" data-tip="Obras: USD 24.511.035 (56,7 %)"></div><span class="cifra">24,5 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Servicios</span><span class="detalle">19 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:26.9%" data-tip="Servicios: USD 8.034.238 (18,6 %)"></div><span class="cifra">8,03 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Bienes</span><span class="detalle">17 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:23.9%" data-tip="Bienes: USD 7.155.139 (16,5 %)"></div><span class="cifra">7,16 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Compras por catálogo electrónico</span><span class="detalle">8 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:11.9%" data-tip="Compras por catálogo electrónico: USD 3.542.942 (8,2 %)"></div><span class="cifra">3,54 M</span></div>
+    </li>
+  
+  </ul>
+
+  <h3>¿Quién compra?</h3>
+  
+  <ul class="barras">
+  
+    <li>
+      <div class="texto"><span class="nombre">GAD Municipal de San Miguel de Ibarra</span><span class="detalle">92 %</span></div>
+      <div class="pista"><div class="barra" style="width:82.0%" data-tip="GAD Municipal de San Miguel de Ibarra: USD 39.653.609"></div><span class="cifra">39,7 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">EMAPA-I - Agua Potable y Alcantarillado de Ibarra</span><span class="detalle">5 %</span></div>
+      <div class="pista"><div class="barra" style="width:4.9%" data-tip="EMAPA-I - Agua Potable y Alcantarillado de Ibarra: USD 2.352.612"></div><span class="cifra">2,35 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Cuerpo de Bomberos de Ibarra</span><span class="detalle">2 %</span></div>
+      <div class="pista"><div class="barra" style="width:1.8%" data-tip="Cuerpo de Bomberos de Ibarra: USD 891.238"></div><span class="cifra">0,89 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Registro de la Propiedad del Cantón Ibarra</span><span class="detalle">1 %</span></div>
+      <div class="pista"><div class="barra" style="width:0.7%" data-tip="Registro de la Propiedad del Cantón Ibarra: USD 314.452"></div><span class="cifra">0,31 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Comercibarra - Mercado Mayorista de Ibarra</span><span class="detalle">0 %</span></div>
+      <div class="pista"><div class="barra" style="width:0.1%" data-tip="Comercibarra - Mercado Mayorista de Ibarra: USD 27.540"></div><span class="cifra">0,03 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">EP Municipal de Faenamiento del Cantón Ibarra</span><span class="detalle">0 %</span></div>
+      <div class="pista"><div class="barra" style="width:0.0%" data-tip="EP Municipal de Faenamiento del Cantón Ibarra: USD 3.904"></div><span class="cifra">0,00 M</span></div>
+    </li>
+  
+  </ul>
+  <details class="tabla"><summary>Ver estos datos en tabla</summary>
+  <table>
+    <tr><th>Categoría o entidad</th><th class="n">USD</th><th class="n">%</th></tr>
+    <tr><td>Obras</td><td class="n">24.511.035</td><td class="n">56,7 %</td></tr><tr><td>Servicios</td><td class="n">8.034.238</td><td class="n">18,6 %</td></tr><tr><td>Bienes</td><td class="n">7.155.139</td><td class="n">16,5 %</td></tr><tr><td>Compras por catálogo electrónico</td><td class="n">3.542.942</td><td class="n">8,2 %</td></tr><tr><td>GAD Municipal de San Miguel de Ibarra</td><td class="n">39.653.609</td><td class="n">91,7 %</td></tr><tr><td>EMAPA-I - Agua Potable y Alcantarillado de Ibarra</td><td class="n">2.352.612</td><td class="n">5,4 %</td></tr><tr><td>Cuerpo de Bomberos de Ibarra</td><td class="n">891.238</td><td class="n">2,1 %</td></tr><tr><td>Registro de la Propiedad del Cantón Ibarra</td><td class="n">314.452</td><td class="n">0,7 %</td></tr><tr><td>Comercibarra - Mercado Mayorista de Ibarra</td><td class="n">27.540</td><td class="n">0,1 %</td></tr><tr><td>EP Municipal de Faenamiento del Cantón Ibarra</td><td class="n">3.904</td><td class="n">0,0 %</td></tr>
+  </table>
+  </details>
+
+  <div class="tiles">
+    <div class="tile"><div class="etiqueta">Contratado sin concurso de ofertas</div><div class="numero">2,9 %</div><div class="muted">1,25 M en contratación directa o régimen especial</div></div>
+  </div>
+</section>
+
+<section data-anio-panel="2026" hidden>
+  <p class="muted">Año 2026. Cambie el año arriba.</p>
+
+  <h3>Las 5 compras más grandes</h3>
+  <p class="muted">Presupuesto de cada proceso. Toque el código para ver la ficha oficial.</p>
+  
+  <ul class="barras">
+  
+    <li>
+      <div class="nombre">Mejoramiento de la infraestructura de la liga Deportiva Barrial San Miguel Liga Alpachaca, intervención en…</div>
+      <div class="detalle">GAD Municipal de San Miguel de Ibarra · licitación · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-014-2783">LICO-GADM-IBARRA-2026-014</a></div>
+      <div class="pista"><div class="barra" style="width:82.0%" data-tip="Mejoramiento de la infraestructura de la liga Deportiva Barrial San Miguel Liga Alpachaca, intervención en…: USD 3.636.863"></div><span class="cifra">3,64 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Regeneración de aceras y bordillos de la Av. Mariano Acosta, construcción del cerramiento para el relleno…</div>
+      <div class="detalle">GAD Municipal de San Miguel de Ibarra · licitación · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-011-2783">LICO-GADM-IBARRA-2026-011</a></div>
+      <div class="pista"><div class="barra" style="width:44.6%" data-tip="Regeneración de aceras y bordillos de la Av. Mariano Acosta, construcción del cerramiento para el relleno…: USD 1.976.131"></div><span class="cifra">1,98 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Adquisición de vehículos pesados con financiamiento del BDE para fortalecer el equipo caminero municipal en…</div>
+      <div class="detalle">GAD Municipal de San Miguel de Ibarra · subasta inversa electrónica · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-SIE-GADM-IBARRA-2026-001-2783">SIE-GADM-IBARRA-2026-001</a></div>
+      <div class="pista"><div class="barra" style="width:42.8%" data-tip="Adquisición de vehículos pesados con financiamiento del BDE para fortalecer el equipo caminero municipal en…: USD 1.899.600"></div><span class="cifra">1,90 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Construcción del centro recreativo y cultural pilanqui primera etapa y proyectos viales con presupuesto…</div>
+      <div class="detalle">GAD Municipal de San Miguel de Ibarra · licitación · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-024-2783">LICO-GADM-IBARRA-2026-024</a></div>
+      <div class="pista"><div class="barra" style="width:35.3%" data-tip="Construcción del centro recreativo y cultural pilanqui primera etapa y proyectos viales con presupuesto…: USD 1.565.256"></div><span class="cifra">1,57 M</span></div>
+    </li>
+  
+    <li>
+      <div class="nombre">Construcción de los centros culturales y deportivos mi espacio seguro lomas de azaya, san cristobal alto y…</div>
+      <div class="detalle">GAD Municipal de San Miguel de Ibarra · licitación · <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/ocds/ocds-5wno2w-LICO-GADM-IBARRA-2026-021-2783">LICO-GADM-IBARRA-2026-021</a></div>
+      <div class="pista"><div class="barra" style="width:29.9%" data-tip="Construcción de los centros culturales y deportivos mi espacio seguro lomas de azaya, san cristobal alto y…: USD 1.325.017"></div><span class="cifra">1,33 M</span></div>
+    </li>
+  
+  </ul>
+
+  <h3>¿En qué se va el dinero?</h3>
+  <p class="muted">El catálogo electrónico es la tienda del Estado: suministros, limpieza, seguridad y otros.</p>
+  
+  <ul class="barras">
+  
+    <li>
+      <div class="texto"><span class="nombre">Obras</span><span class="detalle">66 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:82.0%" data-tip="Obras: USD 17.727.983 (65,9 %)"></div><span class="cifra">17,7 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Bienes</span><span class="detalle">15 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:18.4%" data-tip="Bienes: USD 3.985.753 (14,8 %)"></div><span class="cifra">3,99 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Servicios</span><span class="detalle">11 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:13.1%" data-tip="Servicios: USD 2.842.499 (10,6 %)"></div><span class="cifra">2,84 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Compras por catálogo electrónico</span><span class="detalle">9 % del total</span></div>
+      <div class="pista"><div class="barra" style="width:10.8%" data-tip="Compras por catálogo electrónico: USD 2.337.308 (8,7 %)"></div><span class="cifra">2,34 M</span></div>
+    </li>
+  
+  </ul>
+
+  <h3>¿Quién compra?</h3>
+  
+  <ul class="barras">
+  
+    <li>
+      <div class="texto"><span class="nombre">GAD Municipal de San Miguel de Ibarra</span><span class="detalle">91 %</span></div>
+      <div class="pista"><div class="barra" style="width:82.0%" data-tip="GAD Municipal de San Miguel de Ibarra: USD 24.519.501"></div><span class="cifra">24,5 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">EMAPA-I - Agua Potable y Alcantarillado de Ibarra</span><span class="detalle">6 %</span></div>
+      <div class="pista"><div class="barra" style="width:5.6%" data-tip="EMAPA-I - Agua Potable y Alcantarillado de Ibarra: USD 1.661.414"></div><span class="cifra">1,66 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Cuerpo de Bomberos de Ibarra</span><span class="detalle">2 %</span></div>
+      <div class="pista"><div class="barra" style="width:1.7%" data-tip="Cuerpo de Bomberos de Ibarra: USD 508.894"></div><span class="cifra">0,51 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Comercibarra - Mercado Mayorista de Ibarra</span><span class="detalle">1 %</span></div>
+      <div class="pista"><div class="barra" style="width:0.6%" data-tip="Comercibarra - Mercado Mayorista de Ibarra: USD 167.266"></div><span class="cifra">0,17 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">Registro de la Propiedad del Cantón Ibarra</span><span class="detalle">0 %</span></div>
+      <div class="pista"><div class="barra" style="width:0.1%" data-tip="Registro de la Propiedad del Cantón Ibarra: USD 34.656"></div><span class="cifra">0,03 M</span></div>
+    </li>
+  
+    <li>
+      <div class="texto"><span class="nombre">EP Municipal de Faenamiento del Cantón Ibarra</span><span class="detalle">0 %</span></div>
+      <div class="pista"><div class="barra" style="width:0.0%" data-tip="EP Municipal de Faenamiento del Cantón Ibarra: USD 1.813"></div><span class="cifra">0,00 M</span></div>
+    </li>
+  
+  </ul>
+  <details class="tabla"><summary>Ver estos datos en tabla</summary>
+  <table>
+    <tr><th>Categoría o entidad</th><th class="n">USD</th><th class="n">%</th></tr>
+    <tr><td>Obras</td><td class="n">17.727.983</td><td class="n">65,9 %</td></tr><tr><td>Bienes</td><td class="n">3.985.753</td><td class="n">14,8 %</td></tr><tr><td>Servicios</td><td class="n">2.842.499</td><td class="n">10,6 %</td></tr><tr><td>Compras por catálogo electrónico</td><td class="n">2.337.308</td><td class="n">8,7 %</td></tr><tr><td>GAD Municipal de San Miguel de Ibarra</td><td class="n">24.519.501</td><td class="n">91,2 %</td></tr><tr><td>EMAPA-I - Agua Potable y Alcantarillado de Ibarra</td><td class="n">1.661.414</td><td class="n">6,2 %</td></tr><tr><td>Cuerpo de Bomberos de Ibarra</td><td class="n">508.894</td><td class="n">1,9 %</td></tr><tr><td>Comercibarra - Mercado Mayorista de Ibarra</td><td class="n">167.266</td><td class="n">0,6 %</td></tr><tr><td>Registro de la Propiedad del Cantón Ibarra</td><td class="n">34.656</td><td class="n">0,1 %</td></tr><tr><td>EP Municipal de Faenamiento del Cantón Ibarra</td><td class="n">1.813</td><td class="n">0,0 %</td></tr>
+  </table>
+  </details>
+
+  <div class="tiles">
+    <div class="tile"><div class="etiqueta">Contratado sin concurso de ofertas</div><div class="numero">0,5 %</div><div class="muted">0,14 M en contratación directa o régimen especial</div></div>
+  </div>
+</section>
+
+
+
+<h2>¿Compiten los proveedores?</h2>
+<p class="muted">Procesos con <b>un solo</b> oferente, 2025 y 2026. Menos es mejor: más ofertas dan mejores precios.</p>
+<div class="leyenda"><span><i style="background:var(--series-1)"></i>Ibarra</span><span><i style="background:var(--referencia)"></i>Todo el país</span></div>
+
+<ul class="barras">
+
+  <li>
+    <div class="nombre">Subasta Inversa Electrónica <span class="detalle">(195 procesos)</span></div>
+    <div class="pista"><div class="barra" style="width:46.5%" data-tip="Ibarra: 17,4 % con un solo oferente"></div><span class="cifra">17 %</span></div>
+    <div class="pista"><div class="barra ref" style="width:45.3%" data-tip="Todo el país: 17,0 %"></div><span class="cifra">17 %</span></div>
+  </li>
+
+  <li>
+    <div class="nombre">Licitación <span class="detalle">(52 procesos)</span></div>
+    <div class="pista"><div class="barra" style="width:82.0%" data-tip="Ibarra: 30,8 % con un solo oferente"></div><span class="cifra">31 %</span></div>
+    <div class="pista"><div class="barra ref" style="width:57.6%" data-tip="Todo el país: 21,6 %"></div><span class="cifra">22 %</span></div>
+  </li>
+
+</ul>
+<p>En 0 de 2 tipos de procedimiento, Ibarra tuvo menos procesos con un solo oferente que el promedio del país.</p>
+
+
+<div class="aviso"><b>Esto no acusa a nadie.</b> Resume datos que publica el Estado. Un patrón puede tener una explicación válida. Los documentos de identidad de personas naturales están ocultos.</div>
+
+<h2>Compruébelo usted</h2>
+<p>Fuentes: <a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos">datos abiertos del SERCOP</a> y <a href="https://transparencia.dpe.gob.ec">Portal Nacional de Transparencia</a>. La herramienta es libre. Ejecútela y compare las cifras.</p>
+<pre># en una copia del código de veeduria-ec
+pip install .
+veeduria auditar entidades/ibarra.toml --anios 2025 2026</pre>
+<p class="muted">Datos usados: 22 archivos mensuales del SERCOP, cada uno con todas las compras públicas del país en ese mes (298.368 procesos en total; 1.132 de Ibarra), y 27 archivos que la entidad publicó en el Portal de Transparencia. Descargados el 11 de octubre de 2026. La huella SHA-256 de cada archivo está en <a href="procedencia.json">procedencia.json</a>: misma huella, mismos datos.</p>
+<p class="muted">Las alertas y el informe técnico muestran a un proveedor persona natural como "Persona natural". <code>procesos.csv</code> incluye los nombres de los proveedores tal como los publica el SERCOP.</p>
+<p>Más detalle: <a href="informe.html">informe técnico</a> · <a href="alertas.csv">alertas.csv</a> · <a href="procesos.csv">procesos.csv</a>. Periodistas: <a href="../guia/periodistas.html">de una alerta a una nota</a>. Su cantón: <a href="../guia/hazlo-tu.html">guía paso a paso</a>.</p>
+
+<footer class="pie">Ojo al Gasto · herramienta libre (licencia MIT) · datos del SERCOP procesados y resumidos, bajo licencia <a href="https://creativecommons.org/licenses/by/3.0/ec/">CC BY 3.0 Ecuador</a> · no es una veeduría registrada en el CPCCS · generado el 11/10/2026 10:03</footer>
+</main>
+<div id="tip" role="tooltip"></div>
+</div>
+<script>
+  document.querySelectorAll(".anios button").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll(".anios button").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    document.querySelectorAll("[data-anio-panel]").forEach(s => s.hidden = s.dataset.anioPanel !== b.dataset.anio);
+  }));
+  const tip = document.getElementById("tip");
+  document.querySelectorAll(".pista").forEach(fila => {
+    const barra = fila.querySelector("[data-tip]");
+    if (!barra) return;
+    fila.addEventListener("pointermove", ev => {
+      tip.textContent = barra.dataset.tip;
+      tip.style.left = Math.min(ev.clientX + 12, innerWidth - 290) + "px";
+      tip.style.top = (ev.clientY + 14) + "px";
+      tip.style.opacity = 1;
+    });
+    fila.addEventListener("pointerleave", () => tip.style.opacity = 0);
+  });
+  document.getElementById("compartir").addEventListener("click", async () => {
+    const datos = { title: document.title, text: document.querySelector('meta[name="description"]').content, url: location.href };
+    if (navigator.share) { try { await navigator.share(datos); } catch (e) {} return; }
+    location.href = "https://wa.me/?text=" + encodeURIComponent(datos.text + " " + datos.url);
+  });
+  document.querySelectorAll("[data-copiar]").forEach(b => b.addEventListener("click", async () => {
+    const texto = document.getElementById(b.dataset.copiar).textContent.trim();
+    try { await navigator.clipboard.writeText(texto); b.textContent = "Copiado ✓"; } catch (_) { b.textContent = "No se pudo copiar"; }
+    setTimeout(() => b.textContent = "Copiar el texto", 2500);
+  }));
+</script>
+</body>
+</html>

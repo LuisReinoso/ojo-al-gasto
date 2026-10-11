@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Ojo al Gasto</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z' fill='white' stroke='%231c5cab' stroke-width='2.2'/%3E%3Ccircle cx='12' cy='12' r='4.3' fill='%23eb6834'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#1c5cab">
+  <style>
+  :root{color-scheme:light dark;--marca:#1c5cab;--linea:#e3e1dc;--text-muted:#6f6e69}
+  body{font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;max-width:760px;margin:0 auto;padding:1rem 1.1rem 4rem;color:#0b0b0b;background:#fff}
+  @media (prefers-color-scheme:dark){:root{--marca:#6da7ec;--linea:#383835;--text-muted:#9e9d95}body{color:#fff;background:#121211}a{color:#86b6ef}th{background:#242422!important}td,th{border-color:#383835!important}pre,code{background:#242422!important}blockquote{background:#1a1a19!important}}
+
+    .marca { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap;
+             padding: .7rem 0 .9rem; border-bottom: 1px solid var(--linea, #e3e1dc); margin-bottom: 1.4rem; }
+    .marca-enlace { display: inline-flex; align-items: center; gap: .45rem; text-decoration: none; color: inherit; white-space: nowrap; }
+    .marca-logo { width: 34px; height: 34px; flex: none; }
+    .marca-nombre { font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
+    .marca-lema { color: var(--text-muted, #6f6e69); font-size: .82rem; }
+
+  @media (max-width:520px){.marca-lema{display:none}}
+  a{color:#1c5cab} h1{line-height:1.15} h2{margin-top:2.4rem}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow-x:auto} th,td{border-bottom:1px solid #e3e1dc;padding:.4rem .5rem;text-align:left;vertical-align:top} th{background:#f3f2ef}
+  pre{background:#f3f2ef;padding:.8rem 1rem;border-radius:8px;overflow-x:auto} code{background:#f3f2ef;padding:.1rem .3rem;border-radius:4px;font-size:.88em}
+  blockquote{margin:1rem 0;padding:.7rem 1rem;background:#f6f7f9;border-radius:8px}
+  header#title-block-header{display:none}
+  footer.pie{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--linea);color:var(--text-muted);font-size:.85rem}
+  </style>
+</head>
+<body>
+<header class="marca">
+  <a class="marca-enlace" href="../index.html" aria-label="Ojo al Gasto: inicio">
+    <svg class="marca-logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z" fill="none" stroke="var(--marca, #1c5cab)" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="4.3" fill="#eb6834"/>
+      <circle cx="12" cy="12" r="2" fill="none" stroke="#fff" stroke-width="1.2"/>
+    </svg>
+    <span class="marca-nombre">Ojo al Gasto</span>
+  </a>
+  <span class="marca-lema">Control ciudadano de las compras municipales</span>
+</header>
+<main>
+<header id="title-block-header">
+<h1 class="title">Ojo al Gasto</h1>
+</header>
+<h1 id="hallazgos-municipio-de-quito-2025-y-2026">Hallazgos: Municipio de Quito, 2025 y 2026</h1>
+<p>Generado el 11-oct-2026 con <code>veeduria auditar entidades/quito.toml --anios 2025 2026</code>. Datos del SERCOP hasta el 10-oct-2026. Incluye 18 entidades: la administración central y sus empresas públicas y entidades adscritas.</p>
+<blockquote>
+<p>Estos hallazgos no acusan a nadie. Son preguntas para las entidades.</p>
+</blockquote>
+<h2 id="cifras-generales">Cifras generales</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Dato</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Procesos publicados</td>
+<td>8.226</td>
+</tr>
+<tr class="even">
+<td>Monto total</td>
+<td>USD 907,4 millones</td>
+</tr>
+<tr class="odd">
+<td>Monto sin concurso de ofertas</td>
+<td>13,5 % (USD 122,7 millones)</td>
+</tr>
+<tr class="even">
+<td>Entidad con mayor monto</td>
+<td>EPMMOP (USD 261,3 millones)</td>
+</tr>
+</tbody>
+</table>
+<p>El proceso más grande sin concurso es el mantenimiento del material rodante del Metro (USD 35,65 millones, Consorcio CAF Metro de Quito, régimen de bienes y servicios únicos). Se puede pedir la justificación técnica.</p>
+<h2 id="positivo">Positivo</h2>
+<ul>
+<li><strong>Competencia:</strong> Quito tiene menos procesos con un solo oferente que el país en los 5 tipos con datos suficientes. Ejemplo: subasta inversa, 9,0 % en Quito y 17,0 % en el país.</li>
+<li><strong>Transparencia:</strong> el municipio publica los 26 numerales LOTAIP casi todos los meses, en promedio 18 días después del cierre del mes.</li>
+</ul>
+<h2 id="para-preguntar">Para preguntar</h2>
+<h3 id="1-posible-fraccionamiento">1. Posible fraccionamiento</h3>
+<p>Mismo proveedor, objetos parecidos y suma sobre un límite legal: 3 grupos, 6 procesos, USD 896.095.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Entidad</th>
+<th>Procesos</th>
+<th>Montos (USD)</th>
+<th>Límite</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>EPMMOP</td>
+<td>COTS-EPMMOP-2025-003 y -006: mantenimiento de alumbrado ornamental</td>
+<td>350.000 + 300.000</td>
+<td>Cotización (540.945): juntos habrían requerido licitación</td>
+</tr>
+<tr class="even">
+<td>Administración central</td>
+<td>LICS-MDMQ-2026-105 y -106: mantenimiento de bombas y de generadores, el mismo día</td>
+<td>71.312 + 37.596</td>
+<td>Comisión técnica obligatoria desde 100.000 (no cambia el procedimiento)</td>
+</tr>
+<tr class="odd">
+<td>Administración central</td>
+<td>SIE-MDMQ-2026-4908 y -4911: implementos y maquinaria deportiva, en 4 días</td>
+<td>69.024 + 68.164</td>
+<td>Comisión técnica obligatoria desde 100.000 (no cambia el procedimiento)</td>
+</tr>
+</tbody>
+</table>
+<p>Pregunta: ¿por qué se contrataron por separado?</p>
+<p>Otros 3 grupos tienen el mismo proveedor y suman sobre un límite, pero con objetos distintos (por ejemplo, Quito Turismo: marketing digital y pauta promocional). Probablemente son coincidencias. Están en el informe técnico con nivel baja.</p>
+<h3 id="2-obra-pública">2. Obra pública</h3>
+<p>A agosto de 2026 el grupo 75 (obras públicas) tenía ejecutado el 13,9 %: USD 11,8 millones de USD 84,9 millones. Un ritmo parejo daría cerca del 67 %. Fuente: numeral 6 LOTAIP del municipio.</p>
+<p>Pregunta: ¿qué obras del grupo 75 están pendientes y por qué?</p>
+<h3 id="3-solicitudes-sin-responder">3. Solicitudes sin responder</h3>
+<p>En 2025 el municipio dejó sin responder 102 de 317 solicitudes de información (32,2 %). En 2026, hasta octubre: 14 de 403. Fuente: estadísticas del Portal Nacional de Transparencia.</p>
+<h3 id="4-datos-ilegibles">4. Datos ilegibles</h3>
+<p>En el numeral 8 LOTAIP (agosto de 2026), 787 de 975 RUC de contratistas están en notación científica. En el numeral 9 (contratistas incumplidos), los 3 RUC tienen el mismo problema: 790 en total. No se puede saber a quién se contrató.</p>
+<p>Pregunta: ¿cuándo publicará el municipio el archivo corregido?</p>
+<h3 id="5-otros">5. Otros</h3>
+<ul>
+<li>9 contratos de "bienes y servicios únicos" clasificados como servicios desde el 28-oct-2025. Si la categoría corresponde al art. 139 del Reglamento, ese artículo no lo permite para servicios. Pida el informe técnico de cada uno.</li>
+<li>21 procesos que el municipio reporta en LOTAIP no aparecen en el SERCOP con ese código.</li>
+<li>La Contraloría tiene 151 informes sobre el municipio. En 19, la entidad indica que no hay seguimiento de las recomendaciones. Ejemplo: <a href="ejemplo-contraloria.html">informe de las fiestas de Quito 2024</a>.</li>
+</ul>
+<h2 id="no-incluido">No incluido</h2>
+<p>Ínfimas cuantías, emergencias, calidad de las obras y vínculos entre proveedores y funcionarios.</p>
+<footer class="pie">Ojo al Gasto · herramienta libre (licencia MIT)</footer>
+</main>
+</body>
+</html>

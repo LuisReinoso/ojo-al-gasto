@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Ojo al Gasto</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z' fill='white' stroke='%231c5cab' stroke-width='2.2'/%3E%3Ccircle cx='12' cy='12' r='4.3' fill='%23eb6834'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#1c5cab">
+  <style>
+  :root{color-scheme:light dark;--marca:#1c5cab;--linea:#e3e1dc;--text-muted:#6f6e69}
+  body{font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;max-width:760px;margin:0 auto;padding:1rem 1.1rem 4rem;color:#0b0b0b;background:#fff}
+  @media (prefers-color-scheme:dark){:root{--marca:#6da7ec;--linea:#383835;--text-muted:#9e9d95}body{color:#fff;background:#121211}a{color:#86b6ef}th{background:#242422!important}td,th{border-color:#383835!important}pre,code{background:#242422!important}blockquote{background:#1a1a19!important}}
+
+    .marca { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap;
+             padding: .7rem 0 .9rem; border-bottom: 1px solid var(--linea, #e3e1dc); margin-bottom: 1.4rem; }
+    .marca-enlace { display: inline-flex; align-items: center; gap: .45rem; text-decoration: none; color: inherit; white-space: nowrap; }
+    .marca-logo { width: 34px; height: 34px; flex: none; }
+    .marca-nombre { font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
+    .marca-lema { color: var(--text-muted, #6f6e69); font-size: .82rem; }
+
+  @media (max-width:520px){.marca-lema{display:none}}
+  a{color:#1c5cab} h1{line-height:1.15} h2{margin-top:2.4rem}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow-x:auto} th,td{border-bottom:1px solid #e3e1dc;padding:.4rem .5rem;text-align:left;vertical-align:top} th{background:#f3f2ef}
+  pre{background:#f3f2ef;padding:.8rem 1rem;border-radius:8px;overflow-x:auto} code{background:#f3f2ef;padding:.1rem .3rem;border-radius:4px;font-size:.88em}
+  blockquote{margin:1rem 0;padding:.7rem 1rem;background:#f6f7f9;border-radius:8px}
+  header#title-block-header{display:none}
+  footer.pie{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--linea);color:var(--text-muted);font-size:.85rem}
+  </style>
+</head>
+<body>
+<header class="marca">
+  <a class="marca-enlace" href="../index.html" aria-label="Ojo al Gasto: inicio">
+    <svg class="marca-logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z" fill="none" stroke="var(--marca, #1c5cab)" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="4.3" fill="#eb6834"/>
+      <circle cx="12" cy="12" r="2" fill="none" stroke="#fff" stroke-width="1.2"/>
+    </svg>
+    <span class="marca-nombre">Ojo al Gasto</span>
+  </a>
+  <span class="marca-lema">Control ciudadano de las compras municipales</span>
+</header>
+<main>
+<header id="title-block-header">
+<h1 class="title">Ojo al Gasto</h1>
+</header>
+<h1 id="metodología">Metodología</h1>
+<h2 id="fuentes">Fuentes</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Fuente</th>
+<th>Datos</th>
+<th>Licencia</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos">SERCOP, datos abiertos OCDS</a></td>
+<td>Todos los procesos del país, un archivo por mes</td>
+<td>CC BY 3.0 Ecuador</td>
+</tr>
+<tr class="even">
+<td><a href="https://transparencia.dpe.gob.ec">Portal Nacional de Transparencia</a></td>
+<td>Publicación LOTAIP mensual, solicitudes, presupuesto, informes de Contraloría</td>
+<td>Información pública (LOTAIP)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="procesamiento">Procesamiento</h2>
+<ol>
+<li>La herramienta une las tablas de cada archivo mensual en una fila por proceso.</li>
+<li>Si un proceso aparece en varios meses, la herramienta usa la versión más reciente.</li>
+<li>Un proceso cuenta en el año de su publicación (inicio del periodo de ofertas). En catálogo electrónico se usa la fecha de la orden.</li>
+<li>El monto es el presupuesto del proceso. Si no hay presupuesto, el monto es lo adjudicado.</li>
+<li>Las entidades de un cantón se definen por RUC en <code>entidades/&lt;cantón&gt;.toml</code>.</li>
+</ol>
+<h2 id="comparación-con-el-país">Comparación con el país</h2>
+<p>Cada tasa de la entidad se compara con la tasa nacional del mismo tipo de procedimiento y del mismo periodo. La herramienta calcula la probabilidad de que la diferencia sea casualidad (prueba binomial con corrección de Bonferroni). Una tasa se marca en rojo si cumple tres condiciones:</p>
+<ol>
+<li>Es mayor que 1,5 veces la tasa nacional.</li>
+<li>Tiene 5 casos o más.</li>
+<li>Su probabilidad por azar es menor que 0,05 dividido entre el número de comparaciones.</li>
+</ol>
+<h2 id="alertas">Alertas</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Alerta</th>
+<th>Condición</th>
+<th>Nivel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Posible fraccionamiento</td>
+<td>2 o más procesos de la misma entidad y el mismo proveedor, en 90 días, bajo el mismo régimen legal. Cada uno está bajo un límite y la suma lo supera</td>
+<td>alta si los objetos se parecen; media si no</td>
+</tr>
+<tr class="even">
+<td>Proveedor único para servicios u obras</td>
+<td>Régimen de bienes y servicios únicos para un servicio u obra, desde el 28-oct-2025 (RGLOSNCP, art. 139)</td>
+<td>media</td>
+</tr>
+<tr class="odd">
+<td>Un solo oferente</td>
+<td>Procedimiento competitivo con un oferente</td>
+<td>media</td>
+</tr>
+<tr class="even">
+<td>Contratación sin concurso</td>
+<td>Régimen especial o contratación directa de USD 50.000 o más</td>
+<td>media</td>
+</tr>
+<tr class="odd">
+<td>Presupuesto al borde del límite</td>
+<td>Presupuesto hasta 2 % bajo un límite</td>
+<td>baja</td>
+</tr>
+<tr class="even">
+<td>Plazo de ofertas muy corto</td>
+<td>Menos días que el 95 % de los procesos del mismo tipo en el país</td>
+<td>baja</td>
+</tr>
+<tr class="odd">
+<td>Adjudicado al precio máximo</td>
+<td>Adjudicado por el 99,5 % del presupuesto o más</td>
+<td>baja</td>
+</tr>
+<tr class="even">
+<td>Procedimiento bajo el umbral legal</td>
+<td>Subasta, licitación o concurso de USD 10.000 o menos, desde el 7-oct-2025</td>
+<td>baja</td>
+</tr>
+</tbody>
+</table>
+<h2 id="límites-por-fecha">Límites por fecha</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Publicación</th>
+<th>Límites usados</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hasta el 25-jun-2025</td>
+<td>Menor cuantía y cotización, calculadas con el Presupuesto Inicial del Estado. Solo para menor cuantía, cotización y licitación</td>
+</tr>
+<tr class="even">
+<td>26-jun a 27-oct-2025</td>
+<td>Ninguno: la transición de la reforma no tiene un límite verificado</td>
+</tr>
+<tr class="odd">
+<td>Desde el 28-oct-2025</td>
+<td>Comisión técnica obligatoria desde USD 100.000 (RGLOSNCP, art. 88)</td>
+</tr>
+</tbody>
+</table>
+<p>Control: en todo el país ningún proceso de menor cuantía de bienes y servicios supera USD 72.126 en 2025. Esto confirma el límite calculado.</p>
+<h2 id="transparencia-lotaip">Transparencia (LOTAIP)</h2>
+<ul>
+<li><strong>Días hasta la publicación:</strong> días entre el cierre del mes y la publicación. No hay una fecha límite verificada en la norma; la herramienta no califica atrasos.</li>
+<li><strong>Mes incompleto:</strong> falta un numeral que la entidad publica en otros meses.</li>
+<li><strong>Solicitudes sin responder:</strong> cifras anuales del portal. El año en curso es parcial.</li>
+<li><strong>Datos ilegibles:</strong> RUC convertidos a notación científica por una hoja de cálculo.</li>
+</ul>
+<h2 id="privacidad">Privacidad</h2>
+<p>El RUC de una persona natural contiene su cédula. La herramienta lo enmascara en todos los archivos (LOPDP, art. 10). En las alertas, el informe técnico y la lista de proveedores, una persona natural aparece como "Persona natural". La razón: una alerta describe un patrón de la entidad, no una conducta del proveedor. <code>procesos.csv</code> conserva el nombre, igual que el dato oficial del SERCOP.</p>
+<h2 id="lo-que-la-herramienta-no-ve">Lo que la herramienta no ve</h2>
+<ul>
+<li>Ínfimas cuantías y emergencias: no están en los datos abiertos del SERCOP.</li>
+<li>Calidad de las obras y precios unitarios: necesitan documentos y visitas.</li>
+<li>Vínculos entre proveedores y funcionarios: necesitan registros societarios.</li>
+</ul>
+<footer class="pie">Ojo al Gasto · herramienta libre (licencia MIT)</footer>
+</main>
+</body>
+</html>

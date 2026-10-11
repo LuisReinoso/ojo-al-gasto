@@ -1,0 +1,12 @@
+{# Encabezado de marca común. Variables: marca (nombre, lema), raiz ("" o "../"). Estilos en CSS_MARCA (informe.py). #}
+<header class="marca">
+  <a class="marca-enlace" href="{{ raiz }}index.html" aria-label="{{ marca.nombre }}: inicio">
+    <svg class="marca-logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M1.8 12C4.8 6.2 19.2 6.2 22.2 12C19.2 17.8 4.8 17.8 1.8 12Z" fill="none" stroke="var(--marca, #1c5cab)" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="4.3" fill="#eb6834"/>
+      <circle cx="12" cy="12" r="2" fill="none" stroke="#fff" stroke-width="1.2"/>
+    </svg>
+    <span class="marca-nombre">{{ marca.nombre }}</span>
+  </a>
+  <span class="marca-lema">{{ marca.lema }}</span>
+</header>
