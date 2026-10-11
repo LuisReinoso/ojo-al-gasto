@@ -19,7 +19,7 @@ Ojo al Gasto es una herramienta de control social (Constitución, art. 95). No e
 | `veeduria plazo` | La fecha límite de respuesta de una solicitud |
 | `veeduria entidades` | Los RUC de las entidades de un cantón, para preparar su archivo |
 
-Ejemplos publicados: [Quito](informes/quito/publico.html) e [Ibarra](informes/ibarra/publico.html).
+Sitio: **https://luisreinoso.dev/ojo-al-gasto/** · Ejemplos: [Quito](https://luisreinoso.dev/ojo-al-gasto/quito/publico.html) e [Ibarra](https://luisreinoso.dev/ojo-al-gasto/ibarra/publico.html).
 
 ## Instalación
 

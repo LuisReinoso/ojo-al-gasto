@@ -12,6 +12,7 @@ dependencies = [
 ]
 
 [project.urls]
+Sitio = "https://luisreinoso.dev/ojo-al-gasto/"
 Repositorio = "https://github.com/LuisReinoso/ojo-al-gasto"
 Problemas = "https://github.com/LuisReinoso/ojo-al-gasto/issues"
 
