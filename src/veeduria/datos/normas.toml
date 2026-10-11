@@ -1,0 +1,90 @@
+# Parámetros legales usados por la herramienta. Ver docs/marco-legal.md para las fuentes.
+# Si cambia una norma, corríjala aquí: no hace falta tocar el código.
+
+# ---------------------------------------------------------------------------
+# Contratación pública: límites por procedimiento, por régimen y fecha de publicación.
+#
+# Hasta el 25-jun-2025 los procedimientos dependían de coeficientes del Presupuesto Inicial
+# del Estado (PIE). La Ley Orgánica de Integridad Pública (RO S. 68, 26-jun-2025) y luego la
+# Ley Orgánica Reformatoria de la LOSNCP (RO 4.º S. 140, 7-oct-2025) eliminaron la menor
+# cuantía y la cotización. En los datos del SERCOP esos procedimientos dejan de aparecer el
+# 31-jul-2025 y desde el 26-jun-2025 hay licitaciones desde USD 10.000.
+# Entre el 26-jun-2025 y el 27-oct-2025 no hay un umbral verificado: no se aplican reglas de límite.
+# ---------------------------------------------------------------------------
+
+[[contratacion.regimenes]]
+nombre = "LOSNCP anterior, PIE 2024 (USD 33.296.819.775,31)"
+# En este régimen la escalera por monto (menor cuantía < cotización < licitación) no rige para la subasta inversa
+# ni el catálogo, que no tenían techo: solo se agrupan procesos de estos procedimientos.
+procedimientos = ["Menor Cuantía", "Cotización", "Licitación"]
+desde = "2024-01-01"
+hasta = "2024-12-31"
+base_legal = "LOSNCP y RGLOSNCP anteriores a la reforma de 2025: montos por coeficientes del PIE (tabla SERCOP 2024). Prohibición de subdividir contratos para eludir procedimientos."
+bienes_servicios = [["menor cuantía de bienes y servicios", 66593.64], ["cotización de bienes y servicios", 499452.30]]
+obras = [["menor cuantía de obras", 233077.74], ["cotización de obras", 998904.59]]
+
+[[contratacion.regimenes]]
+nombre = "LOSNCP anterior, PIE 2025 (USD 36.063.017.083,08)"
+# En este régimen la escalera por monto (menor cuantía < cotización < licitación) no rige para la subasta inversa
+# ni el catálogo, que no tenían techo: solo se agrupan procesos de estos procedimientos.
+procedimientos = ["Menor Cuantía", "Cotización", "Licitación"]
+desde = "2025-01-01"
+hasta = "2025-06-25"
+base_legal = "LOSNCP y RGLOSNCP anteriores a la reforma de 2025: montos por coeficientes del PIE 2025. Prohibición de subdividir contratos para eludir procedimientos."
+bienes_servicios = [["menor cuantía de bienes y servicios", 72126.03], ["cotización de bienes y servicios", 540945.26]]
+obras = [["menor cuantía de obras", 252441.12], ["cotización de obras", 1081890.51]]
+
+[[contratacion.regimenes]]
+nombre = "LOSNCP reformada (RO 4.º S. 140, 7-oct-2025) y RGLOSNCP (DE 193, RO 9.º S. 153, 28-oct-2025)"
+desde = "2025-10-28"
+hasta = "2099-12-31"
+base_legal = "RGLOSNCP art. 88: comisión técnica obligatoria desde USD 100.000. LOSNCP Disposición General Tercera: prohibido subdividir el objeto para eludir procedimientos."
+bienes_servicios = [["comisión técnica obligatoria (RGLOSNCP art. 88)", 100000.0]]
+obras = [["comisión técnica obligatoria (RGLOSNCP art. 88)", 100000.0]]
+
+[contratacion]
+# Fecha desde la que rige el RGLOSNCP art. 139 (proveedor único no aplica a servicios, obras ni consultorías).
+proveedor_unico_desde = "2025-10-28"
+# LOSNCP reformada arts. 42, 47, 48 y 50: subasta inversa, licitación y concurso solo por encima de USD 10.000;
+# hasta ese monto corresponde ínfima cuantía.
+umbral_infima = 10000.0
+umbral_infima_desde = "2025-10-07"
+
+# ---------------------------------------------------------------------------
+# LOTAIP (RO 2.º S. 245, 7-feb-2023) y su Reglamento (DE 124, RO S. 484, 24-ene-2024)
+# ---------------------------------------------------------------------------
+[lotaip]
+portal = "https://transparencia.dpe.gob.ec"
+# No se encontró una norma verificada con la fecha límite mensual de publicación (art. 19 dice "mensualmente").
+# Si se fija, ponga aquí el día del mes siguiente (p. ej. 10) y el informe marcará atrasos.
+dia_limite_publicacion = 0
+base_derecho = "los artículos 18 numeral 2 y 91 de la Constitución de la República y los artículos 32 y 34 de la Ley Orgánica de Transparencia y Acceso a la Información Pública (LOTAIP)"
+base_formato = "los artículos 31 numerales 3 y 5 y 33 de la LOTAIP; no se considera respuesta suficiente la sola remisión a un enlace web (art. 38)"
+base_reserva = "artículo 37 de la LOTAIP"
+texto_plazo_solicitud = "De acuerdo con el artículo 34 de la LOTAIP, la entidad debe responder en un plazo de diez (10) días, prorrogable por cinco (5) días más por causas justificadas que deben comunicarse al solicitante antes del vencimiento (art. 13 del Reglamento). La falta de respuesta en ese plazo constituye denegación de acceso a la información (art. 4 numeral 3 de la LOTAIP)."
+si_no_responde = "la falta de respuesta es denegación (LOTAIP art. 4 núm. 3). Puede pedir la gestión oficiosa a la Defensoría del Pueblo dentro de 30 días desde el vencimiento (arts. 40-41) o presentar una acción de acceso a la información pública ante un juez (Constitución art. 91). El silencio administrativo positivo no aplica (COA art. 207)."
+
+[lotaip.plazos]
+# La LOTAIP art. 34 dice "plazo" (días calendario, como lo lee la guía DEPE-DPE-035-2023 de la Defensoría);
+# el Reglamento art. 13 dice "término" (días hábiles). Se calculan ambos.
+respuesta = 10
+prorroga = 5
+base_respuesta = "LOTAIP art. 34"
+base_prorroga = "LOTAIP art. 34; Reglamento LOTAIP art. 13"
+
+# ---------------------------------------------------------------------------
+# Feriados nacionales (días de descanso efectivos, ya trasladados). Fuente: calendario
+# oficial del Viceministerio de Turismo 2025-2030 según El Comercio, Primicias y Vistazo.
+# Los feriados locales (p. ej. fundación de Quito) van en el archivo de cada entidad.
+# Revise si hay decretos nuevos. 2026-04-30 aparece en una sola fuente y no se incluye.
+# ---------------------------------------------------------------------------
+[feriados]
+2025 = [
+  "2025-01-01", "2025-01-02", "2025-01-03", "2025-03-03", "2025-03-04", "2025-04-18",
+  "2025-05-02", "2025-05-23", "2025-08-11", "2025-10-10", "2025-11-03", "2025-11-04",
+  "2025-12-25",
+]
+2026 = [
+  "2026-01-01", "2026-01-02", "2026-02-16", "2026-02-17", "2026-04-03", "2026-05-01",
+  "2026-05-25", "2026-08-10", "2026-10-09", "2026-11-02", "2026-11-03", "2026-12-25",
+]
